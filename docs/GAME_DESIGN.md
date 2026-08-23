@@ -15,7 +15,7 @@
 
 | # | Entscheidung |
 |---|---|
-| F1 | **3–8 Spieler pro Liga**, realistisch 3–4. Keine NPC-Vereine in der Liga. |
+| F1 | **3–8 Spieler pro Liga**, realistisch 3–4. Bei ungerader Spielerzahl füllt ein **Bot-Verein** auf (→ §9.5). |
 | F2 | **Asynchron.** Spieler öffnen die App 1–3× täglich für je 3–8 Minuten. |
 | F3 | **Eine Saison = 7 Tage = 21 Spieltage**, drei Anstöße täglich um **17:00, 20:00 und 22:00**. Die Zahl 21 ist fix, unabhängig von der Spielerzahl. |
 | F4 | **Der Transfermarkt ist ab Lobbystart durchgehend offen**, die ganze Saison über. Keine Transferfenster. |
@@ -30,12 +30,13 @@
 | F13 | **Ausgeglichenes Balancing** nach den Zielwerten in §19.4. |
 | F14 | **Bieter sind namentlich sichtbar.** |
 | F15 | **Ligastart per Bereit-Button**, spätestens nach 24 Stunden automatisch. **Zwischensaison per Bereit-Button**, spätestens nach 48 Stunden. |
+| F16 | **Bei ungerader Spielerzahl spielt ein Bot-Verein mit**, damit jeder an jedem Spieltag antritt. Keine Freilose. |
 
 ### 0.2 Offene Annahmen (meine Setzung, änderbar)
 
 | # | Annahme | Warum |
 |---|---|---|
-| A1 | **Ungerade Spielerzahl → Freilose**, ausgeglichen durch eine **Freilos-Prämie** in Höhe eines durchschnittlichen Heimspiels. | Ohne Ausgleich wird der Spielplan bei 3 Spielern zum reinen Zufallsnachteil: Wer pausiert, hat kein Heimspiel und damit keine Ticketeinnahmen. |
+| A1 | **Der Bot-Kader wird aus dem Reservebestand bestückt und auf den Median der menschlichen Vereine kalibriert** — nicht aus dem aktiven Marktpool. | Der Bot soll auffüllen und Maßstab sein, nicht mit euch um dieselben Spieler konkurrieren. Details und Begründung in §9.5. |
 | A2 | **Server ist autoritativ**, Simulation läuft serverseitig mit gespeichertem Seed. | Reproduzierbarkeit, Cheat-Schutz, identischer Ticker für alle. |
 | A3 | **Spielerdaten liegen in einer austauschbaren Datenschicht** (JSON/DB, nicht im Code). | Ein späterer Wechsel auf Fantasienamen kostet dann Minuten statt Tage. |
 | A4 | **Attributwerte werden selbst gesetzt**, nicht aus einem Fremddatensatz übernommen. | Nur so lässt sich die Simulation überhaupt balancieren. Reale Namen, eigene Zahlen. |
@@ -252,6 +253,8 @@ Auf etwa 30 % der Auktionen bietet ein anonymer Auswärtsverein mit — begrenzt
 
 Die Außenwelt macht außerdem **Kaufangebote** für Spieler in euren Kadern (ereignisgesteuert) — die einzige Möglichkeit, Spieler zu Geld zu machen, ohne sie einem Freund zu überlassen.
 
+Der **Bot-Verein** (§9.5) ist davon strikt getrennt: Er bietet auf keiner Auktion mit und nimmt euch nie einen Spieler weg.
+
 ### 5.5 Der tägliche Marktabschluss
 
 Alle Auktionen laufen **24 Stunden** und enden gestaffelt im Fenster **16:00–17:00** (F5), sortiert nach Einstellzeitpunkt, ca. alle 2–4 Minuten eine.
@@ -414,17 +417,20 @@ Drei Anstöße pro Abend × 90 Sekunden = viereinhalb Minuten Pflichtprogramm. D
 
 Der Spielplan wird als Round-Robin erzeugt und **zyklisch fortgesetzt, bis 21 Spieltage voll sind** — unabhängig davon, wie viele Vereine mitspielen.
 
-| Vereine | Partien pro Spieltag | Runden in 21 Spieltagen | Spiele pro Verein |
-|---|---|---|---|
-| 3 | 1 (+1 Freilos) | 7 volle Runden | 14 |
-| 4 | 2 | 7 volle Runden | 21 |
-| 5 | 2 (+1 Freilos) | 4,2 Runden | 16–17 |
-| 6 | 3 | 4,2 Runden | 20–21 |
-| 8 | 4 | 3 volle Runden | 21 |
+Bei ungerader Spielerzahl füllt ein **Bot-Verein** auf (F16), damit die Teilnehmerzahl immer gerade ist und jeder an jedem Spieltag antritt. Es gibt keine Freilose.
 
-**Freilose (A1):** Bei ungerader Vereinszahl pausiert pro Spieltag einer. Der pausierende Verein erhält eine **Freilos-Prämie** in Höhe eines durchschnittlichen Heimspielerlöses — sonst wäre der Spielplan ein reiner Zufallsnachteil. Sein Kader regeneriert außerdem Fitness (+14 statt −22), was das Freilos zu einem taktischen Vorteil macht statt zu einer Strafe.
+| Freunde | Vereine gesamt | Partien pro Spieltag | Runden in 21 Spieltagen | Spiele pro Verein |
+|---|---|---|---|---|
+| **3** | 3 + Bot = **4** | 2 | 7 volle Runden | **21** ✓ |
+| **4** | 4 | 2 | 7 volle Runden | **21** ✓ |
+| **5** | 5 + Bot = **6** | 3 | 4,2 Runden | 20–21 |
+| **6** | 6 | 3 | 4,2 Runden | 20–21 |
+| **7** | 7 + Bot = **8** | 4 | 3 volle Runden | **21** ✓ |
+| **8** | 8 | 4 | 3 volle Runden | **21** ✓ |
 
-**Ungleiche Spielanzahl:** Wo die letzte Runde unvollständig bleibt (5 und 6 Vereine), wird sie so gelost, dass die Differenz maximal 1 Spiel beträgt. Die Tabelle sortiert dann primär nach **Punkten pro Spiel**, mit absoluten Punkten als Anzeige. Damit ist jedes Format fair, ohne dass die 21 angetastet wird.
+Bei 3, 4, 7 und 8 Freunden geht die Rechnung damit **exakt** auf: volle Runden, gleich viele Spiele für alle, keine Sonderregel. Genau der realistische Fall dieser Gruppe.
+
+**Ungleiche Spielanzahl:** Nur bei 5 und 6 Vereinen bleibt die letzte Runde unvollständig. Sie wird dann so gelost, dass die Differenz maximal 1 Spiel beträgt, und die Tabelle sortiert primär nach **Punkten pro Spiel**, mit absoluten Punkten als Anzeige. Damit ist jedes Format fair, ohne dass die 21 angetastet wird.
 
 ### 9.2 Wertung
 
@@ -447,6 +453,55 @@ Der Abstand zwischen Erstem und Letztem liegt bei 15 Mio, gemessen an Saisoneinn
 ### 9.4 Kein Auf- und Abstieg
 
 Stattdessen bestimmt die Tabelle die **inverse Reihenfolge** bei der Sponsorenwahl und beim Zugriff auf den Marktnachschub zwischen den Saisons (→ §18).
+
+### 9.5 Der Bot-Verein
+
+Bei ungerader Spielerzahl tritt ein computergesteuerter Verein an. Er ist kein Gegner-Boss und kein Kanonenfutter, sondern erfüllt drei klar getrennte Aufgaben.
+
+#### Drei Prinzipien
+
+**1. Er füllt auf, er konkurriert nicht.** Der Bot-Kader wird aus dem **Reservebestand** der 150 Spieler bestückt, nicht aus dem aktiven Marktpool (A1). Er nimmt euch keinen einzigen Spieler weg, bietet auf keiner Auktion mit und treibt keinen Preis hoch. Alles andere würde den Kern des Spiels beschädigen: Ein Bieterkrieg, den man gegen einen Algorithmus verliert, ist kein Drama, sondern Ärger.
+
+**2. Er ist der Maßstab.** Sein Kaderwert wird zu jedem Saisonbeginn auf den **Median der menschlichen Vereine** kalibriert. Damit ist er eine ehrliche Messlatte: Wer unter dem Bot steht, hat wirklich schlecht gespielt — und wer ihn schlägt, hat es verdient. Das ist nebenbei die klarste Rückmeldung, die ein Spieler in einer 3er-Gruppe überhaupt bekommen kann, weil zwei menschliche Gegner allein kaum Aussagekraft haben.
+
+**3. Er ist sichtbar ein Bot.** Eigener Vereinsname, eigenes Wappen, klar als Bot gekennzeichnet. Der Feed behandelt ihn im Boulevard-Ton wie einen ungeliebten Traditionsverein, der grundsolide Mittelmaß liefert. Niemand soll ihn je mit einem Freund verwechseln.
+
+#### Verhalten
+
+| Bereich | Verhalten |
+|---|---|
+| **Aufstellung** | Auto-Optimierung inklusive **korrekter Rotation** — der Bot nutzt die Fitness-Mechanik richtig. Ohne das wäre er ab Tag 3 chancenlos und würde die Tabelle verzerren. |
+| **Taktik** | Konservativ und stabil, leichte Anpassung an die Stärke des Gegners. Keine Extremtaktiken. |
+| **Verletzungen & Sperren** | Gelten für ihn genauso wie für alle. |
+| **Transfermarkt (Kauf)** | Nie. Er bietet auf nichts. |
+| **Transfermarkt (Verkauf)** | 1–2 Mal pro Saison stellt er einen Spieler in die Auktion — eine willkommene Gelegenheit für die Freunde und der einzige Weg, an seine Spieler zu kommen. |
+| **Wirtschaft** | Wird nicht simuliert. Kein Budget, kein Stadion, keine Fans, keine Bilanz. Er taucht in keinem Wirtschaftsranking auf. |
+| **Ereignisse** | Bekommt keine. |
+
+#### Wertung und Trophäen
+
+Der Bot **zählt in der Tabelle voll mit** — alles andere wäre unehrlich, weil seine Ergebnisse ja echte Punkte kosten. Aber:
+
+- Er gewinnt **keine Trophäen** und sammelt **kein Prestige**.
+- Er erscheint in keiner Wirtschafts- oder Fan-Rangliste.
+- Wird er Tabellenerster, geht der **Meistertitel an den besten Menschen** — mit Sternchen in der ewigen Tabelle und einer Dauerschmach im Feed: *"Der Bot war besser als ihr alle. Herzlichen Glückwunsch, Marco, zum Titel des besten Menschen."*
+
+Diese Regel ist bewusst so gebaut: maximale Demütigung, ohne dass jemand real etwas verliert. Genau die Sorte Schadenfreude, die das Spiel tragen soll.
+
+#### Kalibrierung
+
+| Kennwert | Zielwert |
+|---|---|
+| Kaderwert | Median der menschlichen Vereine, ±5 % |
+| Kaderbreite | 17 Spieler — er hat nie ein Fitnessproblem |
+| Erwartete Platzierung | statistisch Mittelfeld, in ca. 15 % der Saisons Platz 1 oder 2 |
+| Trophäenfähigkeit | keine |
+
+Die Rekalibrierung passiert **jede Saison neu** (→ §18). Zieht die Gruppe insgesamt davon, zieht der Bot mit; fällt sie zurück, fällt er mit. Er kann dadurch nie zum unschlagbaren Hindernis werden und nie zum Freilos verkommen.
+
+#### Kommt ein Freund dazu
+
+Sobald die Spielerzahl gerade wird, verschwindet der Bot zum nächsten Saisonstart. Sein Kader geht zurück in den Reservebestand und steht damit ab dem nächsten Marktnachschub allen zur Verfügung — ein netter Nebeneffekt, weil ein Bot-Abgang den Markt spürbar auffüllt.
 
 ---
 
@@ -717,6 +772,7 @@ Ein gemeinsamer chronologischer Kanal, in dem automatisch alles Peinliche und al
 > 💸 *"Lisas Verein rutscht ins Minus. Die Bank hat angerufen."*
 > 🔥 *"Toms Fans fordern seinen Rücktritt nach dem 0:4."*
 > 😴 *"Sarah stellt zum dritten Mal in Folge dieselbe Elf auf. Vier Spieler unter Fitness 40."*
+> 🤖 *"Der Bot steht auf Platz zwei. Zwei von drei Menschen liegen dahinter."*
 > 🏆 *"Marco gewinnt zum fünften Mal in Folge. Die Liga schaut zu."*
 
 Emoji-Reaktionen und Kommentare direkt am Eintrag. **Der Feed ist der Motor der Schadenfreude** und der günstigste Retention-Mechanismus, den es gibt: Man öffnet die App, um zu sehen, was den anderen passiert ist.
@@ -775,6 +831,8 @@ Damit gehört die Liga der Gruppe und nicht dem Entwickler — der stärkste den
 | ⚽ **Torschützenkönig** | Meiste Tore | 4 |
 | 🎓 **Beste Entwicklung** | Größter OVR-Zuwachs eines Spielers unter 24 | 5 |
 
+Der Bot-Verein (§9.5) ist von allen Trophäen und vom Prestige ausgeschlossen. Wird er Tabellenerster, geht der Meistertitel an den besten Menschen — mit Sternchen und einer Dauerschmach im Feed.
+
 Dazu zwei Anti-Trophäen, weil Schadenfreude ein erklärtes Designziel ist:
 
 | Anti-Trophäe | Kriterium |
@@ -814,8 +872,9 @@ Ablauf:
 8. **Sponsoren-Neuvergabe** in inverser Tabellenreihenfolge
 9. **TV-Vertrag** neu berechnet auf Basis der Ligagesamtattraktivität — steigt, wenn die Liga insgesamt wächst, was ein gemeinsames Interesse an einem gesunden Universum schafft
 10. **Liga-Abstimmung** über Regeländerungen (§16.5)
-11. **Neue Saisonziele** vom Vorstand, basierend auf relativem Kaderwert
-12. **Bereit-Button** — Saisonstart, spätestens nach 48 Stunden
+11. **Bot-Rekalibrierung** (§9.5): Der Bot-Kader wird auf den neuen Median der menschlichen Vereine angepasst. Bei gerader Spielerzahl entfällt er und sein Kader geht zurück in die Reserve
+12. **Neue Saisonziele** vom Vorstand, basierend auf relativem Kaderwert
+13. **Bereit-Button** — Saisonstart, spätestens nach 48 Stunden
 
 **Was persistiert:** Kapital, Kader, Stadion, Fanbasis, Prestige, Rivalitäten, Schulden, offene Klauseln und Raten, Rekorde, Feed-Historie.
 **Was zurückgesetzt wird:** Tabelle, Form, Fitness, Saisonziele, Sponsorenboni, Verletzungen.
@@ -914,7 +973,8 @@ Ziel: **eine vollständige Saison mit 3–4 Freunden durchspielen** und beantwor
 | **Kader** | 4 Formationen, Startelf + Bank, 3 Taktikregler, eine gespeicherte Aufstellung, Auto-Korrektur |
 | **Fitness** | Volles Verbrauchs- und Regenerationsmodell (§7.3) |
 | **Simulation** | Ballbesitz-Ketten-Sim, 90-Sek-Ticker, Statistik, deterministischer Seed |
-| **Liga** | 21 Spieltage, 3 pro Tag um 17/20/22, Freilose mit Prämie, Tabelle nach Punkten pro Spiel |
+| **Liga** | 21 Spieltage, 3 pro Tag um 17/20/22, Tabelle nach Punkten pro Spiel |
+| **Bot-Verein** | Bei ungerader Spielerzahl: Kaderzuteilung aus der Reserve, Auto-Aufstellung mit Rotation, Median-Kalibrierung |
 | **Ereignisse** | 20 handgeschriebene Ereignisse, davon 14 mit Entscheidungen, 1–2 pro Tag morgens |
 | **Fans** | Fanbasis + Stimmung, Erwartungsdifferenz-Modell |
 | **Stadion** | 2 Ausbaustufen, Bauzeit, Baustellenmalus, Zustand und Instandhaltung |
@@ -1022,7 +1082,7 @@ Chronologisch, damit später nachvollziehbar bleibt, warum das Spiel so aussieht
 | Spieler | Echte Profis, privates Projekt, austauschbare Datenschicht | §0.2 A3, §4.1 |
 | Poolgröße | 150 zum Start, erweiterbar | §5.2 |
 | Poolstruktur | Gestaffelt: 30 Weltklasse / 50 sehr gut / 70 solide | §5.2 |
-| Ungerade Spielerzahl | Freilose, ausgeglichen durch Freilos-Prämie | §9.1, §0.2 A1 |
+| Ungerade Spielerzahl | **Bot-Verein füllt auf** (ersetzt die zuvor geplanten Freilose) | §9.1, §9.5 |
 | Jugendakademie | **Gestrichen.** Ersetzt durch Scouting und Spielerentwicklung | §15 |
 | Aufstellung | Eine gespeicherte Aufstellung, jederzeit änderbar, Auto-Korrektur | §7.1, §7.2 |
 | Ereignisdichte | 1–2 pro Tag, morgens gebündelt | §10.2 |
