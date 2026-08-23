@@ -1,6 +1,6 @@
 # Soccer World — Game Design Document
 
-**Version:** 0.2 — alle offenen Weichenstellungen entschieden (siehe §23 Entscheidungsprotokoll)
+**Version:** 0.3 — alle Weichenstellungen entschieden, baubereit (siehe §23 Entscheidungsprotokoll)
 **Genre:** Asynchrones Multiplayer-Strategie- und Wirtschaftsspiel im Fußballkontext
 **Zielgruppe:** Geschlossene Freundesgruppen, real 3–4 Spieler, ausgelegt bis 8
 **Plattform:** Web-App und mobile App
@@ -31,6 +31,10 @@
 | F14 | **Bieter sind namentlich sichtbar.** |
 | F15 | **Ligastart per Bereit-Button**, spätestens nach 24 Stunden automatisch. **Zwischensaison per Bereit-Button**, spätestens nach 48 Stunden. |
 | F16 | **Bei ungerader Spielerzahl spielt ein Bot-Verein mit**, damit jeder an jedem Spieltag antritt. Keine Freilose. |
+| F17 | **Spieler haben kein Vetorecht.** Über einen Transfer entscheidet allein der abgebende Verein; freie Agenten gehen immer an den Höchstbieter. |
+| F18 | **Spieler können entlassen werden** gegen eine Abfindung von 50 % des Restgehalts. |
+| F19 | **Kein Urlaubs- oder Abwesenheitsmodus.** Wer nicht da ist, spielt mit der letzten Aufstellung plus Auto-Korrektur. |
+| F20 | **Feed- und Ereignistexte aus handgeschriebenen Templates** mit Platzhaltern, kein Sprachmodell zur Laufzeit. |
 
 ### 0.2 Offene Annahmen (meine Setzung, änderbar)
 
@@ -186,7 +190,7 @@ Jeder Spieler hat 0–2 Traits. Traits sind keine reinen Boni, sondern **Hooks, 
 | **Big-Game-Player** | +8 Form in Spitzenspielen und Derbys | Heldengeschichten |
 | **Publikumsliebling** | Verkauf kostet 15 Stimmungspunkte | Fanproteste bei Transfer |
 | **Spätzünder** | Entwicklung erst ab 26 | Der Fehlkauf, der Saison 3 explodiert |
-| **Söldner** | Wechselt für Geld ohne Loyalität | Abwerbeangebote |
+| **Söldner** | Moral hängt fast nur am Gehalt, kaum an Erfolg oder Einsatzzeit | Gehaltsforderungen, Abwerbegerüchte |
 | **Hitzkopf** | +20 % Rote-Karte-Risiko, +5 Zweikampf | Sperren, Boulevard |
 | **Eisenmann** | −40 % Fitnessverlust pro Einsatz | Der Dauerbrenner im 3-Spiele-Tag |
 
@@ -195,6 +199,10 @@ Jeder Spieler hat 0–2 Traits. Traits sind keine reinen Boni, sondern **Hooks, 
 ### 4.4 Verträge
 
 Gehalt pro Spieltag, Laufzeit in Spieltagen, optionale Klauseln (Ausstiegsklausel, Weiterverkaufsbeteiligung, Torbonus). Läuft ein Vertrag aus, ohne dass verlängert wird, ist der Spieler nach der Saison **ablösefrei** — und alle Freunde sehen den Countdown im Kaderprofil. Vertragsmanagement ist eine öffentliche Angreifbarkeit, kein privates Häkchen.
+
+**Vertragsauflösung (F18):** Ein Spieler kann jederzeit entlassen werden. Kosten: **50 % des restlichen Vertragswerts**, sofort fällig. Dazu Fanstimmung −5, bei einem Publikumsliebling −15, und ein Eintrag im Feed.
+
+Das ist bewusst ein **teurer Notausgang**, kein bequemer. Ein Fehlkauf für 90 Mio, den niemand haben will, kostet beim Entlassen immer noch mehrere Millionen — aber man fährt sich nicht unrettbar fest. Ein festgefahrener Freund hört auf zu spielen, und das ist der teuerste Fehler, den dieses Design machen könnte.
 
 ### 4.5 Marktwert
 
@@ -306,9 +314,19 @@ Absprachen unter Freunden sind Teil des Spiels und sollen nicht verboten werden 
 
 Das verhindert Kollusion nicht — es macht sie sichtbar und teuer, was in einer Freundesgruppe wirksamer ist als jedes Verbot.
 
-### 6.5 Spielerzustimmung
+### 6.5 Wer über einen Transfer entscheidet (F17)
 
-Ein Transfer kann scheitern, weil der **Spieler nicht will**. Die Wahrscheinlichkeit hängt ab von Gehaltsangebot, Prestige, erwarteter Einsatzzeit und Traits — ein Söldner sagt fast immer ja, ein Publikumsliebling fast immer nein. Das ist die dritte Partei am Tisch und der Grund, warum der reichste Verein nicht automatisch jeden bekommt.
+**Spieler haben kein Vetorecht.** Niemand lehnt einen Wechsel ab, niemand verhandelt sich aus einem Transfer heraus. Über einen Wechsel entscheidet allein der Verein, dem der Spieler gehört.
+
+| Fall | Regel |
+|---|---|
+| **Freier Agent** (gehört keinem Verein) | Der Höchstbieter bekommt ihn. **Bindend, ohne Ausnahme.** Kein Rückzug, keine Ablehnung. |
+| **Spieler eines Freundes** | Der **abgebende Verein entscheidet**. Er stellt den Spieler mit einem Mindestpreis in die Auktion; wird der nicht erreicht, platzt sie automatisch. Nach Auktionsende hat er bis zum nächsten Marktabschluss Zeit, anzunehmen oder abzulehnen. |
+| **Bot-Verein** | Verkauft immer zum Höchstgebot, wenn der Mindestpreis erreicht ist. Er lehnt nie ab. |
+
+Lehnt ein Verkäufer ab, werden alle gebundenen Gebote sofort freigegeben und der Spieler bleibt in seinem Kader. Wer das dreimal in Folge tut, bekommt ein sichtbares Boulevard-Etikett ("Scheinverkäufer") — Reputation reguliert das besser als eine Regel.
+
+**Warum das so gut funktioniert:** Es macht den Markt vollständig berechenbar. Ein gewonnenes Gebot auf einen freien Agenten ist ein sicherer Zuschlag, und ein Bieterkrieg endet nie mit "der Spieler wollte nicht". Damit verschiebt sich die gesamte Unsicherheit dorthin, wo sie hingehört: **auf die anderen Menschen am Tisch.** Der einzige, der dir einen Spieler verweigern kann, ist ein Freund — und genau darüber soll geredet, gestritten und verhandelt werden.
 
 ---
 
@@ -360,6 +378,10 @@ Kabinenklima (0–100) sinkt durch zu viele Ego-Spieler, durch Gehaltsungerechti
 ### 7.5 Aufwand für den Spieler
 
 Wer nichts tut, spielt mit der letzten Aufstellung plus Auto-Korrektur. Ein aufmerksamer Spieler, der rotiert und auf den Gegner reagiert, gewinnt etwa **8–12 % Teamstärke** gegenüber dem Autopiloten — etwas mehr als in einem klassischen Manager, weil Rotation hier echtes Handwerk ist. Genug Belohnung für Aufmerksamkeit, wenig genug, dass ein verpasster Abend nicht die Saison kostet.
+
+**Längere Abwesenheit (F19):** Es gibt keinen Urlaubs- oder Pausenmodus. Wer zwei Tage nicht kann, verliert zwei Tage — bei 21 Spieltagen in einer Woche also rund ein Drittel der Saison. Abgefedert wird das ausschließlich durch die Auto-Korrektur aus §7.2, die wenigstens verhindert, dass man mit verletzten oder völlig erschöpften Spielern anläuft.
+
+Das ist die härteste Regel im gesamten Dokument, und sie ist eine bewusste Entscheidung: Anwesenheit ist Teil des Spiels. Für eine Gruppe, die eine Woche lang gemeinsam etwas durchzieht, ist das tragbar — aber es ist der Punkt, an dem ein Freund am ehesten aussteigt. **Falls sich das im ersten Playtest als Problem zeigt, ist ein Autopilot-Modus die naheliegende Nachbesserung** (automatische Rotation nach Fitness plus neutrale Antwort auf Ereignisse), nicht eine Verlängerung der Saison.
 
 ---
 
@@ -534,7 +556,7 @@ Die Bündelung passt zum Tagesablauf aus §1.1: morgens entscheiden, tagsüber M
 > Vier starke Spiele in Folge, und sein Berater weiß es. Gefordert: +60 % Gehalt.
 >
 > - **Zustimmen** → Moral +20, Kabinenklima −8 (die anderen wollen jetzt auch), Gehaltslast +60 %
-> - **Verhandeln** (60 % Erfolg) → +30 % Gehalt, Moral +5. Bei Scheitern: Moral −25, Trait "Söldner" wird aktiv
+> - **Verhandeln** (60 % Erfolg) → +30 % Gehalt, Moral +5. Bei Scheitern: Moral −25, er bekommt dauerhaft den Trait "Söldner"
 > - **Ablehnen** → Geld gespart, Moral −30, Fanstimmung −5, 25 % Chance auf Wechselforderung
 
 ### 10.5 Gewichtung nach Situation (getarntes Rubberbanding)
@@ -686,7 +708,7 @@ Bilanz **pro Spieltag**, aber im Interface als **Tagesbilanz** zusammengefasst: 
   1. Transfersperre
   2. Zwangsverkauf des wertvollsten Spielers unter Marktwert — öffentlich, mit Boulevard-Schlagzeile
   3. −3 Punkte
-  4. Notverwaltung: Gehaltsdeckel, alle Ego- und Söldner-Spieler fordern Wechsel
+  4. Notverwaltung: Gehaltsdeckel, Ego- und Söldner-Spieler verlieren massiv Moral
 
 Bankrott soll **peinlich** sein, nicht endgültig. Ein ausgeschiedener Spieler ist ein Freund, der nicht mehr mitspielt — der teuerste Fehler, den dieses Design machen könnte.
 
@@ -776,6 +798,17 @@ Ein gemeinsamer chronologischer Kanal, in dem automatisch alles Peinliche und al
 > 🏆 *"Marco gewinnt zum fünften Mal in Folge. Die Liga schaut zu."*
 
 Emoji-Reaktionen und Kommentare direkt am Eintrag. **Der Feed ist der Motor der Schadenfreude** und der günstigste Retention-Mechanismus, den es gibt: Man öffnet die App, um zu sehen, was den anderen passiert ist.
+
+**Woher die Texte kommen (F20):** 100–150 **handgeschriebene Templates** mit Platzhaltern, kein Sprachmodell zur Laufzeit.
+
+```
+"{verein} zahlt {summe} für {spieler} — {prozent} über Marktwert.
+ Experten sprechen von {panik|Größenwahn|einem Hilferuf}."
+```
+
+Pro Meldungstyp 4–8 Varianten mit Zufallsauswahl, plus Wortlisten für Zuspitzungen. Volle Kontrolle über Ton und Schärfe, keine laufenden Kosten, keine Latenz, keine Ausrutscher — und die Texte funktionieren offline und deterministisch, was für einen reproduzierbaren Spielverlauf ohnehin wichtig ist.
+
+Aufwand: ein bis zwei Tage konzentrierte Schreibarbeit. Das ist die wirtschaftlichste Investition im ganzen Projekt, weil der Feed laut §20.3 zu den drei Dingen gehört, die überdurchschnittlich gut sein müssen. **Die Templates sind kein Nebenprodukt, sie sind Feature-Arbeit** und gehören entsprechend geplant.
 
 ### 16.2 Verhandlungen
 
@@ -969,7 +1002,8 @@ Ziel: **eine vollständige Saison mit 3–4 Freunden durchspielen** und beantwor
 | **Spielerdaten** | 150 reale Profis, gestaffelt, handkalibrierte Attribute, austauschbare Datenschicht |
 | **Marktpool** | Skalierung nach Vereinszahl (§5.2) |
 | **Auktion** | Soft-Close, Escrow, Proxy-Gebot, sichtbare Bieter, täglicher Abschluss 16–17 Uhr, Push bei Überbieten |
-| **Direkttransfer** | Einfache Variante: Geld gegen Spieler, mit Annahme/Ablehnung |
+| **Direkttransfer** | Einfache Variante: Geld gegen Spieler, mit Annahme/Ablehnung durch den Verkäufer |
+| **Vertragsauflösung** | Entlassung gegen 50 % Restgehalt, mit Fanstimmungsmalus |
 | **Kader** | 4 Formationen, Startelf + Bank, 3 Taktikregler, eine gespeicherte Aufstellung, Auto-Korrektur |
 | **Fitness** | Volles Verbrauchs- und Regenerationsmodell (§7.3) |
 | **Simulation** | Ballbesitz-Ketten-Sim, 90-Sek-Ticker, Statistik, deterministischer Seed |
@@ -980,7 +1014,7 @@ Ziel: **eine vollständige Saison mit 3–4 Freunden durchspielen** und beantwor
 | **Stadion** | 2 Ausbaustufen, Bauzeit, Baustellenmalus, Zustand und Instandhaltung |
 | **Finanzen** | Tagesbilanz, Tickets, Merch, TV, 1 Sponsorenslot, Gehälter, Kredit, Insolvenzleiter |
 | **Scouting** | Verdecktes Potenzial mit Range, 2 Scouting-Stufen |
-| **Social** | Liga-Feed mit Boulevard-Meldungen, Emoji-Reaktionen, Gruppenchat |
+| **Social** | Liga-Feed mit 100–150 Text-Templates, Emoji-Reaktionen, Gruppenchat |
 | **Saisonende** | 5 Trophäen + 1 Anti-Trophäe, Saisonrückblick als teilbares Bild |
 | **Technik** | Server-autoritativ, Web-App + mobile App, Push-Nachrichten |
 
@@ -1006,7 +1040,7 @@ Drei Dinge tragen das gesamte MVP:
 | 1 | Spielerdaten (150 kalibriert), Kader, Simulation, Ticker | 3–4 |
 | 2 | Auktionssystem mit Escrow, Soft-Close, Marktabschluss, Push | 2–3 |
 | 3 | Wirtschaft, Fans, Stadion, Tagesbilanz | 2–3 |
-| 4 | Ereignissystem + 20 Ereignisse | 1–2 |
+| 4 | Ereignissystem + 20 Ereignisse + 100–150 Feed-Templates | 2–3 |
 | 5 | Feed, Saisonende, Trophäen, App-Wrapper | 2 |
 | 6 | Balancing-Playtest mit echter Gruppe | 2–3 |
 
@@ -1057,11 +1091,15 @@ Die Gruppe stimmt zwischen den Saisons über Regeln ab. Kein Fußballspiel gibt 
 
 ## 22. Verbleibende offene Punkte
 
-1. **Aussteiger mitten in der Saison** — Autopilot, Übernahme durch einen neuen Freund, oder Vereinsauflösung? Empfehlung: Autopilot mit jederzeit möglicher Übergabe.
-2. **Wie viele reale Namen genau?** 150 zum Start ist gesetzt; die Frage ist, welche 150 und nach welchen Kriterien die Attribute kalibriert werden.
-3. **Zeitzonen** — 17/20/22 Uhr in welcher Zeitzone, wenn jemand im Ausland ist?
-4. **Urlaubsmodus** — was passiert, wenn ein Spieler zwei Tage nicht kann? Bei 21 Spieltagen in einer Woche ist das ein Drittel der Saison.
-5. **Was passiert bei Gleichstand** in mehreren Trophäen-Kategorien gleichzeitig?
+Nichts davon blockiert den Baubeginn. Die ersten drei sollten vor dem ersten Playtest entschieden sein, die letzten beiden können bis zur ersten Saisonauswertung warten.
+
+1. **Welche 150 Spieler, mit welchen Werten?** Die Struktur steht (30 / 50 / 70), die Namensliste und die Attributkalibrierung nicht. Reine Fleißarbeit, aber die gesamte Balance hängt daran — realistisch ein Arbeitstag.
+2. **Push-Strategie.** Pro Tag fallen an: 1–2 Ereignisse, mehrere Überboten-Alarme, der Marktabschluss und drei Anstöße. Meine Setzung wäre: Überboten immer sofort (die Auktion braucht es), Ereignisse einmal morgens gebündelt, Anstöße als eine Sammelnachricht pro Abendblock, alles einzeln abschaltbar. Ungebündelt wäre das ein Deinstallationsgrund.
+3. **Zeitzonen.** 17/20/22 Uhr in welcher Zeitzone, wenn jemand im Ausland ist? Naheliegend: eine feste Lobby-Zeitzone, die der Host beim Erstellen wählt.
+4. **Aussteiger mitten in der Saison.** Empfehlung: Verein läuft im Autopilot weiter, Übergabe an einen neuen Freund jederzeit möglich.
+5. **Gleichstand bei Trophäen.** Was passiert, wenn zwei Vereine exakt denselben Kaderwert haben? Vorschlag: geteilte Trophäe, beide bekommen das volle Prestige.
+
+**Nicht mehr offen, aber im Auge zu behalten:** Der Verzicht auf eine Marktbremse (F6) und der Verzicht auf einen Abwesenheitsmodus (F19). Beide sind bewusst getroffen, beide sind die wahrscheinlichsten Kandidaten für eine Nachbesserung nach dem ersten Playtest — die Messgrößen dafür stehen in §19.6.
 
 ---
 
@@ -1089,3 +1127,7 @@ Chronologisch, damit später nachvollziehbar bleibt, warum das Spiel so aussieht
 | Spieltag-Erlebnis | 90-Sekunden-Ticker, live oder später abrufbar | §8.4 |
 | Plattform | Web-App und mobile App aus einer Codebasis | §0.2 A6 |
 | Bietertransparenz | Namen sichtbar | §6.1 |
+| Spielerzustimmung | **Gestrichen.** Kein Vetorecht; freie Agenten gehen bindend an den Höchstbieter, über eigene Spieler entscheidet allein der Verkäufer | §6.5 |
+| Vertragsauflösung | Entlassung möglich gegen 50 % Restgehalt | §4.4 |
+| Abwesenheit | Kein Urlaubsmodus — nur Auto-Korrektur der Aufstellung | §7.5 |
+| Feed- und Ereignistexte | Handgeschriebene Templates mit Platzhaltern, kein LLM zur Laufzeit | §16.1 |
