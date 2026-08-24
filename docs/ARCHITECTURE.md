@@ -203,7 +203,20 @@ COMMIT;
 
 ### Proxy-Gebote
 
-Nach jedem erfolgreichen Gebot läuft die Proxy-Auflösung **innerhalb derselben Transaktion**: Hat der überbotene Verein ein hinterlegtes Maximum, das noch reicht, wird sofort automatisch gegengeboten — in Mindestschritten, bis einer nicht mehr kann. Die Schleife ist begrenzt (max. 50 Runden), und das Ergebnis hängt nur von den hinterlegten Maxima ab, nicht davon, wer zuerst geklickt hat. Das ist Voraussetzung dafür, dass asynchrones Bieten überhaupt fair sein kann.
+Nach jedem Gebot wird der Auktionszustand **innerhalb derselben Transaktion** komplett neu aus allen hinterlegten Maxima abgeleitet: Es führt, wer das höchste Maximum hat, und er zahlt einen Mindestschritt über dem zweithöchsten — nie sein eigenes Maximum. Bei exakt gleichem Maximum gewinnt das frühere Gebot.
+
+Damit hängt das Ergebnis **nur von den Maxima ab, nicht von der Klickreihenfolge**. Das ist Voraussetzung dafür, dass asynchrones Bieten überhaupt fair sein kann — sonst gewinnt, wer zufällig um 16:47 wach ist. Ein Test permutiert alle Reihenfolgen von vier Geboten und prüft, dass Führender und Preis identisch bleiben.
+
+### Was Escrow bindet: das Maximum, nicht den Preis
+
+Beim Umsetzen wurde eine Lücke sichtbar, die im Design nicht benannt war. Bindet eine Sperre nur den **angezeigten Preis**, kann ein Verein ein Proxy-Maximum von 100 Mio hinterlegen, während nur 20 Mio gebunden sind — und die restlichen 80 Mio zwischenzeitlich anderswo ausgeben. Feuert sein Proxy später, ist es ungedeckt.
+
+Deshalb gilt:
+
+- **Geprüft wird gegen das Maximum.** Wer 100 Mio hinterlegt, muss 100 Mio frei haben. Sonst ließen sich Preise mit ungedeckten Maxima hochtreiben.
+- **Gebunden wird das Maximum des Führenden.** Nur der Führende bindet; wer überboten wird, bekommt sein Geld sofort frei.
+
+Das macht ein hohes Proxy-Gebot bewusst teuer: Es blockiert Liquidität für den ganzen restlichen Markttag. Genau die strategische Frage, die §6.1 des Designs stellt — *wo binde ich mein Geld, während der Markt läuft?* — wird dadurch erst scharf.
 
 ### Abschluss
 

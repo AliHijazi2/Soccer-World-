@@ -37,6 +37,16 @@ npm run players      # erzeugt data/players.json aus data/roster.json
 npm run typecheck
 ```
 
+Für die Nebenläufigkeitstests wird eine PostgreSQL-Instanz gebraucht:
+
+```bash
+export DATABASE_URL="postgresql://postgres@localhost/postgres?host=/tmp&port=5433"
+npm run test:db   # 12 Tests gegen echtes Postgres, inkl. Marktabschluss-Härtetest
+npm run test:all
+```
+
+Jede Testdatei legt sich ihre eigene Datenbank an.
+
 `RUNS=40000 npm run balance` erhöht die Stichprobe.
 
 ### Stand
@@ -48,8 +58,9 @@ npm run typecheck
 | Spielsimulation mit Ticker | ✅ kalibriert |
 | Headless-Balancer | ✅ |
 | Spielerpool, 150 echte Profis | ✅ |
-| Datenbankschema | 📄 entworfen, nicht umgesetzt |
-| Auktion und Escrow | ⬜ |
+| Datenbankschema (Marktausschnitt) | ✅ |
+| Auktion, Escrow, Proxy-Gebote | ✅ Nebenläufigkeit geprüft |
+| Auktionsabschluss und Buchhaltung | ✅ |
 | Scheduler | ⬜ |
 | Wirtschaft, Fans, Ereignisse | ⬜ |
 | Client | ⬜ |
