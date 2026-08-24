@@ -189,6 +189,7 @@ export async function seedLeague(
                  "CM", "CM", "AM", "LW", "RW", "ST", "ST", "ST"].slice(0, squadSize);
 
   const clubIds: string[] = [];
+  const budget = 400_000_000;
   for (let i = 0; i < clubCount; i++) {
     const user = await pool.query<{ id: string }>(
       `INSERT INTO app_user (email, display_name) VALUES ($1, $2) RETURNING id`,
@@ -200,10 +201,34 @@ export async function seedLeague(
     const clubId = club.rows[0]!.id;
     clubIds.push(clubId);
 
-    for (const position of NEEDS) {
-      const candidates = byPosition.get(position);
-      const player = candidates?.shift();
-      if (!player) throw new Error(`Pool erschöpft auf Position ${position}`);
+    // Kader innerhalb des Startbudgets zusammenstellen (GDD §2.3).
+    // Ohne diese Schranke bekommt jeder Verein einen Traumkader, den er sich
+    // nie leisten könnte — und alle Gehaltszahlen im Bericht sind wertlos.
+    let remaining = budget;
+    for (const [slotIndex, position] of NEEDS.entries()) {
+      const candidates = byPosition.get(position) ?? [];
+      if (candidates.length === 0) throw new Error(`Pool erschöpft auf Position ${position}`);
+
+      // Reserve für die noch offenen Plätze: Sie muss sich an den tatsächlich
+      // günstigsten verbleibenden Spielern orientieren, nicht an einem
+      // Pauschalwert — sonst reicht das Budget am Ende nicht und der Kader
+      // wird trotz Schranke zu teuer.
+      const slotsLeft = NEEDS.slice(slotIndex + 1);
+      const reserve = slotsLeft.reduce((sum, slot) => {
+        const rest = byPosition.get(slot) ?? [];
+        const cheapest = rest.length > 0
+          ? Math.min(...rest.map((p) => p.baseValue)) : 0;
+        return sum + cheapest;
+      }, 0);
+
+      const affordable = candidates.findIndex((p) => p.baseValue <= remaining - reserve);
+      // Ist nichts leistbar, kommt der billigste Spieler der Position — nie der
+      // schwächste, der zufällig teuer ist
+      const index = affordable >= 0 ? affordable
+        : candidates.reduce((best, p, i, all) =>
+            p.baseValue < all[best]!.baseValue ? i : best, 0);
+      const player = candidates.splice(index, 1)[0]!;
+      remaining -= player.baseValue;
 
       const template = await pool.query<{ id: string }>(
         `INSERT INTO player_template

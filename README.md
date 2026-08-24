@@ -65,10 +65,15 @@ Jede Testdatei legt sich ihre eigene Datenbank an.
 | Spielplan und Zeitplanung | ✅ inkl. Zeitumstellung |
 | Scheduler mit Jobkette | ✅ idempotent |
 | Vollständiger Saisondurchlauf | ✅ ohne Oberfläche |
-| Fans, Sponsoren, TV-Gelder, Ereignisse | ⬜ |
+| Fanmodell mit Erwartungsdruck | ✅ |
+| Einnahmen, Sponsoren, Prämien, Betriebskosten | ✅ kalibriert |
+| Ereignisse, Feed-Templates | ⬜ |
+| Transfermarkt-Anbindung im Spielbetrieb | ⬜ |
 | Scheduler | ⬜ |
 | Wirtschaft, Fans, Ereignisse | ⬜ |
 | Client | ⬜ |
 
 Eine komplette Saison mit 4 Vereinen läuft in unter einer Sekunde durch:
-42 Partien, 21 Jobs, rund 730 Ticker-Ereignisse.
+42 Partien, 21 Jobs, rund 730 Ticker-Ereignisse. `npm run season:demo` druckt
+Abschlusstabelle, Erwartungsbilanz, Kaderstruktur und Wirtschaftsrechnung gegen
+die Zielwerte aus dem Design.

@@ -9,6 +9,12 @@
 import { hashSeed } from "../../../shared/src/rules/rng.ts";
 import { simulateMatch } from "../../../shared/src/rules/match/simulate.ts";
 import { fitnessAfterMatch, pickBestEleven } from "../../../shared/src/rules/lineup.ts";
+import {
+  applyMoodChange, fanCountChange, moodChangeAfterMatch, occupancy,
+} from "../../../shared/src/rules/economy/fans.ts";
+import {
+  matchBonus, merchandise, ticketIncome, tvBasePerMatchday, upkeep,
+} from "../../../shared/src/rules/economy/revenue.ts";
 import type {
   Attributes, MatchPlayer, MatchSquad, Position, Trait,
 } from "../../../shared/src/types/match.ts";
@@ -201,17 +207,30 @@ export async function runMatchday(
       }
 
       // Ticketeinnahmen nur beim Heimverein
-      const income = support.attendance * support.ticketPrice;
       await book(client, leagueId, match.home_club_id, season, matchday,
-        "ticket", income, "Ticketverkauf");
+        "ticket", support.income, "Ticketverkauf");
+
+      // Fanstimmung nach Erwartungsdifferenz (GDD §11.2) — der wichtigste
+      // Anti-Snowball-Hebel des Spiels
+      await applyFanEffects(client, match.home_club_id,
+        result.homeGoals, result.awayGoals, true, support.ticketPrice);
+      await applyFanEffects(client, match.away_club_id,
+        result.awayGoals, result.homeGoals, false, 0);
+
+      // Spielprämien
+      await book(client, leagueId, match.home_club_id, season, matchday, "prize",
+        matchBonus(pointsFor(result.homeGoals, result.awayGoals)), "Spielprämie");
+      await book(client, leagueId, match.away_club_id, season, matchday, "prize",
+        matchBonus(pointsFor(result.awayGoals, result.homeGoals)), "Spielprämie");
 
       report.matchesPlayed++;
       report.goals += result.homeGoals + result.awayGoals;
       report.injuries += result.injuries.length;
-      report.ticketIncome += income;
+      report.ticketIncome += support.income;
     }
 
     report.wagesPaid = await payWages(client, leagueId, season, matchday);
+    await payRecurring(client, leagueId, season, matchday);
     await applyFitness(client, leagueId, matchday, played, substituted);
     await client.query(
       `UPDATE player_instance SET suspension_matches = suspension_matches - 1
@@ -225,7 +244,7 @@ export async function runMatchday(
 
 async function homeSupport(
   client: PoolClient, clubId: string,
-): Promise<{ factor: number; attendance: number; ticketPrice: number }> {
+): Promise<{ factor: number; attendance: number; ticketPrice: number; income: number }> {
   const { rows } = await client.query<{
     stadium_capacity: number; fan_mood: number; ticket_price: number; fan_count: number;
   }>(
@@ -233,19 +252,96 @@ async function homeSupport(
     [clubId]);
   const club = rows[0]!;
 
-  // Auslastung nach den Stimmungszonen aus GDD §11.4
-  const mood = club.fan_mood;
-  const occupancy = mood >= 85 ? 1.0 : mood >= 60 ? 0.8 : mood >= 35 ? 0.6 : 0.35;
-  const attendance = Math.min(
-    club.stadium_capacity,
-    Math.round(club.stadium_capacity * occupancy),
-    club.fan_count,
-  );
+  const rate = occupancy(club.fan_mood, club.ticket_price);
+  const { attendance, income } = ticketIncome(club.stadium_capacity, rate, club.ticket_price);
+  const capped = Math.min(attendance, club.fan_count);
+
   return {
-    factor: attendance / club.stadium_capacity * (mood / 100),
-    attendance,
+    // Heimvorteil aus Auslastung mal Stimmung (GDD §8.3)
+    factor: (capped / club.stadium_capacity) * (club.fan_mood / 100),
+    attendance: capped,
     ticketPrice: club.ticket_price,
+    income: capped * club.ticket_price,
   };
+}
+
+function pointsFor(scored: number, conceded: number): number {
+  return scored > conceded ? 3 : scored === conceded ? 1 : 0;
+}
+
+/**
+ * Stimmung und Fanzahl nach einer Partie.
+ *
+ * Gemessen wird gegen die zu Saisonbeginn festgelegte Erwartung, nicht gegen
+ * das nackte Ergebnis: Der teuerste Kader hat dadurch automatisch die
+ * unzufriedensten Fans (GDD §11.2).
+ */
+async function applyFanEffects(
+  client: PoolClient, clubId: string,
+  goalsFor: number, goalsAgainst: number, isHome: boolean, ticketPrice: number,
+): Promise<void> {
+  const { rows } = await client.query<{
+    fan_mood: number; fan_count: number; expected_ppg: number;
+  }>("SELECT fan_mood, fan_count, expected_ppg FROM club WHERE id = $1", [clubId]);
+  const club = rows[0]!;
+
+  const change = moodChangeAfterMatch({
+    points: pointsFor(goalsFor, goalsAgainst),
+    expectedPoints: club.expected_ppg,
+    goalsFor, goalsAgainst, ticketPrice, isHome,
+  });
+  const mood = applyMoodChange(club.fan_mood, change);
+  const fans = club.fan_count + fanCountChange(club.fan_count, mood);
+
+  await client.query(
+    "UPDATE club SET fan_mood = $2, fan_count = GREATEST($3, 1000) WHERE id = $1",
+    [clubId, mood, fans]);
+}
+
+/**
+ * Laufende Posten je Spieltag: TV-Sockel, Merchandise, Sponsoren, Betriebskosten.
+ *
+ * Der TV-Sockel wird allen gleich ausgezahlt — er ist der Grund, warum ein
+ * schwacher Verein nie finanziell abstirbt (GDD §19.2, Nr. 8).
+ */
+async function payRecurring(
+  client: PoolClient, leagueId: string, season: number, matchday: number,
+): Promise<void> {
+  const { rows } = await client.query<{
+    id: string; fan_count: number; fan_mood: number;
+    stadium_capacity: number; stadium_condition: number;
+  }>(
+    `SELECT id, fan_count, fan_mood, stadium_capacity, stadium_condition
+       FROM club WHERE league_id = $1`, [leagueId]);
+
+  const tvBase = tvBasePerMatchday();
+  for (const club of rows) {
+    await book(client, leagueId, club.id, season, matchday, "tv", tvBase, "TV-Sockel");
+    await book(client, leagueId, club.id, season, matchday, "merch",
+      merchandise(club.fan_count, club.fan_mood), "Merchandise");
+    await book(client, leagueId, club.id, season, matchday, "maintenance",
+      -upkeep(club.stadium_capacity, club.stadium_condition), "Stadionbetrieb");
+
+    const sponsors = await client.query<{ total: number; mood: number }>(
+      `SELECT COALESCE(SUM(base_per_matchday), 0)::bigint AS total,
+              COALESCE(SUM(mood_per_matchday), 0)::numeric AS mood
+         FROM sponsor_contract WHERE club_id = $1`, [club.id]);
+    const sponsor = sponsors.rows[0]!;
+    if (sponsor.total > 0) {
+      await book(client, leagueId, club.id, season, matchday,
+        "sponsor", sponsor.total, "Sponsoren");
+    }
+    if (sponsor.mood !== 0) {
+      await client.query(
+        "UPDATE club SET fan_mood = GREATEST(0, LEAST(100, fan_mood + $2)) WHERE id = $1",
+        [club.id, sponsor.mood]);
+    }
+  }
+
+  // Das Stadion verfällt, ob man hinsieht oder nicht (GDD §12.4)
+  await client.query(
+    `UPDATE club SET stadium_condition = GREATEST(0, stadium_condition - 0.6)
+      WHERE league_id = $1`, [leagueId]);
 }
 
 async function updateStanding(

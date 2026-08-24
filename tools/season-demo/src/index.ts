@@ -97,15 +97,91 @@ const f = fitness.rows[0]!;
 console.log(`Fitness am Saisonende: Schnitt ${f.avg}, Tiefstwert ${f.min}, ` +
   `${f.below} Spieler unter der Leistungsgrenze von 70`);
 
+const fans = await pool.query<{
+  name: string; fan_count: number; fan_mood: number; expected_ppg: number;
+  season_goal: string; points: number; played: number;
+}>(
+  `SELECT c.name, c.fan_count, c.fan_mood, c.expected_ppg, c.season_goal,
+          s.points, s.played
+     FROM club c JOIN standing s ON s.club_id = c.id
+    WHERE c.league_id = $1 ORDER BY c.expected_ppg DESC`, [fx.leagueId]);
+console.log("\nERWARTUNG GEGEN WIRKLICHKEIT (GDD §11.2)");
+console.log("─".repeat(78));
+console.log(pad("Verein", 14) + pad("Saisonziel", 13) + padL("erwartet", 10) +
+  padL("erreicht", 10) + padL("Differenz", 11) + padL("Stimmung", 10) + padL("Fans", 10));
+console.log("─".repeat(78));
+for (const row of fans.rows) {
+  const actual = row.points / Math.max(row.played, 1);
+  const diff = actual - row.expected_ppg;
+  console.log(
+    pad(row.name, 14) + pad(row.season_goal, 13) +
+    padL(row.expected_ppg.toFixed(2), 10) + padL(actual.toFixed(2), 10) +
+    padL((diff >= 0 ? "+" : "") + diff.toFixed(2), 11) +
+    padL(Math.round(row.fan_mood) + "", 10) +
+    padL(Math.round(row.fan_count / 1000) + "k", 10));
+}
+console.log("─".repeat(78));
+
 const money = await pool.query<{ category: string; total: number }>(
   `SELECT category, SUM(amount)::bigint AS total FROM ledger_entry
     WHERE league_id = $1 GROUP BY category ORDER BY SUM(amount) DESC`, [fx.leagueId]);
-console.log("\nGELDFLUSS DER LIGA");
+const clubCount = table.rows.length;
+console.log("\nWIRTSCHAFT JE VEREIN UND SAISON (Zielwerte aus GDD §13.1)");
 console.log("─".repeat(78));
+// Zielwerte aus GDD §13.1 in der korrigierten Fassung
+const TARGETS: Record<string, number> = {
+  tv: 18, tv_bonus: 12, sponsor: 15, ticket: 9, merch: 7, prize: 7,
+  wages: -40, maintenance: -12,
+};
+let income = 0, expense = 0;
 for (const row of money.rows) {
-  console.log(pad(row.category, 20) + padL(mio(row.total), 16));
+  const perClub = row.total / clubCount / 1_000_000;
+  if (perClub > 0) income += perClub; else expense += perClub;
+  const target = TARGETS[row.category];
+  const mark = target === undefined ? " "
+    : Math.abs(perClub - target) <= Math.max(3, Math.abs(target) * 0.35) ? "✓" : "✗";
+  console.log(
+    pad(`${mark} ${row.category}`, 20) + padL(perClub.toFixed(1) + " Mio", 14) +
+    padL(target === undefined ? "" : `Ziel ${target} Mio`, 18));
 }
-console.log("─".repeat(78) + "\n");
+console.log("─".repeat(78));
+console.log(pad("Einnahmen", 20) + padL(income.toFixed(1) + " Mio", 14) + padL("Ziel 68 Mio", 18));
+console.log(pad("Ausgaben", 20) + padL(expense.toFixed(1) + " Mio", 14) + padL("Ziel -52 Mio", 18));
+console.log(pad("Ergebnis", 20) + padL((income + expense).toFixed(1) + " Mio", 14) +
+  padL("Ziel +10 bis +22", 18));
+const wageShare = Math.abs((TARGETS.wages ? (money.rows.find((r) => r.category === "wages")?.total ?? 0) : 0)
+  / clubCount / 1_000_000) / Math.max(income, 1) * 100;
+console.log(pad("Gehaltsquote", 20) + padL(wageShare.toFixed(0) + " %", 14) +
+  padL("Ziel 45-60 %", 18));
+console.log("─".repeat(78));
+
+// Warum die Gehaltsquote von der Kadergröße abweicht: Das Gehalt hängt am
+// Können, der Marktwert zusätzlich am Alter (GDD §13.2). Ein Kader voller
+// Altersschnäppchen ist billig gekauft und teuer im Unterhalt.
+const squads = await pool.query<{
+  name: string; market_value: number; wage_season: number; avg_age: number;
+}>(
+  `SELECT c.name,
+          COALESCE(SUM(p.market_value), 0)::bigint AS market_value,
+          (COALESCE(SUM(p.wage_per_matchday), 0) * 21)::bigint AS wage_season,
+          ROUND(AVG(p.age), 1)::numeric AS avg_age
+     FROM club c LEFT JOIN player_instance p ON p.club_id = c.id
+    WHERE c.league_id = $1 GROUP BY c.name ORDER BY c.name`, [fx.leagueId]);
+console.log("\nKADERSTRUKTUR — Ablöse gegen Gehalt");
+console.log("─".repeat(78));
+console.log(pad("Verein", 14) + padL("Kaderwert", 14) + padL("Gehalt/Saison", 16) +
+  padL("Quote", 9) + padL("Ø Alter", 10));
+console.log("─".repeat(78));
+for (const row of squads.rows) {
+  const ratio = row.market_value > 0 ? row.wage_season / row.market_value * 100 : 0;
+  console.log(
+    pad(row.name, 14) + padL(mio(row.market_value), 14) +
+    padL(mio(row.wage_season), 16) + padL(ratio.toFixed(0) + " %", 9) +
+    padL(String(row.avg_age), 10));
+}
+console.log("─".repeat(78));
+console.log("Ein Kader im besten Alter läge bei rund 8 % — höhere Werte bedeuten:");
+console.log("billig eingekauft, teuer im Unterhalt.\n");
 
 const ticker = await pool.query<{ minute: number; type: string; text_key: string }>(
   `SELECT e.minute, e.type, e.text_key FROM match_event e

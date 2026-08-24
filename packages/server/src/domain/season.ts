@@ -10,7 +10,13 @@ import { hashSeed } from "../../../shared/src/rules/rng.ts";
 import {
   SEASON, generateFixtures, marketCloseAt, planKickoffs,
 } from "../../../shared/src/rules/schedule.ts";
-import { inTransaction, type Pool } from "../db/pool.ts";
+import {
+  expectedPointsPerGame, expectedRank, seasonGoal,
+} from "../../../shared/src/rules/economy/expectations.ts";
+import {
+  placementPrize, sponsorTerms, tvPerformanceShare, type SponsorProfile,
+} from "../../../shared/src/rules/economy/revenue.ts";
+import { inTransaction, type Pool, type PoolClient } from "../db/pool.ts";
 import { enqueue, type Job, type JobHandler } from "../scheduler/runner.ts";
 import { runMatchday } from "./matchday.ts";
 import { settleAuction } from "./auction.ts";
@@ -66,12 +72,7 @@ export async function startSeason(
       seasonStart, league.kickoff_times, league.timezone, SEASON.MATCHDAYS);
     const kickoffByMatchday = new Map(kickoffs.map((k) => [k.matchday, k.kickoffAt]));
 
-    for (const [index, clubId] of clubs.entries()) {
-      await client.query("UPDATE club SET squad_index = $2 WHERE id = $1", [clubId, index]);
-      await client.query(
-        `INSERT INTO standing (league_id, season, club_id) VALUES ($1, $2, $3)
-         ON CONFLICT DO NOTHING`, [leagueId, season, clubId]);
-    }
+    await setExpectations(client, leagueId, season, clubs);
 
     for (const fixture of fixtures) {
       const home = clubs[fixture.homeIndex]!;
@@ -128,6 +129,126 @@ async function scheduleMarketClose(
   }
 }
 
+/**
+ * Legt Erwartungswerte, Saisonziele und Sponsoren fest.
+ *
+ * Der teuerste Kader bekommt "Meister werden", der billigste "Nicht Letzter".
+ * Beides steht danach fest — eine Erwartung, die sich innerhalb der Saison
+ * mitbewegt, könnte man einfach abhängen und wäre wirkungslos (GDD §11.2).
+ */
+async function setExpectations(
+  client: PoolClient, leagueId: string, season: number, clubs: readonly string[],
+): Promise<void> {
+  const values: number[] = [];
+  for (const clubId of clubs) {
+    const { rows } = await client.query<{ total: number }>(
+      `SELECT COALESCE(SUM(market_value), 0)::bigint AS total
+         FROM player_instance WHERE club_id = $1`, [clubId]);
+    values.push(rows[0]?.total ?? 0);
+  }
+  const average = values.reduce((sum, value) => sum + value, 0) / Math.max(clubs.length, 1);
+
+  // Sponsorenwahl in inverser Reihenfolge der Kaderwerte: Wer wenig hat, wählt
+  // zuerst (GDD §14.1). Das schwächste Team bekommt das lukrativste Angebot.
+  const profiles: SponsorProfile[] = ["safe", "performance", "controversial"];
+
+  for (const [index, clubId] of clubs.entries()) {
+    const rank = expectedRank(values, index);
+    const ppg = expectedPointsPerGame(values[index]!, average);
+
+    await client.query(
+      `UPDATE club SET squad_index = $2, expected_ppg = $3, season_goal = $4,
+                       season_start_squad_value = $5
+        WHERE id = $1`,
+      [clubId, index, ppg, seasonGoal(rank, clubs.length), values[index]!]);
+    await client.query(
+      `INSERT INTO standing (league_id, season, club_id) VALUES ($1, $2, $3)
+       ON CONFLICT DO NOTHING`, [leagueId, season, clubId]);
+
+    const terms = sponsorTerms(profiles[index % profiles.length]!);
+    await client.query(
+      `INSERT INTO sponsor_contract
+         (club_id, slot, sponsor_name, profile, base_per_matchday,
+          bonus_per_win, title_bonus, mood_per_matchday, until_season)
+       VALUES ($1, 'shirt', $2, $3, $4, $5, $6, $7, $8)
+       ON CONFLICT (club_id, slot) DO NOTHING`,
+      [clubId, `Sponsor ${terms.profile}`, terms.profile, terms.basePerMatchday,
+       terms.bonusPerWin, terms.titleBonus, terms.moodPerMatchday, season]);
+    if (terms.moodImmediate !== 0) {
+      await client.query(
+        "UPDATE club SET fan_mood = GREATEST(0, fan_mood + $2) WHERE id = $1",
+        [clubId, terms.moodImmediate]);
+    }
+  }
+}
+
+export interface SeasonFinishRow {
+  clubId: string; rank: number; points: number;
+  placementPrize: number; tvShare: number; titleBonus: number;
+}
+
+/**
+ * Saisonabschluss: Platzierungsprämie und leistungsabhängiger TV-Anteil.
+ *
+ * Bewusst flach gehalten — sportlicher Erfolg soll Ruhm bringen, nicht
+ * ökonomische Unschlagbarkeit (GDD §9.3).
+ */
+export async function finishSeason(
+  pool: Pool, leagueId: string, season: number,
+): Promise<SeasonFinishRow[]> {
+  return inTransaction(pool, async (client) => {
+    const standings = await client.query<{
+      club_id: string; points: number; played: number;
+      goals_for: number; goals_against: number; fan_count: number;
+    }>(
+      `SELECT s.club_id, s.points, s.played, s.goals_for, s.goals_against, c.fan_count
+         FROM standing s JOIN club c ON c.id = s.club_id
+        WHERE s.league_id = $1 AND s.season = $2
+        ORDER BY (s.points::numeric / NULLIF(s.played, 0)) DESC NULLS LAST,
+                 (s.goals_for - s.goals_against) DESC, s.goals_for DESC`,
+      [leagueId, season]);
+
+    const clubCount = standings.rows.length;
+    const totalFans = standings.rows.reduce((sum, row) => sum + row.fan_count, 0) || 1;
+    const result: SeasonFinishRow[] = [];
+
+    for (const [index, row] of standings.rows.entries()) {
+      const rank = index + 1;
+      const prize = placementPrize(rank, clubCount);
+      const tv = tvPerformanceShare(rank, clubCount, row.fan_count / totalFans);
+
+      const sponsor = await client.query<{ title_bonus: number }>(
+        "SELECT COALESCE(SUM(title_bonus), 0)::bigint AS title_bonus FROM sponsor_contract WHERE club_id = $1",
+        [row.club_id]);
+      const titleBonus = rank === 1 ? (sponsor.rows[0]?.title_bonus ?? 0) : 0;
+
+      for (const [category, amount, text] of [
+        ["prize", prize, "Platzierungsprämie"],
+        // Eigene Kategorie: Sockel und Leistungsanteil in einen Topf zu werfen
+        // macht die Bilanz unlesbar — man sieht dann nicht mehr, wie viel
+        // solidarisch verteilt wurde und wie viel am Erfolg hing.
+        ["tv_bonus", tv, "TV-Leistungsanteil"],
+        ["sponsor", titleBonus, "Meisterbonus des Sponsors"],
+      ] as const) {
+        if (amount === 0) continue;
+        await client.query(
+          `INSERT INTO ledger_entry
+             (league_id, club_id, season, matchday, category, amount, description)
+           VALUES ($1, $2, $3, 21, $4, $5, $6)`,
+          [leagueId, row.club_id, season, category, amount, text]);
+        await client.query("UPDATE club SET cash = cash + $2 WHERE id = $1",
+          [row.club_id, amount]);
+      }
+
+      result.push({
+        clubId: row.club_id, rank, points: row.points,
+        placementPrize: prize, tvShare: tv, titleBonus,
+      });
+    }
+    return result;
+  });
+}
+
 // ── Job-Handler ───────────────────────────────────────────────────────────
 
 const runMatchdayHandler: JobHandler = async (job: Job, pool: Pool) => {
@@ -138,6 +259,7 @@ const runMatchdayHandler: JobHandler = async (job: Job, pool: Pool) => {
   await runMatchday(pool, job.leagueId, season, matchday);
 
   if (matchday >= SEASON.MATCHDAYS) {
+    await finishSeason(pool, job.leagueId, season);
     await pool.query(
       "UPDATE league SET status = 'between_seasons' WHERE id = $1", [job.leagueId]);
     return;

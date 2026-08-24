@@ -468,13 +468,13 @@ Bei 3, 4, 7 und 8 Freunden geht die Rechnung damit **exakt** auf: volle Runden, 
 
 | Platzierung | Prämie |
 |---|---|
-| 1. | 40 Mio |
-| 2. | 34 Mio |
-| 3. | 30 Mio |
-| 4. | 27 Mio |
-| ab 5. | 25 Mio |
+| 1. | 7,0 Mio |
+| Letzter | 4,0 Mio |
+| dazwischen | linear interpoliert |
 
-Der Abstand zwischen Erstem und Letztem liegt bei 15 Mio, gemessen an Saisoneinnahmen von rund 70 Mio und einem Startbudget von 400 Mio. Dazu Spielprämien: 1,2 Mio pro Sieg, 400k pro Unentschieden.
+Dazu Spielprämien: **220k pro Sieg, 70k pro Unentschieden.** Über eine Saison ergibt das je nach Erfolg 6–9 Mio.
+
+> **Korrigiert beim Umsetzen.** Die erste Fassung nannte hier 40 Mio für den Ersten und 25 Mio für den Letzten. Das ist mit der Zielaufteilung aus §13.1 unvereinbar, wo Prämien mit 6 Mio je Verein veranschlagt sind — die alten Zahlen hätten die Prämien zur mit Abstand größten Einnahmequelle gemacht, in einem Abschnitt, der ausdrücklich "bewusst flach" heißt. Die Spanne beträgt jetzt inklusive Siegprämien rund 5 Mio, also etwa 7 % der Saisoneinnahmen und damit klar unter der Obergrenze von 21 % aus §19.1.
 
 **Sportlicher Erfolg soll Ruhm bringen, nicht ökonomische Unschlagbarkeit.** Wer die Liga über Geld dominieren will, muss das über Fans, Stadion und clevere Transfers tun — also über Entscheidungen.
 
@@ -685,13 +685,19 @@ Kalibriert auf einen Zielkader von 16 Spielern mit rund 390 Mio Marktwert:
 |---|---|
 | TV-Gelder | 30 Mio (18 Mio Sockel für alle + 12 Mio leistungsabhängig) |
 | Sponsoren | 15 Mio |
-| Tickets | 12 Mio |
-| Merchandise | 8 Mio |
-| Prämien | 6 Mio |
-| **Einnahmen gesamt** | **≈ 71 Mio** |
-| Spielergehälter | ≈ 33 Mio (46 %) |
+| Tickets | 9 Mio |
+| Merchandise | 7 Mio |
+| Prämien | 7 Mio |
+| **Einnahmen gesamt** | **≈ 68 Mio** |
+| Spielergehälter | ≈ 34–46 Mio (siehe unten) |
 | Instandhaltung, Betrieb, Personal | ≈ 12 Mio |
-| **Betriebsergebnis** | **≈ +26 Mio** |
+| **Betriebsergebnis** | **≈ +10 bis +22 Mio** |
+
+> **Zwei Korrekturen aus der Umsetzung.**
+>
+> **Tickets: 12 Mio waren arithmetisch unmöglich.** Bei 25.000 Plätzen, 40 € Eintritt und rund 10,5 Heimspielen liegt die Obergrenze bei 10,5 Mio — und die setzt eine Auslastung von 100 % über die gesamte Saison voraus. Realistisch sind 7–9 Mio. Der gemessene Wert im vollständigen Saisondurchlauf liegt bei 7,5 Mio.
+>
+> **Die Gehaltsquote hängt an der Altersstruktur.** Weil das Gehalt am Können hängt und der Marktwert zusätzlich am Alter (§13.2), kostet ein Kader aus Altersschnäppchen bei gleichem Kaderwert deutlich mehr Gehalt. Gemessen: ein Kader mit Durchschnittsalter 27,6 liegt bei 10 % des Kaderwerts pro Saison, einer mit 29,2 bei 13 %. Die gesunde Quote von 45–60 % der Einnahmen gilt für einen Kader im besten Alter; wer auf günstige Ablösen optimiert, landet bei 65–75 % und muss das bewusst in Kauf nehmen. **Das ist keine Fehlkalibrierung, sondern der Trade-off, den §13.2 erzeugt.**
 
 Das Startbudget von 400 Mio ist also einmalig und wird nie wieder in einer Saison verdient. Nach Saison 1 finanziert man Käufe überwiegend aus **Verkäufen**, nicht aus laufenden Einnahmen. Das hält den Transfermarkt lebendig und verhindert, dass der Kaderwert von Saison zu Saison explodiert.
 
@@ -936,7 +942,7 @@ Ablauf:
 |---|---|---|
 | Startbudget / Marktwert eines Weltstars | 400 / 100 = 4,0 | Man kann sich **zwei** Weltstars leisten und hat dann fast nichts für die restlichen 12 Kaderplätze. Erzwingt Prioritäten. |
 | Weltstars im Pool / Vereine | 1,5 | Weniger Stars als Vereine sie wollen. Der Motor aller Bieterkriege. |
-| Saisoneinnahmen / Startbudget | 71 / 400 ≈ 0,18 | Eine Saison verdient das Startbudget nicht ansatzweise. Nach Saison 1 finanzieren Verkäufe die Käufe. |
+| Saisoneinnahmen / Startbudget | 68 / 400 ≈ 0,17 | Eine Saison verdient das Startbudget nicht ansatzweise. Nach Saison 1 finanzieren Verkäufe die Käufe. |
 | Gehaltsquote (gesund) | 45–60 % der Einnahmen | Darüber wird es eng, darunter verschenkt man Potenzial. |
 | Prämienspanne 1. gegen letzter | ≈ 21 % der Saisoneinnahmen | Erfolg zahlt sich aus, entscheidet aber nicht die nächste Saison. |
 | Kaderbreite für 21 Spieltage | 17–18 Spieler | 14 sind das Minimum und ab Tag 3 spürbar zu wenig. |
@@ -1143,3 +1149,6 @@ Chronologisch, damit später nachvollziehbar bleibt, warum das Spiel so aussieht
 | Vertragsauflösung | Entlassung möglich gegen 50 % Restgehalt | §4.4 |
 | Abwesenheit | Kein Urlaubsmodus — nur Auto-Korrektur der Aufstellung | §7.5 |
 | Feed- und Ereignistexte | Handgeschriebene Templates mit Platzhaltern, kein LLM zur Laufzeit | §16.1 |
+| Preisgelder | Von 40/25 Mio auf 7/4 Mio gesenkt — die alten Werte widersprachen der Gesamtökonomie | §9.3 |
+| Ticketeinnahmen | Zielwert von 12 auf 9 Mio korrigiert; 12 waren bei 25.000 Plätzen unerreichbar | §13.1 |
+| Fitness-Regeneration | Von +18 auf +30 angehoben; mit +18 kollabierte jeder Kader über die Saison | §7.3 |

@@ -5,3 +5,6 @@ export * from "./rules/match/simulate.ts";
 export * from "./rules/auction/rules.ts";
 export * from "./rules/schedule.ts";
 export * from "./rules/lineup.ts";
+export * from "./rules/economy/expectations.ts";
+export * from "./rules/economy/fans.ts";
+export * from "./rules/economy/revenue.ts";
