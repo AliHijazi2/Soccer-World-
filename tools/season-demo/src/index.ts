@@ -10,6 +10,7 @@
 import { createPool, migrate } from "../../../packages/server/src/db/pool.ts";
 import { handlers, startSeason } from "../../../packages/server/src/domain/season.ts";
 import { drain } from "../../../packages/server/src/scheduler/runner.ts";
+import { readEvents } from "../../../packages/server/src/domain/events.ts";
 import { readFeed, readTicker } from "../../../packages/server/src/domain/feed.ts";
 import { seedLeague } from "../../../packages/server/test/helpers.ts";
 
@@ -206,6 +207,29 @@ console.log("─".repeat(78));
 for (const item of feed) {
   const mark = item.importance >= 3 ? "🔥" : item.importance === 2 ? "⚡" : "· ";
   console.log(`${mark} ST ${String(item.matchday).padStart(2)}  ${item.text}`);
+}
+console.log("─".repeat(78));
+
+const events = await readEvents(client, fx.clubIds[0]!, 6);
+const eventTotal = await client.query<{ n: number; decisions: number }>(
+  `SELECT COUNT(*)::int AS n,
+          COUNT(*) FILTER (WHERE jsonb_array_length(options) > 0)::int AS decisions
+     FROM club_event WHERE league_id = $1`, [fx.leagueId]);
+const stats2 = eventTotal.rows[0]!;
+console.log(`\nPOSTEINGANG — ${stats2.n} Ereignisse in der Liga, ` +
+  `${stats2.decisions} davon mit Entscheidung ` +
+  `(${Math.round(stats2.decisions / stats2.n * 100)} %, Ziel mindestens 70)`);
+console.log("─".repeat(78));
+for (const event of events) {
+  console.log(`ST ${String(event.matchday).padStart(2)} · ${event.category}`);
+  console.log(`  ${event.title}`);
+  console.log(`  ${event.body}`);
+  for (const option of event.options) {
+    const mark = option.index === event.chosenOption ? "▸" : " ";
+    console.log(`   ${mark} ${option.text}`);
+  }
+  if (event.options.length === 0) console.log("     (keine Entscheidung)");
+  console.log();
 }
 console.log("─".repeat(78) + "\n");
 

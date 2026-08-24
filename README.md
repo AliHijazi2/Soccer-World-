@@ -68,7 +68,7 @@ Jede Testdatei legt sich ihre eigene Datenbank an.
 | Fanmodell mit Erwartungsdruck | ✅ |
 | Einnahmen, Sponsoren, Prämien, Betriebskosten | ✅ kalibriert |
 | Boulevard-Feed mit 140 Text-Templates | ✅ |
-| Ereignisse mit Entscheidungen | ⬜ |
+| Ereignissystem mit 20 Ereignissen | ✅ 83 % mit Entscheidung |
 | Transfermarkt-Anbindung im Spielbetrieb | ⬜ |
 | Scheduler | ⬜ |
 | Wirtschaft, Fans, Ereignisse | ⬜ |

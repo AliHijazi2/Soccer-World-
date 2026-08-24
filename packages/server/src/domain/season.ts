@@ -18,12 +18,14 @@ import {
 } from "../../../shared/src/rules/economy/revenue.ts";
 import { inTransaction, type Pool, type PoolClient } from "../db/pool.ts";
 import { enqueue, type Job, type JobHandler } from "../scheduler/runner.ts";
+import { deliverEvents, resolveExpired, resolveOpen } from "./events.ts";
 import { runMatchday } from "./matchday.ts";
 import { settleAuction } from "./auction.ts";
 
 export const JOB = {
   RUN_MATCHDAY: "run_matchday",
   CLOSE_AUCTION: "close_auction",
+  DELIVER_EVENTS: "deliver_events",
 } as const;
 
 export function matchdayKey(leagueId: string, season: number, matchday: number): string {
@@ -116,6 +118,14 @@ async function scheduleMarketClose(
 ): Promise<void> {
   if ((matchday - 1) % SEASON.KICKOFFS_PER_DAY !== 0) return;  // nur einmal am Tag
   const closeAt = marketCloseAt(kickoffAt, windowStart, timeZone);
+
+  // Ereignisse kommen morgens, lange vor dem Marktabschluss (GDD §1.1)
+  await enqueue(client, {
+    leagueId, type: JOB.DELIVER_EVENTS,
+    payload: { season, matchday },
+    runAt: new Date(closeAt.getTime() - 8 * 3600 * 1000),
+    idempotencyKey: `events:${leagueId}:s${season}:md${matchday}`,
+  });
   const auctions = await client.query<{ id: string }>(
     `SELECT id FROM auction WHERE league_id = $1 AND status = 'open'`, [leagueId]);
   for (const [index, auction] of auctions.rows.entries()) {
@@ -256,9 +266,17 @@ const runMatchdayHandler: JobHandler = async (job: Job, pool: Pool) => {
   const matchday = Number(job.payload.matchday);
   if (!job.leagueId) throw new Error("run_matchday ohne Liga");
 
+  // Abgelaufene Ereignisse zuerst: Wer nicht reagiert hat, bekommt die neutrale
+  // Antwort, und zwar bevor der Spieltag angepfiffen wird.
+  // Maßgeblich ist die Anstoßzeit des Jobs, nicht die Systemuhr — sonst hängt
+  // das Verhalten davon ab, wann der Prozess zufällig läuft.
+  await resolveExpired(pool, job.runAt);
   await runMatchday(pool, job.leagueId, season, matchday);
 
   if (matchday >= SEASON.MATCHDAYS) {
+    // Am Saisonende darf kein Ereignis offen liegen bleiben — es gäbe keinen
+    // Spieltag mehr, an dem es aufgelöst würde
+    await resolveOpen(pool, job.leagueId);
     await finishSeason(pool, job.leagueId, season);
     await pool.query(
       "UPDATE league SET status = 'between_seasons' WHERE id = $1", [job.leagueId]);
@@ -287,6 +305,18 @@ const runMatchdayHandler: JobHandler = async (job: Job, pool: Pool) => {
     league.rows[0]!.market_close_from, league.rows[0]!.timezone);
 };
 
+/**
+ * Stellt die Ereignisse eines Tages zu.
+ *
+ * Läuft zum Tagesbeginn, nicht nach jedem Spieltag — sonst wären es über
+ * dreißig Entscheidungen pro Woche (GDD §10.2).
+ */
+const deliverEventsHandler: JobHandler = async (job: Job, pool: Pool) => {
+  if (!job.leagueId) throw new Error("deliver_events ohne Liga");
+  await deliverEvents(pool, job.leagueId,
+    Number(job.payload.season), Number(job.payload.matchday));
+};
+
 const closeAuctionHandler: JobHandler = async (job: Job, pool: Pool) => {
   const auctionId = String(job.payload.auctionId);
   const result = await settleAuction(pool, auctionId);
@@ -311,4 +341,5 @@ const closeAuctionHandler: JobHandler = async (job: Job, pool: Pool) => {
 export const handlers: Record<string, JobHandler> = {
   [JOB.RUN_MATCHDAY]: runMatchdayHandler,
   [JOB.CLOSE_AUCTION]: closeAuctionHandler,
+  [JOB.DELIVER_EVENTS]: deliverEventsHandler,
 };
