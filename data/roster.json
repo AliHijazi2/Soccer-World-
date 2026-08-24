@@ -1,0 +1,1392 @@
+{
+  "_comment": "Quelldatei für den Spielerpool (GDD §5.2). Handgepflegt. Aus dieser Datei erzeugt `npm run players` die vollständige data/players.json mit Attributen, Potenzialrange und Marktwert. Nur hier wird editiert.",
+  "_schema": {
+    "name": "Anzeigename",
+    "pos": "GK CB LB RB DM CM AM LW RW ST",
+    "ovr": "Zielgesamtwert; bestimmt die Stufe: 85+ Weltklasse, 78-84 sehr gut, 68-77 solide",
+    "born": "Geburtsjahr",
+    "arch": "Archetyp, formt die Attributverteilung",
+    "traits": "0-2 Traits aus GDD §4.3"
+  },
+  "seasonYear": 2026,
+  "players": [
+    {
+      "name": "Gianluigi Donnarumma",
+      "pos": "GK",
+      "ovr": 88,
+      "born": 1999,
+      "arch": "shot_stopper",
+      "traits": [
+        "big_game"
+      ]
+    },
+    {
+      "name": "Alisson Becker",
+      "pos": "GK",
+      "ovr": 87,
+      "born": 1992,
+      "arch": "sweeper_keeper",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Thibaut Courtois",
+      "pos": "GK",
+      "ovr": 87,
+      "born": 1992,
+      "arch": "shot_stopper",
+      "traits": [
+        "big_game",
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Virgil van Dijk",
+      "pos": "CB",
+      "ovr": 88,
+      "born": 1991,
+      "arch": "ballplaying",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Rúben Dias",
+      "pos": "CB",
+      "ovr": 88,
+      "born": 1997,
+      "arch": "destroyer",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "William Saliba",
+      "pos": "CB",
+      "ovr": 86,
+      "born": 2001,
+      "arch": "ballplaying",
+      "traits": []
+    },
+    {
+      "name": "Alessandro Bastoni",
+      "pos": "CB",
+      "ovr": 85,
+      "born": 1999,
+      "arch": "ballplaying",
+      "traits": []
+    },
+    {
+      "name": "Antonio Rüdiger",
+      "pos": "CB",
+      "ovr": 85,
+      "born": 1993,
+      "arch": "destroyer",
+      "traits": [
+        "hothead"
+      ]
+    },
+    {
+      "name": "Joško Gvardiol",
+      "pos": "CB",
+      "ovr": 85,
+      "born": 2002,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Achraf Hakimi",
+      "pos": "RB",
+      "ovr": 86,
+      "born": 1998,
+      "arch": "flying_fullback",
+      "traits": [
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Alphonso Davies",
+      "pos": "LB",
+      "ovr": 85,
+      "born": 2000,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Rodri",
+      "pos": "DM",
+      "ovr": 91,
+      "born": 1996,
+      "arch": "anchor",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Jude Bellingham",
+      "pos": "CM",
+      "ovr": 90,
+      "born": 2003,
+      "arch": "box_to_box",
+      "traits": [
+        "big_game",
+        "leader"
+      ]
+    },
+    {
+      "name": "Kevin De Bruyne",
+      "pos": "AM",
+      "ovr": 88,
+      "born": 1991,
+      "arch": "creator",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Federico Valverde",
+      "pos": "CM",
+      "ovr": 88,
+      "born": 1998,
+      "arch": "box_to_box",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Declan Rice",
+      "pos": "DM",
+      "ovr": 87,
+      "born": 1999,
+      "arch": "anchor",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Pedri",
+      "pos": "CM",
+      "ovr": 87,
+      "born": 2002,
+      "arch": "playmaker",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Florian Wirtz",
+      "pos": "AM",
+      "ovr": 87,
+      "born": 2003,
+      "arch": "creator",
+      "traits": []
+    },
+    {
+      "name": "Jamal Musiala",
+      "pos": "AM",
+      "ovr": 87,
+      "born": 2003,
+      "arch": "technician",
+      "traits": [
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Martin Ødegaard",
+      "pos": "AM",
+      "ovr": 86,
+      "born": 1998,
+      "arch": "creator",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Bruno Fernandes",
+      "pos": "AM",
+      "ovr": 85,
+      "born": 1994,
+      "arch": "creator",
+      "traits": [
+        "leader",
+        "hothead"
+      ]
+    },
+    {
+      "name": "Kylian Mbappé",
+      "pos": "ST",
+      "ovr": 92,
+      "born": 1998,
+      "arch": "explosive",
+      "traits": [
+        "ego",
+        "big_game"
+      ]
+    },
+    {
+      "name": "Erling Haaland",
+      "pos": "ST",
+      "ovr": 92,
+      "born": 2000,
+      "arch": "poacher",
+      "traits": [
+        "big_game"
+      ]
+    },
+    {
+      "name": "Vinícius Júnior",
+      "pos": "LW",
+      "ovr": 90,
+      "born": 2000,
+      "arch": "explosive",
+      "traits": [
+        "ego",
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Lamine Yamal",
+      "pos": "RW",
+      "ovr": 89,
+      "born": 2007,
+      "arch": "technician",
+      "traits": [
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Mohamed Salah",
+      "pos": "RW",
+      "ovr": 88,
+      "born": 1992,
+      "arch": "poacher",
+      "traits": [
+        "iron_man",
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Harry Kane",
+      "pos": "ST",
+      "ovr": 88,
+      "born": 1993,
+      "arch": "target",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Bukayo Saka",
+      "pos": "RW",
+      "ovr": 86,
+      "born": 2001,
+      "arch": "technician",
+      "traits": [
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Lautaro Martínez",
+      "pos": "ST",
+      "ovr": 86,
+      "born": 1997,
+      "arch": "poacher",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Rafael Leão",
+      "pos": "LW",
+      "ovr": 85,
+      "born": 1999,
+      "arch": "explosive",
+      "traits": [
+        "ego"
+      ]
+    },
+    {
+      "name": "Ederson",
+      "pos": "GK",
+      "ovr": 83,
+      "born": 1993,
+      "arch": "sweeper_keeper",
+      "traits": []
+    },
+    {
+      "name": "Mike Maignan",
+      "pos": "GK",
+      "ovr": 83,
+      "born": 1995,
+      "arch": "shot_stopper",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Jan Oblak",
+      "pos": "GK",
+      "ovr": 82,
+      "born": 1993,
+      "arch": "shot_stopper",
+      "traits": []
+    },
+    {
+      "name": "Emiliano Martínez",
+      "pos": "GK",
+      "ovr": 82,
+      "born": 1992,
+      "arch": "shot_stopper",
+      "traits": [
+        "big_game",
+        "hothead"
+      ]
+    },
+    {
+      "name": "Marc-André ter Stegen",
+      "pos": "GK",
+      "ovr": 80,
+      "born": 1992,
+      "arch": "sweeper_keeper",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Gregor Kobel",
+      "pos": "GK",
+      "ovr": 79,
+      "born": 1997,
+      "arch": "shot_stopper",
+      "traits": []
+    },
+    {
+      "name": "Marquinhos",
+      "pos": "CB",
+      "ovr": 84,
+      "born": 1994,
+      "arch": "ballplaying",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Éder Militão",
+      "pos": "CB",
+      "ovr": 83,
+      "born": 1998,
+      "arch": "destroyer",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Cristian Romero",
+      "pos": "CB",
+      "ovr": 83,
+      "born": 1998,
+      "arch": "destroyer",
+      "traits": [
+        "hothead"
+      ]
+    },
+    {
+      "name": "Gabriel Magalhães",
+      "pos": "CB",
+      "ovr": 83,
+      "born": 1997,
+      "arch": "destroyer",
+      "traits": []
+    },
+    {
+      "name": "Ronald Araújo",
+      "pos": "CB",
+      "ovr": 82,
+      "born": 1999,
+      "arch": "destroyer",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Jules Koundé",
+      "pos": "RB",
+      "ovr": 82,
+      "born": 1998,
+      "arch": "ballplaying",
+      "traits": []
+    },
+    {
+      "name": "Dayot Upamecano",
+      "pos": "CB",
+      "ovr": 81,
+      "born": 1998,
+      "arch": "destroyer",
+      "traits": []
+    },
+    {
+      "name": "Jonathan Tah",
+      "pos": "CB",
+      "ovr": 80,
+      "born": 1996,
+      "arch": "destroyer",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Micky van de Ven",
+      "pos": "CB",
+      "ovr": 80,
+      "born": 2001,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Pau Cubarsí",
+      "pos": "CB",
+      "ovr": 80,
+      "born": 2007,
+      "arch": "ballplaying",
+      "traits": []
+    },
+    {
+      "name": "Riccardo Calafiori",
+      "pos": "CB",
+      "ovr": 79,
+      "born": 2002,
+      "arch": "ballplaying",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Levi Colwill",
+      "pos": "CB",
+      "ovr": 78,
+      "born": 2003,
+      "arch": "ballplaying",
+      "traits": []
+    },
+    {
+      "name": "Theo Hernández",
+      "pos": "LB",
+      "ovr": 83,
+      "born": 1997,
+      "arch": "flying_fullback",
+      "traits": [
+        "hothead"
+      ]
+    },
+    {
+      "name": "Trent Alexander-Arnold",
+      "pos": "RB",
+      "ovr": 83,
+      "born": 1998,
+      "arch": "creator",
+      "traits": [
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Nuno Mendes",
+      "pos": "LB",
+      "ovr": 81,
+      "born": 2002,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Kyle Walker",
+      "pos": "RB",
+      "ovr": 78,
+      "born": 1990,
+      "arch": "flying_fullback",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Nicolò Barella",
+      "pos": "CM",
+      "ovr": 84,
+      "born": 1997,
+      "arch": "box_to_box",
+      "traits": [
+        "hothead"
+      ]
+    },
+    {
+      "name": "Joshua Kimmich",
+      "pos": "DM",
+      "ovr": 84,
+      "born": 1995,
+      "arch": "playmaker",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Cole Palmer",
+      "pos": "AM",
+      "ovr": 84,
+      "born": 2002,
+      "arch": "creator",
+      "traits": [
+        "big_game"
+      ]
+    },
+    {
+      "name": "Phil Foden",
+      "pos": "AM",
+      "ovr": 84,
+      "born": 2000,
+      "arch": "technician",
+      "traits": []
+    },
+    {
+      "name": "Frenkie de Jong",
+      "pos": "CM",
+      "ovr": 83,
+      "born": 1997,
+      "arch": "playmaker",
+      "traits": []
+    },
+    {
+      "name": "Aurélien Tchouaméni",
+      "pos": "DM",
+      "ovr": 82,
+      "born": 2000,
+      "arch": "anchor",
+      "traits": []
+    },
+    {
+      "name": "Enzo Fernández",
+      "pos": "CM",
+      "ovr": 82,
+      "born": 2001,
+      "arch": "playmaker",
+      "traits": []
+    },
+    {
+      "name": "Moisés Caicedo",
+      "pos": "DM",
+      "ovr": 82,
+      "born": 2001,
+      "arch": "anchor",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Alexis Mac Allister",
+      "pos": "CM",
+      "ovr": 82,
+      "born": 1998,
+      "arch": "box_to_box",
+      "traits": []
+    },
+    {
+      "name": "Eduardo Camavinga",
+      "pos": "CM",
+      "ovr": 81,
+      "born": 2002,
+      "arch": "box_to_box",
+      "traits": []
+    },
+    {
+      "name": "Dominik Szoboszlai",
+      "pos": "CM",
+      "ovr": 81,
+      "born": 2000,
+      "arch": "box_to_box",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Xavi Simons",
+      "pos": "AM",
+      "ovr": 81,
+      "born": 2003,
+      "arch": "technician",
+      "traits": []
+    },
+    {
+      "name": "Gavi",
+      "pos": "CM",
+      "ovr": 80,
+      "born": 2004,
+      "arch": "box_to_box",
+      "traits": [
+        "hothead",
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Ryan Gravenberch",
+      "pos": "DM",
+      "ovr": 80,
+      "born": 2002,
+      "arch": "anchor",
+      "traits": []
+    },
+    {
+      "name": "Warren Zaïre-Emery",
+      "pos": "CM",
+      "ovr": 80,
+      "born": 2006,
+      "arch": "box_to_box",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "İlkay Gündoğan",
+      "pos": "CM",
+      "ovr": 79,
+      "born": 1990,
+      "arch": "playmaker",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Victor Osimhen",
+      "pos": "ST",
+      "ovr": 84,
+      "born": 1998,
+      "arch": "poacher",
+      "traits": [
+        "ego"
+      ]
+    },
+    {
+      "name": "Alexander Isak",
+      "pos": "ST",
+      "ovr": 84,
+      "born": 1999,
+      "arch": "technician",
+      "traits": []
+    },
+    {
+      "name": "Ousmane Dembélé",
+      "pos": "RW",
+      "ovr": 84,
+      "born": 1997,
+      "arch": "explosive",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Khvicha Kvaratskhelia",
+      "pos": "LW",
+      "ovr": 83,
+      "born": 2001,
+      "arch": "technician",
+      "traits": [
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Julián Álvarez",
+      "pos": "ST",
+      "ovr": 83,
+      "born": 2000,
+      "arch": "poacher",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Nico Williams",
+      "pos": "LW",
+      "ovr": 82,
+      "born": 2002,
+      "arch": "explosive",
+      "traits": []
+    },
+    {
+      "name": "Rodrygo",
+      "pos": "RW",
+      "ovr": 82,
+      "born": 2001,
+      "arch": "technician",
+      "traits": []
+    },
+    {
+      "name": "Michael Olise",
+      "pos": "RW",
+      "ovr": 81,
+      "born": 2001,
+      "arch": "creator",
+      "traits": []
+    },
+    {
+      "name": "Serhou Guirassy",
+      "pos": "ST",
+      "ovr": 80,
+      "born": 1996,
+      "arch": "target",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Darwin Núñez",
+      "pos": "ST",
+      "ovr": 79,
+      "born": 1999,
+      "arch": "explosive",
+      "traits": [
+        "hothead"
+      ]
+    },
+    {
+      "name": "Dušan Vlahović",
+      "pos": "ST",
+      "ovr": 79,
+      "born": 2000,
+      "arch": "target",
+      "traits": [
+        "mercenary"
+      ]
+    },
+    {
+      "name": "Marcus Rashford",
+      "pos": "LW",
+      "ovr": 78,
+      "born": 1997,
+      "arch": "explosive",
+      "traits": [
+        "mercenary"
+      ]
+    },
+    {
+      "name": "Diogo Costa",
+      "pos": "GK",
+      "ovr": 77,
+      "born": 1999,
+      "arch": "shot_stopper",
+      "traits": []
+    },
+    {
+      "name": "Guglielmo Vicario",
+      "pos": "GK",
+      "ovr": 76,
+      "born": 1996,
+      "arch": "shot_stopper",
+      "traits": []
+    },
+    {
+      "name": "Yann Sommer",
+      "pos": "GK",
+      "ovr": 76,
+      "born": 1988,
+      "arch": "shot_stopper",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Lucas Chevalier",
+      "pos": "GK",
+      "ovr": 75,
+      "born": 2001,
+      "arch": "sweeper_keeper",
+      "traits": []
+    },
+    {
+      "name": "Manuel Neuer",
+      "pos": "GK",
+      "ovr": 75,
+      "born": 1986,
+      "arch": "sweeper_keeper",
+      "traits": [
+        "leader",
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Wojciech Szczęsny",
+      "pos": "GK",
+      "ovr": 74,
+      "born": 1990,
+      "arch": "shot_stopper",
+      "traits": []
+    },
+    {
+      "name": "Robert Sánchez",
+      "pos": "GK",
+      "ovr": 73,
+      "born": 1997,
+      "arch": "sweeper_keeper",
+      "traits": []
+    },
+    {
+      "name": "Álex Remiro",
+      "pos": "GK",
+      "ovr": 73,
+      "born": 1995,
+      "arch": "shot_stopper",
+      "traits": []
+    },
+    {
+      "name": "Kevin Trapp",
+      "pos": "GK",
+      "ovr": 71,
+      "born": 1990,
+      "arch": "shot_stopper",
+      "traits": []
+    },
+    {
+      "name": "Bart Verbruggen",
+      "pos": "GK",
+      "ovr": 70,
+      "born": 2002,
+      "arch": "sweeper_keeper",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Matthijs de Ligt",
+      "pos": "CB",
+      "ovr": 77,
+      "born": 1999,
+      "arch": "destroyer",
+      "traits": []
+    },
+    {
+      "name": "Ibrahima Konaté",
+      "pos": "CB",
+      "ovr": 77,
+      "born": 1999,
+      "arch": "destroyer",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Kim Min-jae",
+      "pos": "CB",
+      "ovr": 76,
+      "born": 1996,
+      "arch": "destroyer",
+      "traits": []
+    },
+    {
+      "name": "Fikayo Tomori",
+      "pos": "CB",
+      "ovr": 75,
+      "born": 1997,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Aymeric Laporte",
+      "pos": "CB",
+      "ovr": 75,
+      "born": 1994,
+      "arch": "ballplaying",
+      "traits": [
+        "mercenary"
+      ]
+    },
+    {
+      "name": "Nathan Aké",
+      "pos": "CB",
+      "ovr": 74,
+      "born": 1995,
+      "arch": "ballplaying",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Leny Yoro",
+      "pos": "CB",
+      "ovr": 74,
+      "born": 2005,
+      "arch": "ballplaying",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Jarrad Branthwaite",
+      "pos": "CB",
+      "ovr": 74,
+      "born": 2002,
+      "arch": "destroyer",
+      "traits": []
+    },
+    {
+      "name": "Castello Lukeba",
+      "pos": "CB",
+      "ovr": 73,
+      "born": 2002,
+      "arch": "ballplaying",
+      "traits": []
+    },
+    {
+      "name": "Nayef Aguerd",
+      "pos": "CB",
+      "ovr": 72,
+      "born": 1996,
+      "arch": "destroyer",
+      "traits": []
+    },
+    {
+      "name": "Benjamin Pavard",
+      "pos": "CB",
+      "ovr": 72,
+      "born": 1996,
+      "arch": "destroyer",
+      "traits": []
+    },
+    {
+      "name": "Jorrel Hato",
+      "pos": "CB",
+      "ovr": 71,
+      "born": 2006,
+      "arch": "ballplaying",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Lucas Hernández",
+      "pos": "CB",
+      "ovr": 70,
+      "born": 1996,
+      "arch": "destroyer",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Federico Dimarco",
+      "pos": "LB",
+      "ovr": 77,
+      "born": 1997,
+      "arch": "creator",
+      "traits": []
+    },
+    {
+      "name": "Andrew Robertson",
+      "pos": "LB",
+      "ovr": 75,
+      "born": 1994,
+      "arch": "flying_fullback",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Destiny Udogie",
+      "pos": "LB",
+      "ovr": 74,
+      "born": 2002,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Marcos Acuña",
+      "pos": "LB",
+      "ovr": 71,
+      "born": 1991,
+      "arch": "flying_fullback",
+      "traits": [
+        "hothead"
+      ]
+    },
+    {
+      "name": "Denzel Dumfries",
+      "pos": "RB",
+      "ovr": 76,
+      "born": 1996,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Reece James",
+      "pos": "RB",
+      "ovr": 76,
+      "born": 1999,
+      "arch": "creator",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Pedro Porro",
+      "pos": "RB",
+      "ovr": 75,
+      "born": 1999,
+      "arch": "creator",
+      "traits": []
+    },
+    {
+      "name": "Ben White",
+      "pos": "RB",
+      "ovr": 74,
+      "born": 1997,
+      "arch": "ballplaying",
+      "traits": []
+    },
+    {
+      "name": "Malo Gusto",
+      "pos": "RB",
+      "ovr": 72,
+      "born": 2003,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Vanderson",
+      "pos": "RB",
+      "ovr": 70,
+      "born": 2001,
+      "arch": "flying_fullback",
+      "traits": []
+    },
+    {
+      "name": "Bruno Guimarães",
+      "pos": "CM",
+      "ovr": 77,
+      "born": 1997,
+      "arch": "box_to_box",
+      "traits": [
+        "leader"
+      ]
+    },
+    {
+      "name": "Hakan Çalhanoğlu",
+      "pos": "DM",
+      "ovr": 77,
+      "born": 1994,
+      "arch": "playmaker",
+      "traits": []
+    },
+    {
+      "name": "Sandro Tonali",
+      "pos": "CM",
+      "ovr": 76,
+      "born": 2000,
+      "arch": "box_to_box",
+      "traits": []
+    },
+    {
+      "name": "Dani Olmo",
+      "pos": "AM",
+      "ovr": 76,
+      "born": 1998,
+      "arch": "creator",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "James Maddison",
+      "pos": "AM",
+      "ovr": 75,
+      "born": 1996,
+      "arch": "creator",
+      "traits": [
+        "fan_favourite"
+      ]
+    },
+    {
+      "name": "Teun Koopmeiners",
+      "pos": "CM",
+      "ovr": 75,
+      "born": 1998,
+      "arch": "box_to_box",
+      "traits": []
+    },
+    {
+      "name": "Manuel Ugarte",
+      "pos": "DM",
+      "ovr": 74,
+      "born": 2001,
+      "arch": "anchor",
+      "traits": [
+        "hothead"
+      ]
+    },
+    {
+      "name": "Amadou Onana",
+      "pos": "DM",
+      "ovr": 74,
+      "born": 2001,
+      "arch": "anchor",
+      "traits": []
+    },
+    {
+      "name": "Boubacar Kamara",
+      "pos": "DM",
+      "ovr": 74,
+      "born": 1999,
+      "arch": "anchor",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Nico González",
+      "pos": "DM",
+      "ovr": 74,
+      "born": 2002,
+      "arch": "playmaker",
+      "traits": []
+    },
+    {
+      "name": "Fermín López",
+      "pos": "AM",
+      "ovr": 74,
+      "born": 2003,
+      "arch": "technician",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Granit Xhaka",
+      "pos": "DM",
+      "ovr": 74,
+      "born": 1992,
+      "arch": "playmaker",
+      "traits": [
+        "leader",
+        "hothead"
+      ]
+    },
+    {
+      "name": "Youri Tielemans",
+      "pos": "CM",
+      "ovr": 73,
+      "born": 1997,
+      "arch": "playmaker",
+      "traits": []
+    },
+    {
+      "name": "Davide Frattesi",
+      "pos": "CM",
+      "ovr": 73,
+      "born": 1999,
+      "arch": "box_to_box",
+      "traits": []
+    },
+    {
+      "name": "Leon Goretzka",
+      "pos": "CM",
+      "ovr": 73,
+      "born": 1995,
+      "arch": "box_to_box",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Morgan Gibbs-White",
+      "pos": "AM",
+      "ovr": 73,
+      "born": 2000,
+      "arch": "creator",
+      "traits": []
+    },
+    {
+      "name": "Kobbie Mainoo",
+      "pos": "CM",
+      "ovr": 72,
+      "born": 2005,
+      "arch": "playmaker",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Adam Wharton",
+      "pos": "DM",
+      "ovr": 72,
+      "born": 2004,
+      "arch": "playmaker",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Pape Matar Sarr",
+      "pos": "CM",
+      "ovr": 72,
+      "born": 2002,
+      "arch": "box_to_box",
+      "traits": []
+    },
+    {
+      "name": "Aleksandar Pavlović",
+      "pos": "DM",
+      "ovr": 71,
+      "born": 2004,
+      "arch": "anchor",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Carlos Baleba",
+      "pos": "DM",
+      "ovr": 71,
+      "born": 2004,
+      "arch": "anchor",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Emile Smith Rowe",
+      "pos": "AM",
+      "ovr": 70,
+      "born": 2000,
+      "arch": "technician",
+      "traits": [
+        "injury_prone"
+      ]
+    },
+    {
+      "name": "Randal Kolo Muani",
+      "pos": "ST",
+      "ovr": 76,
+      "born": 1998,
+      "arch": "target",
+      "traits": []
+    },
+    {
+      "name": "Jonathan David",
+      "pos": "ST",
+      "ovr": 76,
+      "born": 2000,
+      "arch": "poacher",
+      "traits": [
+        "mercenary"
+      ]
+    },
+    {
+      "name": "Ademola Lookman",
+      "pos": "LW",
+      "ovr": 76,
+      "born": 1997,
+      "arch": "technician",
+      "traits": [
+        "big_game"
+      ]
+    },
+    {
+      "name": "Jérémy Doku",
+      "pos": "LW",
+      "ovr": 75,
+      "born": 2002,
+      "arch": "explosive",
+      "traits": []
+    },
+    {
+      "name": "Loïs Openda",
+      "pos": "ST",
+      "ovr": 75,
+      "born": 2000,
+      "arch": "explosive",
+      "traits": []
+    },
+    {
+      "name": "Benjamin Šeško",
+      "pos": "ST",
+      "ovr": 75,
+      "born": 2003,
+      "arch": "target",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Hugo Ekitiké",
+      "pos": "ST",
+      "ovr": 74,
+      "born": 2002,
+      "arch": "technician",
+      "traits": []
+    },
+    {
+      "name": "Anthony Gordon",
+      "pos": "LW",
+      "ovr": 74,
+      "born": 2001,
+      "arch": "explosive",
+      "traits": [
+        "hothead"
+      ]
+    },
+    {
+      "name": "Santiago Giménez",
+      "pos": "ST",
+      "ovr": 73,
+      "born": 2001,
+      "arch": "poacher",
+      "traits": []
+    },
+    {
+      "name": "Karim Adeyemi",
+      "pos": "LW",
+      "ovr": 72,
+      "born": 2002,
+      "arch": "explosive",
+      "traits": []
+    },
+    {
+      "name": "Brennan Johnson",
+      "pos": "RW",
+      "ovr": 72,
+      "born": 2001,
+      "arch": "poacher",
+      "traits": []
+    },
+    {
+      "name": "Antoine Semenyo",
+      "pos": "RW",
+      "ovr": 72,
+      "born": 2000,
+      "arch": "explosive",
+      "traits": [
+        "iron_man"
+      ]
+    },
+    {
+      "name": "Mathys Tel",
+      "pos": "ST",
+      "ovr": 71,
+      "born": 2005,
+      "arch": "explosive",
+      "traits": [
+        "late_bloomer"
+      ]
+    },
+    {
+      "name": "Igor Thiago",
+      "pos": "ST",
+      "ovr": 70,
+      "born": 2001,
+      "arch": "target",
+      "traits": []
+    },
+    {
+      "name": "Arnaud Kalimuendo",
+      "pos": "ST",
+      "ovr": 69,
+      "born": 2002,
+      "arch": "poacher",
+      "traits": []
+    }
+  ]
+}

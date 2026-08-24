@@ -1,0 +1,3485 @@
+{
+  "generatedFrom": "data/roster.json",
+  "seasonYear": 2026,
+  "count": 150,
+  "players": [
+    {
+      "externalKey": "gianluigi-donnarumma",
+      "fullName": "Gianluigi Donnarumma",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "GK",
+      "tier": "world_class",
+      "overall": 88,
+      "attributes": {
+        "finishing": 58,
+        "technique": 78,
+        "vision": 80,
+        "tackling": 76,
+        "pace": 75,
+        "goalkeeping": 91
+      },
+      "potentialMin": 87,
+      "potentialMax": 91,
+      "traits": [
+        "big_game"
+      ],
+      "baseValue": 96700000,
+      "baseWage": 387000
+    },
+    {
+      "externalKey": "alisson-becker",
+      "fullName": "Alisson Becker",
+      "birthYear": 1992,
+      "age": 34,
+      "primaryPosition": "GK",
+      "tier": "world_class",
+      "overall": 87,
+      "attributes": {
+        "finishing": 59,
+        "technique": 89,
+        "vision": 91,
+        "tackling": 77,
+        "pace": 79,
+        "goalkeeping": 87
+      },
+      "potentialMin": 79,
+      "potentialMax": 87,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 35100000,
+      "baseWage": 351000
+    },
+    {
+      "externalKey": "thibaut-courtois",
+      "fullName": "Thibaut Courtois",
+      "birthYear": 1992,
+      "age": 34,
+      "primaryPosition": "GK",
+      "tier": "world_class",
+      "overall": 87,
+      "attributes": {
+        "finishing": 57,
+        "technique": 77,
+        "vision": 79,
+        "tackling": 75,
+        "pace": 74,
+        "goalkeeping": 90
+      },
+      "potentialMin": 79,
+      "potentialMax": 87,
+      "traits": [
+        "big_game",
+        "injury_prone"
+      ],
+      "baseValue": 35100000,
+      "baseWage": 351000
+    },
+    {
+      "externalKey": "virgil-van-dijk",
+      "fullName": "Virgil van Dijk",
+      "birthYear": 1991,
+      "age": 35,
+      "primaryPosition": "CB",
+      "tier": "world_class",
+      "overall": 88,
+      "attributes": {
+        "finishing": 72,
+        "technique": 93,
+        "vision": 92,
+        "tackling": 89,
+        "pace": 85,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 88,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 23200000,
+      "baseWage": 387000
+    },
+    {
+      "externalKey": "ruben-dias",
+      "fullName": "Rúben Dias",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "CB",
+      "tier": "world_class",
+      "overall": 88,
+      "attributes": {
+        "finishing": 70,
+        "technique": 82,
+        "vision": 84,
+        "tackling": 95,
+        "pace": 85,
+        "goalkeeping": 14
+      },
+      "potentialMin": 84,
+      "potentialMax": 89,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 82200000,
+      "baseWage": 387000
+    },
+    {
+      "externalKey": "william-saliba",
+      "fullName": "William Saliba",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "CB",
+      "tier": "world_class",
+      "overall": 86,
+      "attributes": {
+        "finishing": 70,
+        "technique": 91,
+        "vision": 90,
+        "tackling": 87,
+        "pace": 83,
+        "goalkeeping": 14
+      },
+      "potentialMin": 85,
+      "potentialMax": 91,
+      "traits": [],
+      "baseValue": 78900000,
+      "baseWage": 316000
+    },
+    {
+      "externalKey": "alessandro-bastoni",
+      "fullName": "Alessandro Bastoni",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "CB",
+      "tier": "world_class",
+      "overall": 85,
+      "attributes": {
+        "finishing": 69,
+        "technique": 90,
+        "vision": 89,
+        "tackling": 86,
+        "pace": 82,
+        "goalkeeping": 14
+      },
+      "potentialMin": 84,
+      "potentialMax": 88,
+      "traits": [],
+      "baseValue": 70000000,
+      "baseWage": 280000
+    },
+    {
+      "externalKey": "antonio-rudiger",
+      "fullName": "Antonio Rüdiger",
+      "birthYear": 1993,
+      "age": 33,
+      "primaryPosition": "CB",
+      "tier": "world_class",
+      "overall": 85,
+      "attributes": {
+        "finishing": 67,
+        "technique": 79,
+        "vision": 81,
+        "tackling": 92,
+        "pace": 82,
+        "goalkeeping": 14
+      },
+      "potentialMin": 77,
+      "potentialMax": 85,
+      "traits": [
+        "hothead"
+      ],
+      "baseValue": 28000000,
+      "baseWage": 280000
+    },
+    {
+      "externalKey": "josko-gvardiol",
+      "fullName": "Joško Gvardiol",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "CB",
+      "tier": "world_class",
+      "overall": 85,
+      "attributes": {
+        "finishing": 71,
+        "technique": 86,
+        "vision": 81,
+        "tackling": 85,
+        "pace": 93,
+        "goalkeeping": 14
+      },
+      "potentialMin": 84,
+      "potentialMax": 90,
+      "traits": [],
+      "baseValue": 70000000,
+      "baseWage": 280000
+    },
+    {
+      "externalKey": "achraf-hakimi",
+      "fullName": "Achraf Hakimi",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "RB",
+      "tier": "world_class",
+      "overall": 86,
+      "attributes": {
+        "finishing": 72,
+        "technique": 86,
+        "vision": 81,
+        "tackling": 85,
+        "pace": 93,
+        "goalkeeping": 14
+      },
+      "potentialMin": 85,
+      "potentialMax": 89,
+      "traits": [
+        "fan_favourite"
+      ],
+      "baseValue": 78900000,
+      "baseWage": 316000
+    },
+    {
+      "externalKey": "alphonso-davies",
+      "fullName": "Alphonso Davies",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "LB",
+      "tier": "world_class",
+      "overall": 85,
+      "attributes": {
+        "finishing": 71,
+        "technique": 85,
+        "vision": 80,
+        "tackling": 84,
+        "pace": 92,
+        "goalkeeping": 14
+      },
+      "potentialMin": 84,
+      "potentialMax": 88,
+      "traits": [],
+      "baseValue": 70000000,
+      "baseWage": 280000
+    },
+    {
+      "externalKey": "rodri",
+      "fullName": "Rodri",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "DM",
+      "tier": "world_class",
+      "overall": 91,
+      "attributes": {
+        "finishing": 77,
+        "technique": 88,
+        "vision": 91,
+        "tackling": 98,
+        "pace": 85,
+        "goalkeeping": 14
+      },
+      "potentialMin": 87,
+      "potentialMax": 92,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 104800000,
+      "baseWage": 493000
+    },
+    {
+      "externalKey": "jude-bellingham",
+      "fullName": "Jude Bellingham",
+      "birthYear": 2003,
+      "age": 23,
+      "primaryPosition": "CM",
+      "tier": "world_class",
+      "overall": 90,
+      "attributes": {
+        "finishing": 87,
+        "technique": 89,
+        "vision": 90,
+        "tackling": 93,
+        "pace": 94,
+        "goalkeeping": 14
+      },
+      "potentialMin": 90,
+      "potentialMax": 96,
+      "traits": [
+        "big_game",
+        "leader"
+      ],
+      "baseValue": 125900000,
+      "baseWage": 458000
+    },
+    {
+      "externalKey": "kevin-de-bruyne",
+      "fullName": "Kevin De Bruyne",
+      "birthYear": 1991,
+      "age": 35,
+      "primaryPosition": "AM",
+      "tier": "world_class",
+      "overall": 88,
+      "attributes": {
+        "finishing": 85,
+        "technique": 91,
+        "vision": 94,
+        "tackling": 76,
+        "pace": 82,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 88,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 23200000,
+      "baseWage": 387000
+    },
+    {
+      "externalKey": "federico-valverde",
+      "fullName": "Federico Valverde",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "CM",
+      "tier": "world_class",
+      "overall": 88,
+      "attributes": {
+        "finishing": 85,
+        "technique": 87,
+        "vision": 88,
+        "tackling": 91,
+        "pace": 92,
+        "goalkeeping": 14
+      },
+      "potentialMin": 87,
+      "potentialMax": 91,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 96700000,
+      "baseWage": 387000
+    },
+    {
+      "externalKey": "declan-rice",
+      "fullName": "Declan Rice",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "DM",
+      "tier": "world_class",
+      "overall": 87,
+      "attributes": {
+        "finishing": 73,
+        "technique": 84,
+        "vision": 87,
+        "tackling": 94,
+        "pace": 81,
+        "goalkeeping": 14
+      },
+      "potentialMin": 86,
+      "potentialMax": 90,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 87800000,
+      "baseWage": 351000
+    },
+    {
+      "externalKey": "pedri",
+      "fullName": "Pedri",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "CM",
+      "tier": "world_class",
+      "overall": 87,
+      "attributes": {
+        "finishing": 78,
+        "technique": 91,
+        "vision": 93,
+        "tackling": 82,
+        "pace": 79,
+        "goalkeeping": 14
+      },
+      "potentialMin": 86,
+      "potentialMax": 92,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 87800000,
+      "baseWage": 351000
+    },
+    {
+      "externalKey": "florian-wirtz",
+      "fullName": "Florian Wirtz",
+      "birthYear": 2003,
+      "age": 23,
+      "primaryPosition": "AM",
+      "tier": "world_class",
+      "overall": 87,
+      "attributes": {
+        "finishing": 84,
+        "technique": 90,
+        "vision": 93,
+        "tackling": 76,
+        "pace": 81,
+        "goalkeeping": 14
+      },
+      "potentialMin": 87,
+      "potentialMax": 95,
+      "traits": [],
+      "baseValue": 96600000,
+      "baseWage": 351000
+    },
+    {
+      "externalKey": "jamal-musiala",
+      "fullName": "Jamal Musiala",
+      "birthYear": 2003,
+      "age": 23,
+      "primaryPosition": "AM",
+      "tier": "world_class",
+      "overall": 87,
+      "attributes": {
+        "finishing": 85,
+        "technique": 93,
+        "vision": 87,
+        "tackling": 74,
+        "pace": 86,
+        "goalkeeping": 14
+      },
+      "potentialMin": 87,
+      "potentialMax": 95,
+      "traits": [
+        "fan_favourite"
+      ],
+      "baseValue": 96600000,
+      "baseWage": 351000
+    },
+    {
+      "externalKey": "martin-degaard",
+      "fullName": "Martin Ødegaard",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "AM",
+      "tier": "world_class",
+      "overall": 86,
+      "attributes": {
+        "finishing": 83,
+        "technique": 89,
+        "vision": 92,
+        "tackling": 75,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 85,
+      "potentialMax": 89,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 78900000,
+      "baseWage": 316000
+    },
+    {
+      "externalKey": "bruno-fernandes",
+      "fullName": "Bruno Fernandes",
+      "birthYear": 1994,
+      "age": 32,
+      "primaryPosition": "AM",
+      "tier": "world_class",
+      "overall": 85,
+      "attributes": {
+        "finishing": 82,
+        "technique": 88,
+        "vision": 91,
+        "tackling": 73,
+        "pace": 79,
+        "goalkeeping": 14
+      },
+      "potentialMin": 77,
+      "potentialMax": 85,
+      "traits": [
+        "leader",
+        "hothead"
+      ],
+      "baseValue": 43400000,
+      "baseWage": 280000
+    },
+    {
+      "externalKey": "kylian-mbappe",
+      "fullName": "Kylian Mbappé",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "ST",
+      "tier": "world_class",
+      "overall": 92,
+      "attributes": {
+        "finishing": 91,
+        "technique": 94,
+        "vision": 88,
+        "tackling": 82,
+        "pace": 99,
+        "goalkeeping": 14
+      },
+      "potentialMin": 91,
+      "potentialMax": 95,
+      "traits": [
+        "ego",
+        "big_game"
+      ],
+      "baseValue": 132200000,
+      "baseWage": 529000
+    },
+    {
+      "externalKey": "erling-haaland",
+      "fullName": "Erling Haaland",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "ST",
+      "tier": "world_class",
+      "overall": 92,
+      "attributes": {
+        "finishing": 98,
+        "technique": 89,
+        "vision": 85,
+        "tackling": 79,
+        "pace": 92,
+        "goalkeeping": 14
+      },
+      "potentialMin": 91,
+      "potentialMax": 95,
+      "traits": [
+        "big_game"
+      ],
+      "baseValue": 132200000,
+      "baseWage": 529000
+    },
+    {
+      "externalKey": "vinicius-junior",
+      "fullName": "Vinícius Júnior",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "LW",
+      "tier": "world_class",
+      "overall": 90,
+      "attributes": {
+        "finishing": 88,
+        "technique": 91,
+        "vision": 84,
+        "tackling": 78,
+        "pace": 97,
+        "goalkeeping": 14
+      },
+      "potentialMin": 89,
+      "potentialMax": 93,
+      "traits": [
+        "ego",
+        "fan_favourite"
+      ],
+      "baseValue": 114400000,
+      "baseWage": 458000
+    },
+    {
+      "externalKey": "lamine-yamal",
+      "fullName": "Lamine Yamal",
+      "birthYear": 2007,
+      "age": 19,
+      "primaryPosition": "RW",
+      "tier": "world_class",
+      "overall": 89,
+      "attributes": {
+        "finishing": 87,
+        "technique": 95,
+        "vision": 89,
+        "tackling": 76,
+        "pace": 88,
+        "goalkeeping": 14
+      },
+      "potentialMin": 90,
+      "potentialMax": 96,
+      "traits": [
+        "fan_favourite"
+      ],
+      "baseValue": 124600000,
+      "baseWage": 422000
+    },
+    {
+      "externalKey": "mohamed-salah",
+      "fullName": "Mohamed Salah",
+      "birthYear": 1992,
+      "age": 34,
+      "primaryPosition": "RW",
+      "tier": "world_class",
+      "overall": 88,
+      "attributes": {
+        "finishing": 97,
+        "technique": 86,
+        "vision": 83,
+        "tackling": 76,
+        "pace": 89,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 88,
+      "traits": [
+        "iron_man",
+        "fan_favourite"
+      ],
+      "baseValue": 38700000,
+      "baseWage": 387000
+    },
+    {
+      "externalKey": "harry-kane",
+      "fullName": "Harry Kane",
+      "birthYear": 1993,
+      "age": 33,
+      "primaryPosition": "ST",
+      "tier": "world_class",
+      "overall": 88,
+      "attributes": {
+        "finishing": 94,
+        "technique": 88,
+        "vision": 85,
+        "tackling": 83,
+        "pace": 79,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 88,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 38700000,
+      "baseWage": 387000
+    },
+    {
+      "externalKey": "bukayo-saka",
+      "fullName": "Bukayo Saka",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "RW",
+      "tier": "world_class",
+      "overall": 86,
+      "attributes": {
+        "finishing": 84,
+        "technique": 92,
+        "vision": 86,
+        "tackling": 73,
+        "pace": 85,
+        "goalkeeping": 14
+      },
+      "potentialMin": 85,
+      "potentialMax": 91,
+      "traits": [
+        "fan_favourite"
+      ],
+      "baseValue": 78900000,
+      "baseWage": 316000
+    },
+    {
+      "externalKey": "lautaro-martinez",
+      "fullName": "Lautaro Martínez",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "ST",
+      "tier": "world_class",
+      "overall": 86,
+      "attributes": {
+        "finishing": 93,
+        "technique": 82,
+        "vision": 79,
+        "tackling": 72,
+        "pace": 85,
+        "goalkeeping": 14
+      },
+      "potentialMin": 82,
+      "potentialMax": 87,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 67100000,
+      "baseWage": 316000
+    },
+    {
+      "externalKey": "rafael-leao",
+      "fullName": "Rafael Leão",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "LW",
+      "tier": "world_class",
+      "overall": 85,
+      "attributes": {
+        "finishing": 82,
+        "technique": 85,
+        "vision": 79,
+        "tackling": 73,
+        "pace": 93,
+        "goalkeeping": 14
+      },
+      "potentialMin": 84,
+      "potentialMax": 88,
+      "traits": [
+        "ego"
+      ],
+      "baseValue": 70000000,
+      "baseWage": 280000
+    },
+    {
+      "externalKey": "ederson",
+      "fullName": "Ederson",
+      "birthYear": 1993,
+      "age": 33,
+      "primaryPosition": "GK",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 55,
+        "technique": 85,
+        "vision": 87,
+        "tackling": 73,
+        "pace": 75,
+        "goalkeeping": 83
+      },
+      "potentialMin": 75,
+      "potentialMax": 83,
+      "traits": [],
+      "baseValue": 23300000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "mike-maignan",
+      "fullName": "Mike Maignan",
+      "birthYear": 1995,
+      "age": 31,
+      "primaryPosition": "GK",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 53,
+        "technique": 73,
+        "vision": 75,
+        "tackling": 71,
+        "pace": 70,
+        "goalkeeping": 86
+      },
+      "potentialMin": 79,
+      "potentialMax": 84,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 36200000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "jan-oblak",
+      "fullName": "Jan Oblak",
+      "birthYear": 1993,
+      "age": 33,
+      "primaryPosition": "GK",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 52,
+        "technique": 72,
+        "vision": 74,
+        "tackling": 70,
+        "pace": 69,
+        "goalkeeping": 85
+      },
+      "potentialMin": 74,
+      "potentialMax": 82,
+      "traits": [],
+      "baseValue": 20700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "emiliano-martinez",
+      "fullName": "Emiliano Martínez",
+      "birthYear": 1992,
+      "age": 34,
+      "primaryPosition": "GK",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 52,
+        "technique": 72,
+        "vision": 74,
+        "tackling": 70,
+        "pace": 69,
+        "goalkeeping": 85
+      },
+      "potentialMin": 74,
+      "potentialMax": 82,
+      "traits": [
+        "big_game",
+        "hothead"
+      ],
+      "baseValue": 20700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "marc-andre-ter-stegen",
+      "fullName": "Marc-André ter Stegen",
+      "birthYear": 1992,
+      "age": 34,
+      "primaryPosition": "GK",
+      "tier": "very_good",
+      "overall": 80,
+      "attributes": {
+        "finishing": 52,
+        "technique": 82,
+        "vision": 84,
+        "tackling": 70,
+        "pace": 72,
+        "goalkeeping": 80
+      },
+      "potentialMin": 72,
+      "potentialMax": 80,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 15300000,
+      "baseWage": 153000
+    },
+    {
+      "externalKey": "gregor-kobel",
+      "fullName": "Gregor Kobel",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "GK",
+      "tier": "very_good",
+      "overall": 79,
+      "attributes": {
+        "finishing": 49,
+        "technique": 69,
+        "vision": 71,
+        "tackling": 67,
+        "pace": 66,
+        "goalkeeping": 82
+      },
+      "potentialMin": 75,
+      "potentialMax": 80,
+      "traits": [],
+      "baseValue": 26900000,
+      "baseWage": 127000
+    },
+    {
+      "externalKey": "marquinhos",
+      "fullName": "Marquinhos",
+      "birthYear": 1994,
+      "age": 32,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 84,
+      "attributes": {
+        "finishing": 68,
+        "technique": 89,
+        "vision": 88,
+        "tackling": 85,
+        "pace": 81,
+        "goalkeeping": 14
+      },
+      "potentialMin": 76,
+      "potentialMax": 84,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 40300000,
+      "baseWage": 260000
+    },
+    {
+      "externalKey": "eder-militao",
+      "fullName": "Éder Militão",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 65,
+        "technique": 77,
+        "vision": 79,
+        "tackling": 90,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 82,
+      "potentialMax": 86,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 58300000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "cristian-romero",
+      "fullName": "Cristian Romero",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 65,
+        "technique": 77,
+        "vision": 79,
+        "tackling": 90,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 82,
+      "potentialMax": 86,
+      "traits": [
+        "hothead"
+      ],
+      "baseValue": 58300000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "gabriel-magalhaes",
+      "fullName": "Gabriel Magalhães",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 65,
+        "technique": 77,
+        "vision": 79,
+        "tackling": 90,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 79,
+      "potentialMax": 84,
+      "traits": [],
+      "baseValue": 49600000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "ronald-araujo",
+      "fullName": "Ronald Araújo",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 64,
+        "technique": 76,
+        "vision": 78,
+        "tackling": 89,
+        "pace": 79,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 85,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 51700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "jules-kounde",
+      "fullName": "Jules Koundé",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "RB",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 66,
+        "technique": 88,
+        "vision": 87,
+        "tackling": 83,
+        "pace": 79,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 85,
+      "traits": [],
+      "baseValue": 51700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "dayot-upamecano",
+      "fullName": "Dayot Upamecano",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 81,
+      "attributes": {
+        "finishing": 63,
+        "technique": 75,
+        "vision": 77,
+        "tackling": 88,
+        "pace": 78,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 84,
+      "traits": [],
+      "baseValue": 45000000,
+      "baseWage": 180000
+    },
+    {
+      "externalKey": "jonathan-tah",
+      "fullName": "Jonathan Tah",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 80,
+      "attributes": {
+        "finishing": 62,
+        "technique": 74,
+        "vision": 76,
+        "tackling": 87,
+        "pace": 77,
+        "goalkeeping": 14
+      },
+      "potentialMin": 76,
+      "potentialMax": 81,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 32600000,
+      "baseWage": 153000
+    },
+    {
+      "externalKey": "micky-van-de-ven",
+      "fullName": "Micky van de Ven",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 80,
+      "attributes": {
+        "finishing": 66,
+        "technique": 81,
+        "vision": 76,
+        "tackling": 80,
+        "pace": 88,
+        "goalkeeping": 14
+      },
+      "potentialMin": 79,
+      "potentialMax": 85,
+      "traits": [],
+      "baseValue": 38300000,
+      "baseWage": 153000
+    },
+    {
+      "externalKey": "pau-cubarsi",
+      "fullName": "Pau Cubarsí",
+      "birthYear": 2007,
+      "age": 19,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 80,
+      "attributes": {
+        "finishing": 64,
+        "technique": 85,
+        "vision": 84,
+        "tackling": 81,
+        "pace": 77,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 94,
+      "traits": [],
+      "baseValue": 45200000,
+      "baseWage": 153000
+    },
+    {
+      "externalKey": "riccardo-calafiori",
+      "fullName": "Riccardo Calafiori",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 79,
+      "attributes": {
+        "finishing": 63,
+        "technique": 84,
+        "vision": 83,
+        "tackling": 80,
+        "pace": 76,
+        "goalkeeping": 14
+      },
+      "potentialMin": 78,
+      "potentialMax": 84,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 31700000,
+      "baseWage": 127000
+    },
+    {
+      "externalKey": "levi-colwill",
+      "fullName": "Levi Colwill",
+      "birthYear": 2003,
+      "age": 23,
+      "primaryPosition": "CB",
+      "tier": "very_good",
+      "overall": 78,
+      "attributes": {
+        "finishing": 62,
+        "technique": 83,
+        "vision": 82,
+        "tackling": 79,
+        "pace": 75,
+        "goalkeeping": 14
+      },
+      "potentialMin": 78,
+      "potentialMax": 86,
+      "traits": [],
+      "baseValue": 27500000,
+      "baseWage": 100000
+    },
+    {
+      "externalKey": "theo-hernandez",
+      "fullName": "Theo Hernández",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "LB",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 69,
+        "technique": 83,
+        "vision": 78,
+        "tackling": 82,
+        "pace": 90,
+        "goalkeeping": 14
+      },
+      "potentialMin": 79,
+      "potentialMax": 84,
+      "traits": [
+        "hothead"
+      ],
+      "baseValue": 49600000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "trent-alexander-arnold",
+      "fullName": "Trent Alexander-Arnold",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "RB",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 85,
+        "technique": 91,
+        "vision": 93,
+        "tackling": 75,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 82,
+      "potentialMax": 86,
+      "traits": [
+        "fan_favourite"
+      ],
+      "baseValue": 58300000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "nuno-mendes",
+      "fullName": "Nuno Mendes",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "LB",
+      "tier": "very_good",
+      "overall": 81,
+      "attributes": {
+        "finishing": 67,
+        "technique": 81,
+        "vision": 76,
+        "tackling": 80,
+        "pace": 88,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 86,
+      "traits": [],
+      "baseValue": 45000000,
+      "baseWage": 180000
+    },
+    {
+      "externalKey": "kyle-walker",
+      "fullName": "Kyle Walker",
+      "birthYear": 1990,
+      "age": 36,
+      "primaryPosition": "RB",
+      "tier": "very_good",
+      "overall": 78,
+      "attributes": {
+        "finishing": 64,
+        "technique": 78,
+        "vision": 73,
+        "tackling": 77,
+        "pace": 85,
+        "goalkeeping": 14
+      },
+      "potentialMin": 70,
+      "potentialMax": 78,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 6000000,
+      "baseWage": 100000
+    },
+    {
+      "externalKey": "nicolo-barella",
+      "fullName": "Nicolò Barella",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 84,
+      "attributes": {
+        "finishing": 81,
+        "technique": 83,
+        "vision": 84,
+        "tackling": 87,
+        "pace": 88,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 85,
+      "traits": [
+        "hothead"
+      ],
+      "baseValue": 55300000,
+      "baseWage": 260000
+    },
+    {
+      "externalKey": "joshua-kimmich",
+      "fullName": "Joshua Kimmich",
+      "birthYear": 1995,
+      "age": 31,
+      "primaryPosition": "DM",
+      "tier": "very_good",
+      "overall": 84,
+      "attributes": {
+        "finishing": 76,
+        "technique": 89,
+        "vision": 90,
+        "tackling": 80,
+        "pace": 77,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 85,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 40300000,
+      "baseWage": 260000
+    },
+    {
+      "externalKey": "cole-palmer",
+      "fullName": "Cole Palmer",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "AM",
+      "tier": "very_good",
+      "overall": 84,
+      "attributes": {
+        "finishing": 81,
+        "technique": 87,
+        "vision": 90,
+        "tackling": 72,
+        "pace": 78,
+        "goalkeeping": 14
+      },
+      "potentialMin": 83,
+      "potentialMax": 89,
+      "traits": [
+        "big_game"
+      ],
+      "baseValue": 65000000,
+      "baseWage": 260000
+    },
+    {
+      "externalKey": "phil-foden",
+      "fullName": "Phil Foden",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "AM",
+      "tier": "very_good",
+      "overall": 84,
+      "attributes": {
+        "finishing": 82,
+        "technique": 90,
+        "vision": 84,
+        "tackling": 71,
+        "pace": 83,
+        "goalkeeping": 14
+      },
+      "potentialMin": 83,
+      "potentialMax": 87,
+      "traits": [],
+      "baseValue": 65000000,
+      "baseWage": 260000
+    },
+    {
+      "externalKey": "frenkie-de-jong",
+      "fullName": "Frenkie de Jong",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 74,
+        "technique": 87,
+        "vision": 89,
+        "tackling": 78,
+        "pace": 75,
+        "goalkeeping": 14
+      },
+      "potentialMin": 79,
+      "potentialMax": 84,
+      "traits": [],
+      "baseValue": 49600000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "aurelien-tchouameni",
+      "fullName": "Aurélien Tchouaméni",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "DM",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 68,
+        "technique": 79,
+        "vision": 82,
+        "tackling": 89,
+        "pace": 76,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 85,
+      "traits": [],
+      "baseValue": 51700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "enzo-fernandez",
+      "fullName": "Enzo Fernández",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 73,
+        "technique": 86,
+        "vision": 88,
+        "tackling": 77,
+        "pace": 74,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 87,
+      "traits": [],
+      "baseValue": 51700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "moises-caicedo",
+      "fullName": "Moisés Caicedo",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "DM",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 68,
+        "technique": 79,
+        "vision": 82,
+        "tackling": 89,
+        "pace": 76,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 87,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 51700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "alexis-mac-allister",
+      "fullName": "Alexis Mac Allister",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 79,
+        "technique": 81,
+        "vision": 82,
+        "tackling": 85,
+        "pace": 86,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 85,
+      "traits": [],
+      "baseValue": 51700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "eduardo-camavinga",
+      "fullName": "Eduardo Camavinga",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 81,
+      "attributes": {
+        "finishing": 78,
+        "technique": 80,
+        "vision": 81,
+        "tackling": 84,
+        "pace": 85,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 86,
+      "traits": [],
+      "baseValue": 45000000,
+      "baseWage": 180000
+    },
+    {
+      "externalKey": "dominik-szoboszlai",
+      "fullName": "Dominik Szoboszlai",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 81,
+      "attributes": {
+        "finishing": 78,
+        "technique": 80,
+        "vision": 81,
+        "tackling": 84,
+        "pace": 85,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 84,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 45000000,
+      "baseWage": 180000
+    },
+    {
+      "externalKey": "xavi-simons",
+      "fullName": "Xavi Simons",
+      "birthYear": 2003,
+      "age": 23,
+      "primaryPosition": "AM",
+      "tier": "very_good",
+      "overall": 81,
+      "attributes": {
+        "finishing": 79,
+        "technique": 87,
+        "vision": 81,
+        "tackling": 68,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 89,
+      "traits": [],
+      "baseValue": 49500000,
+      "baseWage": 180000
+    },
+    {
+      "externalKey": "gavi",
+      "fullName": "Gavi",
+      "birthYear": 2004,
+      "age": 22,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 80,
+      "attributes": {
+        "finishing": 77,
+        "technique": 79,
+        "vision": 80,
+        "tackling": 83,
+        "pace": 84,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 88,
+      "traits": [
+        "hothead",
+        "injury_prone"
+      ],
+      "baseValue": 42200000,
+      "baseWage": 153000
+    },
+    {
+      "externalKey": "ryan-gravenberch",
+      "fullName": "Ryan Gravenberch",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "DM",
+      "tier": "very_good",
+      "overall": 80,
+      "attributes": {
+        "finishing": 66,
+        "technique": 77,
+        "vision": 80,
+        "tackling": 87,
+        "pace": 74,
+        "goalkeeping": 14
+      },
+      "potentialMin": 79,
+      "potentialMax": 85,
+      "traits": [],
+      "baseValue": 38300000,
+      "baseWage": 153000
+    },
+    {
+      "externalKey": "warren-zaire-emery",
+      "fullName": "Warren Zaïre-Emery",
+      "birthYear": 2006,
+      "age": 20,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 80,
+      "attributes": {
+        "finishing": 77,
+        "technique": 79,
+        "vision": 80,
+        "tackling": 83,
+        "pace": 84,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 91,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 45200000,
+      "baseWage": 153000
+    },
+    {
+      "externalKey": "ilkay-gundogan",
+      "fullName": "İlkay Gündoğan",
+      "birthYear": 1990,
+      "age": 36,
+      "primaryPosition": "CM",
+      "tier": "very_good",
+      "overall": 79,
+      "attributes": {
+        "finishing": 70,
+        "technique": 83,
+        "vision": 85,
+        "tackling": 74,
+        "pace": 71,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 79,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 7600000,
+      "baseWage": 127000
+    },
+    {
+      "externalKey": "victor-osimhen",
+      "fullName": "Victor Osimhen",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "ST",
+      "tier": "very_good",
+      "overall": 84,
+      "attributes": {
+        "finishing": 91,
+        "technique": 80,
+        "vision": 77,
+        "tackling": 70,
+        "pace": 83,
+        "goalkeeping": 14
+      },
+      "potentialMin": 83,
+      "potentialMax": 87,
+      "traits": [
+        "ego"
+      ],
+      "baseValue": 65000000,
+      "baseWage": 260000
+    },
+    {
+      "externalKey": "alexander-isak",
+      "fullName": "Alexander Isak",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "ST",
+      "tier": "very_good",
+      "overall": 84,
+      "attributes": {
+        "finishing": 83,
+        "technique": 91,
+        "vision": 84,
+        "tackling": 71,
+        "pace": 84,
+        "goalkeeping": 14
+      },
+      "potentialMin": 83,
+      "potentialMax": 87,
+      "traits": [],
+      "baseValue": 65000000,
+      "baseWage": 260000
+    },
+    {
+      "externalKey": "ousmane-dembele",
+      "fullName": "Ousmane Dembélé",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "RW",
+      "tier": "very_good",
+      "overall": 84,
+      "attributes": {
+        "finishing": 81,
+        "technique": 84,
+        "vision": 78,
+        "tackling": 72,
+        "pace": 92,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 85,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 55300000,
+      "baseWage": 260000
+    },
+    {
+      "externalKey": "khvicha-kvaratskhelia",
+      "fullName": "Khvicha Kvaratskhelia",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "LW",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 81,
+        "technique": 89,
+        "vision": 83,
+        "tackling": 70,
+        "pace": 82,
+        "goalkeeping": 14
+      },
+      "potentialMin": 82,
+      "potentialMax": 88,
+      "traits": [
+        "fan_favourite"
+      ],
+      "baseValue": 58300000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "julian-alvarez",
+      "fullName": "Julián Álvarez",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "ST",
+      "tier": "very_good",
+      "overall": 83,
+      "attributes": {
+        "finishing": 90,
+        "technique": 79,
+        "vision": 76,
+        "tackling": 69,
+        "pace": 82,
+        "goalkeeping": 14
+      },
+      "potentialMin": 82,
+      "potentialMax": 86,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 58300000,
+      "baseWage": 233000
+    },
+    {
+      "externalKey": "nico-williams",
+      "fullName": "Nico Williams",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "LW",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 79,
+        "technique": 82,
+        "vision": 76,
+        "tackling": 70,
+        "pace": 90,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 87,
+      "traits": [],
+      "baseValue": 51700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "rodrygo",
+      "fullName": "Rodrygo",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "RW",
+      "tier": "very_good",
+      "overall": 82,
+      "attributes": {
+        "finishing": 80,
+        "technique": 88,
+        "vision": 82,
+        "tackling": 69,
+        "pace": 81,
+        "goalkeeping": 14
+      },
+      "potentialMin": 81,
+      "potentialMax": 87,
+      "traits": [],
+      "baseValue": 51700000,
+      "baseWage": 207000
+    },
+    {
+      "externalKey": "michael-olise",
+      "fullName": "Michael Olise",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "RW",
+      "tier": "very_good",
+      "overall": 81,
+      "attributes": {
+        "finishing": 80,
+        "technique": 86,
+        "vision": 89,
+        "tackling": 71,
+        "pace": 76,
+        "goalkeeping": 14
+      },
+      "potentialMin": 80,
+      "potentialMax": 86,
+      "traits": [],
+      "baseValue": 45000000,
+      "baseWage": 180000
+    },
+    {
+      "externalKey": "serhou-guirassy",
+      "fullName": "Serhou Guirassy",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "ST",
+      "tier": "very_good",
+      "overall": 80,
+      "attributes": {
+        "finishing": 86,
+        "technique": 80,
+        "vision": 77,
+        "tackling": 75,
+        "pace": 71,
+        "goalkeeping": 14
+      },
+      "potentialMin": 76,
+      "potentialMax": 81,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 32600000,
+      "baseWage": 153000
+    },
+    {
+      "externalKey": "darwin-nunez",
+      "fullName": "Darwin Núñez",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "ST",
+      "tier": "very_good",
+      "overall": 79,
+      "attributes": {
+        "finishing": 77,
+        "technique": 81,
+        "vision": 74,
+        "tackling": 68,
+        "pace": 88,
+        "goalkeeping": 14
+      },
+      "potentialMin": 78,
+      "potentialMax": 82,
+      "traits": [
+        "hothead"
+      ],
+      "baseValue": 31700000,
+      "baseWage": 127000
+    },
+    {
+      "externalKey": "dusan-vlahovic",
+      "fullName": "Dušan Vlahović",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "ST",
+      "tier": "very_good",
+      "overall": 79,
+      "attributes": {
+        "finishing": 85,
+        "technique": 79,
+        "vision": 76,
+        "tackling": 74,
+        "pace": 70,
+        "goalkeeping": 14
+      },
+      "potentialMin": 78,
+      "potentialMax": 82,
+      "traits": [
+        "mercenary"
+      ],
+      "baseValue": 31700000,
+      "baseWage": 127000
+    },
+    {
+      "externalKey": "marcus-rashford",
+      "fullName": "Marcus Rashford",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "LW",
+      "tier": "very_good",
+      "overall": 78,
+      "attributes": {
+        "finishing": 75,
+        "technique": 78,
+        "vision": 72,
+        "tackling": 66,
+        "pace": 86,
+        "goalkeeping": 14
+      },
+      "potentialMin": 74,
+      "potentialMax": 79,
+      "traits": [
+        "mercenary"
+      ],
+      "baseValue": 21300000,
+      "baseWage": 100000
+    },
+    {
+      "externalKey": "diogo-costa",
+      "fullName": "Diogo Costa",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 77,
+      "attributes": {
+        "finishing": 47,
+        "technique": 67,
+        "vision": 69,
+        "tackling": 65,
+        "pace": 64,
+        "goalkeeping": 80
+      },
+      "potentialMin": 76,
+      "potentialMax": 80,
+      "traits": [],
+      "baseValue": 22000000,
+      "baseWage": 88000
+    },
+    {
+      "externalKey": "guglielmo-vicario",
+      "fullName": "Guglielmo Vicario",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 46,
+        "technique": 66,
+        "vision": 68,
+        "tackling": 64,
+        "pace": 63,
+        "goalkeeping": 79
+      },
+      "potentialMin": 72,
+      "potentialMax": 77,
+      "traits": [],
+      "baseValue": 17100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "yann-sommer",
+      "fullName": "Yann Sommer",
+      "birthYear": 1988,
+      "age": 38,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 46,
+        "technique": 66,
+        "vision": 68,
+        "tackling": 64,
+        "pace": 63,
+        "goalkeeping": 79
+      },
+      "potentialMin": 68,
+      "potentialMax": 76,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 4800000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "lucas-chevalier",
+      "fullName": "Lucas Chevalier",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 47,
+        "technique": 77,
+        "vision": 79,
+        "tackling": 65,
+        "pace": 67,
+        "goalkeeping": 75
+      },
+      "potentialMin": 74,
+      "potentialMax": 80,
+      "traits": [],
+      "baseValue": 18200000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "manuel-neuer",
+      "fullName": "Manuel Neuer",
+      "birthYear": 1986,
+      "age": 40,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 47,
+        "technique": 77,
+        "vision": 79,
+        "tackling": 65,
+        "pace": 67,
+        "goalkeeping": 75
+      },
+      "potentialMin": 67,
+      "potentialMax": 75,
+      "traits": [
+        "leader",
+        "injury_prone"
+      ],
+      "baseValue": 4400000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "wojciech-szczesny",
+      "fullName": "Wojciech Szczęsny",
+      "birthYear": 1990,
+      "age": 36,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 44,
+        "technique": 64,
+        "vision": 66,
+        "tackling": 62,
+        "pace": 61,
+        "goalkeeping": 77
+      },
+      "potentialMin": 66,
+      "potentialMax": 74,
+      "traits": [],
+      "baseValue": 3900000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "robert-sanchez",
+      "fullName": "Robert Sánchez",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 73,
+      "attributes": {
+        "finishing": 45,
+        "technique": 75,
+        "vision": 77,
+        "tackling": 63,
+        "pace": 65,
+        "goalkeeping": 73
+      },
+      "potentialMin": 69,
+      "potentialMax": 74,
+      "traits": [],
+      "baseValue": 12300000,
+      "baseWage": 58000
+    },
+    {
+      "externalKey": "alex-remiro",
+      "fullName": "Álex Remiro",
+      "birthYear": 1995,
+      "age": 31,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 73,
+      "attributes": {
+        "finishing": 43,
+        "technique": 63,
+        "vision": 65,
+        "tackling": 61,
+        "pace": 60,
+        "goalkeeping": 76
+      },
+      "potentialMin": 69,
+      "potentialMax": 74,
+      "traits": [],
+      "baseValue": 9000000,
+      "baseWage": 58000
+    },
+    {
+      "externalKey": "kevin-trapp",
+      "fullName": "Kevin Trapp",
+      "birthYear": 1990,
+      "age": 36,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 71,
+      "attributes": {
+        "finishing": 41,
+        "technique": 61,
+        "vision": 63,
+        "tackling": 59,
+        "pace": 58,
+        "goalkeeping": 74
+      },
+      "potentialMin": 63,
+      "potentialMax": 71,
+      "traits": [],
+      "baseValue": 2600000,
+      "baseWage": 43000
+    },
+    {
+      "externalKey": "bart-verbruggen",
+      "fullName": "Bart Verbruggen",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "GK",
+      "tier": "solid",
+      "overall": 70,
+      "attributes": {
+        "finishing": 42,
+        "technique": 72,
+        "vision": 74,
+        "tackling": 60,
+        "pace": 62,
+        "goalkeeping": 70
+      },
+      "potentialMin": 69,
+      "potentialMax": 75,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 8800000,
+      "baseWage": 35000
+    },
+    {
+      "externalKey": "matthijs-de-ligt",
+      "fullName": "Matthijs de Ligt",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 77,
+      "attributes": {
+        "finishing": 59,
+        "technique": 71,
+        "vision": 73,
+        "tackling": 84,
+        "pace": 74,
+        "goalkeeping": 14
+      },
+      "potentialMin": 76,
+      "potentialMax": 80,
+      "traits": [],
+      "baseValue": 22000000,
+      "baseWage": 88000
+    },
+    {
+      "externalKey": "ibrahima-konate",
+      "fullName": "Ibrahima Konaté",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 77,
+      "attributes": {
+        "finishing": 59,
+        "technique": 71,
+        "vision": 73,
+        "tackling": 84,
+        "pace": 74,
+        "goalkeeping": 14
+      },
+      "potentialMin": 76,
+      "potentialMax": 80,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 22000000,
+      "baseWage": 88000
+    },
+    {
+      "externalKey": "kim-min-jae",
+      "fullName": "Kim Min-jae",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 58,
+        "technique": 70,
+        "vision": 72,
+        "tackling": 83,
+        "pace": 73,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 77,
+      "traits": [],
+      "baseValue": 17100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "fikayo-tomori",
+      "fullName": "Fikayo Tomori",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 61,
+        "technique": 76,
+        "vision": 71,
+        "tackling": 75,
+        "pace": 83,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 76,
+      "traits": [],
+      "baseValue": 15500000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "aymeric-laporte",
+      "fullName": "Aymeric Laporte",
+      "birthYear": 1994,
+      "age": 32,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 59,
+        "technique": 80,
+        "vision": 79,
+        "tackling": 76,
+        "pace": 72,
+        "goalkeeping": 14
+      },
+      "potentialMin": 67,
+      "potentialMax": 75,
+      "traits": [
+        "mercenary"
+      ],
+      "baseValue": 11300000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "nathan-ake",
+      "fullName": "Nathan Aké",
+      "birthYear": 1995,
+      "age": 31,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 58,
+        "technique": 79,
+        "vision": 78,
+        "tackling": 75,
+        "pace": 71,
+        "goalkeeping": 14
+      },
+      "potentialMin": 70,
+      "potentialMax": 75,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 10100000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "leny-yoro",
+      "fullName": "Leny Yoro",
+      "birthYear": 2005,
+      "age": 21,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 58,
+        "technique": 79,
+        "vision": 78,
+        "tackling": 75,
+        "pace": 71,
+        "goalkeeping": 14
+      },
+      "potentialMin": 75,
+      "potentialMax": 85,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 18000000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "jarrad-branthwaite",
+      "fullName": "Jarrad Branthwaite",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 56,
+        "technique": 68,
+        "vision": 70,
+        "tackling": 81,
+        "pace": 71,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 79,
+      "traits": [],
+      "baseValue": 16300000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "castello-lukeba",
+      "fullName": "Castello Lukeba",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 73,
+      "attributes": {
+        "finishing": 57,
+        "technique": 78,
+        "vision": 77,
+        "tackling": 74,
+        "pace": 70,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 78,
+      "traits": [],
+      "baseValue": 14400000,
+      "baseWage": 58000
+    },
+    {
+      "externalKey": "nayef-aguerd",
+      "fullName": "Nayef Aguerd",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 54,
+        "technique": 66,
+        "vision": 68,
+        "tackling": 79,
+        "pace": 69,
+        "goalkeeping": 14
+      },
+      "potentialMin": 68,
+      "potentialMax": 73,
+      "traits": [],
+      "baseValue": 10700000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "benjamin-pavard",
+      "fullName": "Benjamin Pavard",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 54,
+        "technique": 66,
+        "vision": 68,
+        "tackling": 79,
+        "pace": 69,
+        "goalkeeping": 14
+      },
+      "potentialMin": 68,
+      "potentialMax": 73,
+      "traits": [],
+      "baseValue": 10700000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "jorrel-hato",
+      "fullName": "Jorrel Hato",
+      "birthYear": 2006,
+      "age": 20,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 71,
+      "attributes": {
+        "finishing": 55,
+        "technique": 76,
+        "vision": 75,
+        "tackling": 72,
+        "pace": 68,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 82,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 12600000,
+      "baseWage": 43000
+    },
+    {
+      "externalKey": "lucas-hernandez",
+      "fullName": "Lucas Hernández",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "CB",
+      "tier": "solid",
+      "overall": 70,
+      "attributes": {
+        "finishing": 52,
+        "technique": 64,
+        "vision": 66,
+        "tackling": 77,
+        "pace": 67,
+        "goalkeeping": 14
+      },
+      "potentialMin": 66,
+      "potentialMax": 71,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 7500000,
+      "baseWage": 35000
+    },
+    {
+      "externalKey": "federico-dimarco",
+      "fullName": "Federico Dimarco",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "LB",
+      "tier": "solid",
+      "overall": 77,
+      "attributes": {
+        "finishing": 79,
+        "technique": 85,
+        "vision": 87,
+        "tackling": 69,
+        "pace": 74,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 78,
+      "traits": [],
+      "baseValue": 18700000,
+      "baseWage": 88000
+    },
+    {
+      "externalKey": "andrew-robertson",
+      "fullName": "Andrew Robertson",
+      "birthYear": 1994,
+      "age": 32,
+      "primaryPosition": "LB",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 61,
+        "technique": 75,
+        "vision": 70,
+        "tackling": 74,
+        "pace": 82,
+        "goalkeeping": 14
+      },
+      "potentialMin": 67,
+      "potentialMax": 75,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 11300000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "destiny-udogie",
+      "fullName": "Destiny Udogie",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "LB",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 60,
+        "technique": 74,
+        "vision": 69,
+        "tackling": 73,
+        "pace": 81,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 79,
+      "traits": [],
+      "baseValue": 16300000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "marcos-acuna",
+      "fullName": "Marcos Acuña",
+      "birthYear": 1991,
+      "age": 35,
+      "primaryPosition": "LB",
+      "tier": "solid",
+      "overall": 71,
+      "attributes": {
+        "finishing": 57,
+        "technique": 71,
+        "vision": 66,
+        "tackling": 70,
+        "pace": 78,
+        "goalkeeping": 14
+      },
+      "potentialMin": 63,
+      "potentialMax": 71,
+      "traits": [
+        "hothead"
+      ],
+      "baseValue": 2600000,
+      "baseWage": 43000
+    },
+    {
+      "externalKey": "denzel-dumfries",
+      "fullName": "Denzel Dumfries",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "RB",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 62,
+        "technique": 76,
+        "vision": 71,
+        "tackling": 75,
+        "pace": 83,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 77,
+      "traits": [],
+      "baseValue": 17100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "reece-james",
+      "fullName": "Reece James",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "RB",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 78,
+        "technique": 84,
+        "vision": 86,
+        "tackling": 68,
+        "pace": 73,
+        "goalkeeping": 14
+      },
+      "potentialMin": 75,
+      "potentialMax": 79,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 20100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "pedro-porro",
+      "fullName": "Pedro Porro",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "RB",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 77,
+        "technique": 83,
+        "vision": 85,
+        "tackling": 67,
+        "pace": 72,
+        "goalkeeping": 14
+      },
+      "potentialMin": 74,
+      "potentialMax": 78,
+      "traits": [],
+      "baseValue": 18200000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "ben-white",
+      "fullName": "Ben White",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "RB",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 58,
+        "technique": 80,
+        "vision": 79,
+        "tackling": 75,
+        "pace": 71,
+        "goalkeeping": 14
+      },
+      "potentialMin": 70,
+      "potentialMax": 75,
+      "traits": [],
+      "baseValue": 13900000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "malo-gusto",
+      "fullName": "Malo Gusto",
+      "birthYear": 2003,
+      "age": 23,
+      "primaryPosition": "RB",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 58,
+        "technique": 72,
+        "vision": 67,
+        "tackling": 71,
+        "pace": 79,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 80,
+      "traits": [],
+      "baseValue": 13800000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "vanderson",
+      "fullName": "Vanderson",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "RB",
+      "tier": "solid",
+      "overall": 70,
+      "attributes": {
+        "finishing": 56,
+        "technique": 70,
+        "vision": 65,
+        "tackling": 69,
+        "pace": 77,
+        "goalkeeping": 14
+      },
+      "potentialMin": 69,
+      "potentialMax": 75,
+      "traits": [],
+      "baseValue": 8800000,
+      "baseWage": 35000
+    },
+    {
+      "externalKey": "bruno-guimaraes",
+      "fullName": "Bruno Guimarães",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "CM",
+      "tier": "solid",
+      "overall": 77,
+      "attributes": {
+        "finishing": 74,
+        "technique": 76,
+        "vision": 77,
+        "tackling": 80,
+        "pace": 81,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 78,
+      "traits": [
+        "leader"
+      ],
+      "baseValue": 18700000,
+      "baseWage": 88000
+    },
+    {
+      "externalKey": "hakan-calhanoglu",
+      "fullName": "Hakan Çalhanoğlu",
+      "birthYear": 1994,
+      "age": 32,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 77,
+      "attributes": {
+        "finishing": 69,
+        "technique": 82,
+        "vision": 83,
+        "tackling": 73,
+        "pace": 70,
+        "goalkeeping": 14
+      },
+      "potentialMin": 69,
+      "potentialMax": 77,
+      "traits": [],
+      "baseValue": 13600000,
+      "baseWage": 88000
+    },
+    {
+      "externalKey": "sandro-tonali",
+      "fullName": "Sandro Tonali",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "CM",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 73,
+        "technique": 75,
+        "vision": 76,
+        "tackling": 79,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 75,
+      "potentialMax": 79,
+      "traits": [],
+      "baseValue": 20100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "dani-olmo",
+      "fullName": "Dani Olmo",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "AM",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 73,
+        "technique": 79,
+        "vision": 82,
+        "tackling": 64,
+        "pace": 70,
+        "goalkeeping": 14
+      },
+      "potentialMin": 75,
+      "potentialMax": 79,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 20100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "james-maddison",
+      "fullName": "James Maddison",
+      "birthYear": 1996,
+      "age": 30,
+      "primaryPosition": "AM",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 72,
+        "technique": 78,
+        "vision": 81,
+        "tackling": 63,
+        "pace": 69,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 76,
+      "traits": [
+        "fan_favourite"
+      ],
+      "baseValue": 15500000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "teun-koopmeiners",
+      "fullName": "Teun Koopmeiners",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "CM",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 72,
+        "technique": 74,
+        "vision": 75,
+        "tackling": 78,
+        "pace": 79,
+        "goalkeeping": 14
+      },
+      "potentialMin": 74,
+      "potentialMax": 78,
+      "traits": [],
+      "baseValue": 18200000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "manuel-ugarte",
+      "fullName": "Manuel Ugarte",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 60,
+        "technique": 71,
+        "vision": 74,
+        "tackling": 81,
+        "pace": 68,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 79,
+      "traits": [
+        "hothead"
+      ],
+      "baseValue": 16300000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "amadou-onana",
+      "fullName": "Amadou Onana",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 60,
+        "technique": 71,
+        "vision": 74,
+        "tackling": 81,
+        "pace": 68,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 79,
+      "traits": [],
+      "baseValue": 16300000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "boubacar-kamara",
+      "fullName": "Boubacar Kamara",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 60,
+        "technique": 71,
+        "vision": 74,
+        "tackling": 81,
+        "pace": 68,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 77,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 16300000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "nico-gonzalez",
+      "fullName": "Nico González",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 66,
+        "technique": 79,
+        "vision": 80,
+        "tackling": 70,
+        "pace": 67,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 79,
+      "traits": [],
+      "baseValue": 16300000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "fermin-lopez",
+      "fullName": "Fermín López",
+      "birthYear": 2003,
+      "age": 23,
+      "primaryPosition": "AM",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 72,
+        "technique": 80,
+        "vision": 74,
+        "tackling": 61,
+        "pace": 73,
+        "goalkeeping": 14
+      },
+      "potentialMin": 74,
+      "potentialMax": 82,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 18000000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "granit-xhaka",
+      "fullName": "Granit Xhaka",
+      "birthYear": 1992,
+      "age": 34,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 66,
+        "technique": 79,
+        "vision": 80,
+        "tackling": 70,
+        "pace": 67,
+        "goalkeeping": 14
+      },
+      "potentialMin": 66,
+      "potentialMax": 74,
+      "traits": [
+        "leader",
+        "hothead"
+      ],
+      "baseValue": 6500000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "youri-tielemans",
+      "fullName": "Youri Tielemans",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "CM",
+      "tier": "solid",
+      "overall": 73,
+      "attributes": {
+        "finishing": 64,
+        "technique": 77,
+        "vision": 79,
+        "tackling": 68,
+        "pace": 65,
+        "goalkeeping": 14
+      },
+      "potentialMin": 69,
+      "potentialMax": 74,
+      "traits": [],
+      "baseValue": 12300000,
+      "baseWage": 58000
+    },
+    {
+      "externalKey": "davide-frattesi",
+      "fullName": "Davide Frattesi",
+      "birthYear": 1999,
+      "age": 27,
+      "primaryPosition": "CM",
+      "tier": "solid",
+      "overall": 73,
+      "attributes": {
+        "finishing": 70,
+        "technique": 72,
+        "vision": 73,
+        "tackling": 76,
+        "pace": 77,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 76,
+      "traits": [],
+      "baseValue": 14400000,
+      "baseWage": 58000
+    },
+    {
+      "externalKey": "leon-goretzka",
+      "fullName": "Leon Goretzka",
+      "birthYear": 1995,
+      "age": 31,
+      "primaryPosition": "CM",
+      "tier": "solid",
+      "overall": 73,
+      "attributes": {
+        "finishing": 70,
+        "technique": 72,
+        "vision": 73,
+        "tackling": 76,
+        "pace": 77,
+        "goalkeeping": 14
+      },
+      "potentialMin": 69,
+      "potentialMax": 74,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 9000000,
+      "baseWage": 58000
+    },
+    {
+      "externalKey": "morgan-gibbs-white",
+      "fullName": "Morgan Gibbs-White",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "AM",
+      "tier": "solid",
+      "overall": 73,
+      "attributes": {
+        "finishing": 70,
+        "technique": 76,
+        "vision": 79,
+        "tackling": 61,
+        "pace": 67,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 76,
+      "traits": [],
+      "baseValue": 14400000,
+      "baseWage": 58000
+    },
+    {
+      "externalKey": "kobbie-mainoo",
+      "fullName": "Kobbie Mainoo",
+      "birthYear": 2005,
+      "age": 21,
+      "primaryPosition": "CM",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 63,
+        "technique": 76,
+        "vision": 78,
+        "tackling": 67,
+        "pace": 64,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 83,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 13800000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "adam-wharton",
+      "fullName": "Adam Wharton",
+      "birthYear": 2004,
+      "age": 22,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 64,
+        "technique": 77,
+        "vision": 78,
+        "tackling": 68,
+        "pace": 65,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 80,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 13800000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "pape-matar-sarr",
+      "fullName": "Pape Matar Sarr",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "CM",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 69,
+        "technique": 71,
+        "vision": 72,
+        "tackling": 75,
+        "pace": 76,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 77,
+      "traits": [],
+      "baseValue": 12600000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "aleksandar-pavlovic",
+      "fullName": "Aleksandar Pavlović",
+      "birthYear": 2004,
+      "age": 22,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 71,
+      "attributes": {
+        "finishing": 57,
+        "technique": 68,
+        "vision": 71,
+        "tackling": 78,
+        "pace": 65,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 79,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 11700000,
+      "baseWage": 43000
+    },
+    {
+      "externalKey": "carlos-baleba",
+      "fullName": "Carlos Baleba",
+      "birthYear": 2004,
+      "age": 22,
+      "primaryPosition": "DM",
+      "tier": "solid",
+      "overall": 71,
+      "attributes": {
+        "finishing": 57,
+        "technique": 68,
+        "vision": 71,
+        "tackling": 78,
+        "pace": 65,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 79,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 11700000,
+      "baseWage": 43000
+    },
+    {
+      "externalKey": "emile-smith-rowe",
+      "fullName": "Emile Smith Rowe",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "AM",
+      "tier": "solid",
+      "overall": 70,
+      "attributes": {
+        "finishing": 68,
+        "technique": 76,
+        "vision": 70,
+        "tackling": 57,
+        "pace": 69,
+        "goalkeeping": 14
+      },
+      "potentialMin": 69,
+      "potentialMax": 73,
+      "traits": [
+        "injury_prone"
+      ],
+      "baseValue": 8800000,
+      "baseWage": 35000
+    },
+    {
+      "externalKey": "randal-kolo-muani",
+      "fullName": "Randal Kolo Muani",
+      "birthYear": 1998,
+      "age": 28,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 82,
+        "technique": 76,
+        "vision": 73,
+        "tackling": 71,
+        "pace": 67,
+        "goalkeeping": 14
+      },
+      "potentialMin": 75,
+      "potentialMax": 79,
+      "traits": [],
+      "baseValue": 20100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "jonathan-david",
+      "fullName": "Jonathan David",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 83,
+        "technique": 72,
+        "vision": 69,
+        "tackling": 62,
+        "pace": 75,
+        "goalkeeping": 14
+      },
+      "potentialMin": 75,
+      "potentialMax": 79,
+      "traits": [
+        "mercenary"
+      ],
+      "baseValue": 20100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "ademola-lookman",
+      "fullName": "Ademola Lookman",
+      "birthYear": 1997,
+      "age": 29,
+      "primaryPosition": "LW",
+      "tier": "solid",
+      "overall": 76,
+      "attributes": {
+        "finishing": 74,
+        "technique": 82,
+        "vision": 76,
+        "tackling": 63,
+        "pace": 75,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 77,
+      "traits": [
+        "big_game"
+      ],
+      "baseValue": 17100000,
+      "baseWage": 80000
+    },
+    {
+      "externalKey": "jeremy-doku",
+      "fullName": "Jérémy Doku",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "LW",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 72,
+        "technique": 75,
+        "vision": 69,
+        "tackling": 63,
+        "pace": 83,
+        "goalkeeping": 14
+      },
+      "potentialMin": 74,
+      "potentialMax": 80,
+      "traits": [],
+      "baseValue": 18200000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "lois-openda",
+      "fullName": "Loïs Openda",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 73,
+        "technique": 77,
+        "vision": 70,
+        "tackling": 64,
+        "pace": 84,
+        "goalkeeping": 14
+      },
+      "potentialMin": 74,
+      "potentialMax": 78,
+      "traits": [],
+      "baseValue": 18200000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "benjamin-sesko",
+      "fullName": "Benjamin Šeško",
+      "birthYear": 2003,
+      "age": 23,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 75,
+      "attributes": {
+        "finishing": 81,
+        "technique": 75,
+        "vision": 72,
+        "tackling": 70,
+        "pace": 66,
+        "goalkeeping": 14
+      },
+      "potentialMin": 75,
+      "potentialMax": 83,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 20000000,
+      "baseWage": 73000
+    },
+    {
+      "externalKey": "hugo-ekitike",
+      "fullName": "Hugo Ekitiké",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 73,
+        "technique": 81,
+        "vision": 74,
+        "tackling": 61,
+        "pace": 74,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 79,
+      "traits": [],
+      "baseValue": 16300000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "anthony-gordon",
+      "fullName": "Anthony Gordon",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "LW",
+      "tier": "solid",
+      "overall": 74,
+      "attributes": {
+        "finishing": 71,
+        "technique": 74,
+        "vision": 68,
+        "tackling": 62,
+        "pace": 82,
+        "goalkeeping": 14
+      },
+      "potentialMin": 73,
+      "potentialMax": 79,
+      "traits": [
+        "hothead"
+      ],
+      "baseValue": 16300000,
+      "baseWage": 65000
+    },
+    {
+      "externalKey": "santiago-gimenez",
+      "fullName": "Santiago Giménez",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 73,
+      "attributes": {
+        "finishing": 80,
+        "technique": 69,
+        "vision": 66,
+        "tackling": 59,
+        "pace": 72,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 78,
+      "traits": [],
+      "baseValue": 14400000,
+      "baseWage": 58000
+    },
+    {
+      "externalKey": "karim-adeyemi",
+      "fullName": "Karim Adeyemi",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "LW",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 69,
+        "technique": 72,
+        "vision": 66,
+        "tackling": 60,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 77,
+      "traits": [],
+      "baseValue": 12600000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "brennan-johnson",
+      "fullName": "Brennan Johnson",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "RW",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 81,
+        "technique": 70,
+        "vision": 67,
+        "tackling": 60,
+        "pace": 73,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 77,
+      "traits": [],
+      "baseValue": 12600000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "antoine-semenyo",
+      "fullName": "Antoine Semenyo",
+      "birthYear": 2000,
+      "age": 26,
+      "primaryPosition": "RW",
+      "tier": "solid",
+      "overall": 72,
+      "attributes": {
+        "finishing": 69,
+        "technique": 72,
+        "vision": 66,
+        "tackling": 60,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 71,
+      "potentialMax": 75,
+      "traits": [
+        "iron_man"
+      ],
+      "baseValue": 12600000,
+      "baseWage": 50000
+    },
+    {
+      "externalKey": "mathys-tel",
+      "fullName": "Mathys Tel",
+      "birthYear": 2005,
+      "age": 21,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 71,
+      "attributes": {
+        "finishing": 69,
+        "technique": 73,
+        "vision": 66,
+        "tackling": 60,
+        "pace": 80,
+        "goalkeeping": 14
+      },
+      "potentialMin": 72,
+      "potentialMax": 82,
+      "traits": [
+        "late_bloomer"
+      ],
+      "baseValue": 11700000,
+      "baseWage": 43000
+    },
+    {
+      "externalKey": "igor-thiago",
+      "fullName": "Igor Thiago",
+      "birthYear": 2001,
+      "age": 25,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 70,
+      "attributes": {
+        "finishing": 76,
+        "technique": 70,
+        "vision": 67,
+        "tackling": 65,
+        "pace": 61,
+        "goalkeeping": 14
+      },
+      "potentialMin": 69,
+      "potentialMax": 75,
+      "traits": [],
+      "baseValue": 8800000,
+      "baseWage": 35000
+    },
+    {
+      "externalKey": "arnaud-kalimuendo",
+      "fullName": "Arnaud Kalimuendo",
+      "birthYear": 2002,
+      "age": 24,
+      "primaryPosition": "ST",
+      "tier": "solid",
+      "overall": 69,
+      "attributes": {
+        "finishing": 76,
+        "technique": 65,
+        "vision": 62,
+        "tackling": 55,
+        "pace": 68,
+        "goalkeeping": 14
+      },
+      "potentialMin": 68,
+      "potentialMax": 74,
+      "traits": [],
+      "baseValue": 6900000,
+      "baseWage": 28000
+    }
+  ]
+}

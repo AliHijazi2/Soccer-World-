@@ -232,6 +232,8 @@ Der Gesamtbestand sind **150 reale Profis**, gestaffelt:
 | **Sehr gut** | 50 | 78–84 | 25–65 Mio |
 | **Solide** | 70 | 68–77 | 5–22 Mio |
 
+Die Spannen gelten **im besten Alter (24–28)**. Darüber greift ein Altersabschlag bis auf 24 % ab 35 Jahren, weshalb ältere Weltklassespieler deutlich unter 70 Mio liegen. Das Gehalt sinkt dabei ausdrücklich nicht mit (→ §13.2).
+
 Davon ist nicht alles gleichzeitig verfügbar. **Der aktive Marktpool wird pro Lobby gezogen und skaliert mit der Spielerzahl (A5):**
 
 ```
@@ -692,10 +694,16 @@ Das Startbudget von 400 Mio ist also einmalig und wird nie wieder in einer Saiso
 ### 13.2 Gehaltsformel
 
 ```
-Gehalt pro Spieltag ≈ Marktwert × 0,004     (angepasst um Alter, Trait, Vertragslänge)
+Gehalt pro Spieltag ≈ Referenzwert(OVR) × 0,004     (angepasst um Trait und Vertragslänge)
 ```
 
-Ein Spieler mit 100 Mio Marktwert kostet also 400.000 pro Spieltag, 8,4 Mio pro Saison. Gehälter werden pro Spieltag abgebucht — bei drei Spieltagen täglich merkt man die Belastung sofort.
+Wichtig ist, woran das Gehalt **nicht** hängt: am tatsächlichen Marktwert. Es hängt am **Referenzwert des Könnens**, also am Marktwert, den ein Spieler dieser Stärke im besten Alter hätte.
+
+Der Unterschied wurde erst bei der Umsetzung sichtbar und ist erheblich. Ein 35-jähriger Weltklassespieler ist wegen des Altersabschlags für rund 23 Mio zu haben statt für 90. Hinge sein Gehalt am Marktwert, wäre er **billig zu kaufen und billig zu halten** — ein Sofortkauf ohne jeden Nachteil, und die Gehaltsspirale als Anti-Snowball-Bremse (§19.2, Nr. 2) wäre ausgehebelt.
+
+So dagegen kostet er 23 Mio Ablöse und trotzdem 8,1 Mio Gehalt pro Saison: Nach drei Saisons hat er mehr gekostet, als er je wert war, und ist inzwischen um 10 OVR gefallen. **Das ist eine der besten Entscheidungen im Spiel** — zwei starke Saisons jetzt, dafür ein Gehaltsklotz später, den niemand abnimmt.
+
+Gehälter werden pro Spieltag abgebucht; bei drei Spieltagen täglich merkt man die Belastung sofort.
 
 ### 13.3 Abrechnung
 

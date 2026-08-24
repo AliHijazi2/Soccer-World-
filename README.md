@@ -31,7 +31,9 @@ Voraussetzung: Node 22 oder neuer. Die TypeScript-Dateien laufen direkt, ohne Bu
 ```bash
 npm install
 npm test        # 13 Tests: Determinismus, Ratings, Ticker-Konsistenz
-npm run balance # Kalibrierungsbericht gegen die Zielkurve aus GDD §8.2
+npm run balance      # Zielkurve aus GDD §8.2, mit gleichmäßigen Testkadern
+npm run balance:pool # dieselbe Prüfung mit echten Kadern, plus Draft-Test
+npm run players      # erzeugt data/players.json aus data/roster.json
 npm run typecheck
 ```
 
@@ -45,6 +47,7 @@ npm run typecheck
 | Spieler- und Mannschaftsbewertung | ✅ |
 | Spielsimulation mit Ticker | ✅ kalibriert |
 | Headless-Balancer | ✅ |
+| Spielerpool, 150 echte Profis | ✅ |
 | Datenbankschema | 📄 entworfen, nicht umgesetzt |
 | Auktion und Escrow | ⬜ |
 | Scheduler | ⬜ |
