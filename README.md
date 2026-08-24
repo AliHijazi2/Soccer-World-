@@ -4,7 +4,8 @@ Ein asynchrones Multiplayer-Strategiespiel für Freundesgruppen: Jeder besitzt e
 Fußballverein, alle teilen sich denselben knappen Transfermarkt, eine Saison dauert
 eine Woche mit 21 Spieltagen — und am Ende gibt es nicht einen Sieger, sondern acht.
 
-**Status:** Konzeptphase abgeschlossen, noch keine Implementierung.
+**Status:** Konzept abgeschlossen. Die Simulation ist gebaut und gegen die
+Zielkurve des Designs kalibriert; alles Weitere steht noch aus.
 
 ## Dokumente
 
@@ -22,3 +23,30 @@ eine Woche mit 21 Spieltagen — und am Ende gibt es nicht einen Sieger, sondern
   täglicher Marktabschluss zwischen 16 und 17 Uhr
 - **Simulierte Partien** als 90-Sekunden-Ticker, deterministisch und reproduzierbar
 - **Acht Trophäen und zwei Anti-Trophäen** pro Saison, Prestige kumuliert über alle Saisons
+
+## Entwicklung
+
+Voraussetzung: Node 22 oder neuer. Die TypeScript-Dateien laufen direkt, ohne Build-Schritt.
+
+```bash
+npm install
+npm test        # 13 Tests: Determinismus, Ratings, Ticker-Konsistenz
+npm run balance # Kalibrierungsbericht gegen die Zielkurve aus GDD §8.2
+npm run typecheck
+```
+
+`RUNS=40000 npm run balance` erhöht die Stichprobe.
+
+### Stand
+
+| Baustein | Status |
+|---|---|
+| Deterministischer PRNG | ✅ |
+| Spieler- und Mannschaftsbewertung | ✅ |
+| Spielsimulation mit Ticker | ✅ kalibriert |
+| Headless-Balancer | ✅ |
+| Datenbankschema | 📄 entworfen, nicht umgesetzt |
+| Auktion und Escrow | ⬜ |
+| Scheduler | ⬜ |
+| Wirtschaft, Fans, Ereignisse | ⬜ |
+| Client | ⬜ |
