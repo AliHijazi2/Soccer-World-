@@ -10,6 +10,7 @@
 import { createPool, migrate } from "../../../packages/server/src/db/pool.ts";
 import { handlers, startSeason } from "../../../packages/server/src/domain/season.ts";
 import { drain } from "../../../packages/server/src/scheduler/runner.ts";
+import { readFeed, readTicker } from "../../../packages/server/src/domain/feed.ts";
 import { seedLeague } from "../../../packages/server/test/helpers.ts";
 
 const CLUBS = Number(process.env.CLUBS ?? 4);
@@ -183,16 +184,31 @@ console.log("─".repeat(78));
 console.log("Ein Kader im besten Alter läge bei rund 8 % — höhere Werte bedeuten:");
 console.log("billig eingekauft, teuer im Unterhalt.\n");
 
-const ticker = await pool.query<{ minute: number; type: string; text_key: string }>(
-  `SELECT e.minute, e.type, e.text_key FROM match_event e
-     JOIN match m ON m.id = e.match_id
-    WHERE m.league_id = $1 AND m.matchday = 1
-    ORDER BY m.id, e.sequence LIMIT 12`, [fx.leagueId]);
-console.log("TICKER-AUSZUG (Spieltag 1)");
+const client = await pool.connect();
+
+const firstMatch = await client.query<{ id: string }>(
+  `SELECT id FROM match WHERE league_id = $1 AND matchday = 1 ORDER BY id LIMIT 1`,
+  [fx.leagueId]);
+const lines = await readTicker(client, firstMatch.rows[0]!.id);
+console.log("TICKER — erste Partie des ersten Spieltags");
 console.log("─".repeat(78));
-for (const row of ticker.rows) {
-  console.log(padL(`${row.minute}'`, 5) + "  " + pad(row.type, 16) + row.text_key);
+for (const line of lines.slice(0, 16)) {
+  console.log(padL(`${line.minute}'`, 5) + "  " + line.text);
+}
+if (lines.length > 16) console.log(padL("", 5) + `  … ${lines.length - 16} weitere`);
+console.log("─".repeat(78));
+
+const feed = await readFeed(client, fx.leagueId, 18);
+const feedTotal = await client.query<{ n: number }>(
+  "SELECT COUNT(*)::int AS n FROM feed_item WHERE league_id = $1", [fx.leagueId]);
+console.log(`\nBOULEVARD-FEED — ${feedTotal.rows[0]!.n} Meldungen über die Saison`);
+console.log("─".repeat(78));
+for (const item of feed) {
+  const mark = item.importance >= 3 ? "🔥" : item.importance === 2 ? "⚡" : "· ";
+  console.log(`${mark} ST ${String(item.matchday).padStart(2)}  ${item.text}`);
 }
 console.log("─".repeat(78) + "\n");
+
+client.release();
 
 await pool.end();

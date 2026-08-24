@@ -8,3 +8,7 @@ export * from "./rules/lineup.ts";
 export * from "./rules/economy/expectations.ts";
 export * from "./rules/economy/fans.ts";
 export * from "./rules/economy/revenue.ts";
+export * from "./rules/feed.ts";
+export * from "./text/engine.ts";
+export * from "./text/ticker.de.ts";
+export * from "./text/feed.de.ts";

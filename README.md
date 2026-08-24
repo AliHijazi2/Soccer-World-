@@ -67,7 +67,8 @@ Jede Testdatei legt sich ihre eigene Datenbank an.
 | Vollständiger Saisondurchlauf | ✅ ohne Oberfläche |
 | Fanmodell mit Erwartungsdruck | ✅ |
 | Einnahmen, Sponsoren, Prämien, Betriebskosten | ✅ kalibriert |
-| Ereignisse, Feed-Templates | ⬜ |
+| Boulevard-Feed mit 140 Text-Templates | ✅ |
+| Ereignisse mit Entscheidungen | ⬜ |
 | Transfermarkt-Anbindung im Spielbetrieb | ⬜ |
 | Scheduler | ⬜ |
 | Wirtschaft, Fans, Ereignisse | ⬜ |

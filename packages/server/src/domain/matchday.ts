@@ -18,6 +18,7 @@ import {
 import type {
   Attributes, MatchPlayer, MatchSquad, Position, Trait,
 } from "../../../shared/src/types/match.ts";
+import { generateFeed, updateStreaks, type MatchOutcome } from "./feed.ts";
 import { inTransaction, type Pool, type PoolClient } from "../db/pool.ts";
 
 interface PlayerRow {
@@ -113,6 +114,7 @@ export interface MatchdayReport {
   injuries: number;
   wagesPaid: number;
   ticketIncome: number;
+  feedItems: number;
 }
 
 interface MatchRow {
@@ -145,8 +147,10 @@ export async function runMatchday(
       [leagueId, season, matchday]);
 
     const report: MatchdayReport = {
-      matchday, matchesPlayed: 0, goals: 0, injuries: 0, wagesPaid: 0, ticketIncome: 0,
+      matchday, matchesPlayed: 0, goals: 0, injuries: 0,
+      wagesPaid: 0, ticketIncome: 0, feedItems: 0,
     };
+    const outcomes: MatchOutcome[] = [];
 
     // Idempotenz: Ein bereits simulierter Spieltag wird nicht erneut gespielt
     const pending = matches.rows.filter((row) => row.status === "scheduled");
@@ -194,6 +198,15 @@ export async function runMatchday(
         result.homeGoals, result.awayGoals);
       await updateStanding(client, leagueId, season, match.away_club_id,
         result.awayGoals, result.homeGoals);
+      await updateStreaks(client, leagueId, season, match.home_club_id,
+        pointsFor(result.homeGoals, result.awayGoals));
+      await updateStreaks(client, leagueId, season, match.away_club_id,
+        pointsFor(result.awayGoals, result.homeGoals));
+
+      outcomes.push({
+        homeClubId: match.home_club_id, awayClubId: match.away_club_id,
+        homeGoals: result.homeGoals, awayGoals: result.awayGoals,
+      });
 
       for (const injury of result.injuries) {
         await client.query(
@@ -237,6 +250,10 @@ export async function runMatchday(
         WHERE league_id = $1 AND suspension_matches > 0`, [leagueId]);
     await client.query(
       "UPDATE league SET current_matchday = $2 WHERE id = $1", [leagueId, matchday]);
+
+    // Der Feed entsteht zuletzt, damit er den fertigen Zustand sieht:
+    // Stimmung, Kassenstand und Fitness sind dann schon fortgeschrieben
+    report.feedItems = await generateFeed(client, leagueId, season, matchday, outcomes);
 
     return report;
   });
