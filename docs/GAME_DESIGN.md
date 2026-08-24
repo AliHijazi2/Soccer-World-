@@ -366,10 +366,14 @@ Bei 21 Spieltagen in 7 Tagen ist Fitness die zentrale Ressource, wichtiger als i
 | Eingewechselt (ca. 30 Min) | −9 |
 | Auf der Bank | +6 |
 | Nicht im Kader | +14 |
-| Über Nacht (zwischen 22:00 und 17:00) | +18 |
+| Über Nacht (zwischen 22:00 und 17:00) | +30 |
 | Trait "Eisenmann" | −40 % auf alle Verluste |
 
-Rechnerisch: Ein Spieler, der alle drei Partien eines Abends durchspielt, verliert 66 Punkte und regeneriert über Nacht 18. **Niemand kann eine Saison lang jeden Spieltag spielen.** Ein Kader von 14 Spielern reicht knapp, 17–18 sind komfortabel, und wer nur 14 hat, muss ab Tag 3 mit müden Stars antreten.
+Rechnerisch: Ein Spieler, der alle drei Partien eines Abends durchspielt, verliert 66 Punkte und regeneriert über Nacht 30. **Niemand kann eine Saison lang jeden Spieltag spielen.** Ein Kader von 14 Spielern reicht knapp, 17–18 sind komfortabel, und wer nur 14 hat, muss ab Tag 3 mit müden Stars antreten.
+
+> **Kalibriert am laufenden System.** Der ursprüngliche Wert von +30 lag bei +18 und war nicht spielbar: Ein 16er-Kader verliert über die Saison rechnerisch 126 Fitnesspunkte, startet aber bei 100. Im ersten vollständigen Saisondurchlauf lagen 61 von 64 Spielern am Ende unter der Leistungsgrenze, viele bei null — kein Rotationsdruck, sondern ein Kollaps. Mit +30 liegt die Saisonbilanz bei rund −42: Wer nicht rotiert, steht am Ende mit einer erschöpften Elf da, aber der Kader hält durch. Gemessener Schnitt am Saisonende: 68, Tiefstwert 28.
+
+Dieselbe Messung hat einen zweiten Fehler aufgedeckt: Die automatische Aufstellung rotierte erst unterhalb der Leistungsgrenze von 70 und schickte die Stammelf dadurch systematisch müde ins Spiel. Sie berücksichtigt Fitness jetzt schon ab 85.
 
 Damit ist Kaderbreite plötzlich genauso wichtig wie Kaderqualität — und das ist eine der besten Antworten auf "einer kauft sich elf Superstars". Elf Superstars, die alle 21 Spieltage brauchen, sind ab Tag 4 elf erschöpfte Superstars.
 

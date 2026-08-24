@@ -145,3 +145,87 @@ export async function checkInvariants(pool: Pool): Promise<Violation[]> {
 
   return violations;
 }
+
+// ── Liga mit echten Spielern ──────────────────────────────────────────────
+
+import { readFileSync } from "node:fs";
+
+interface PoolPlayer {
+  externalKey: string; fullName: string; birthYear: number; age: number;
+  primaryPosition: string; tier: string; overall: number;
+  attributes: Record<string, number>; potentialMin: number; potentialMax: number;
+  traits: string[]; baseValue: number; baseWage: number;
+}
+
+export interface SeasonFixture {
+  leagueId: string;
+  clubIds: string[];
+}
+
+/**
+ * Legt eine spielfähige Liga an: Vereine mit je 16 echten Spielern aus
+ * data/players.json, positionsgerecht verteilt.
+ */
+export async function seedLeague(
+  pool: Pool, clubCount: number, squadSize = 16,
+): Promise<SeasonFixture> {
+  const raw = JSON.parse(readFileSync("data/players.json", "utf8")) as { players: PoolPlayer[] };
+  const byPosition = new Map<string, PoolPlayer[]>();
+  for (const player of raw.players) {
+    const list = byPosition.get(player.primaryPosition) ?? [];
+    list.push(player);
+    byPosition.set(player.primaryPosition, list);
+  }
+
+  const league = await pool.query<{ id: string }>(
+    `INSERT INTO league (name, invite_code, rng_salt, season_start)
+     VALUES ('E2E', $1, 42, '2026-05-04') RETURNING id`,
+    [`e2e-${Math.random().toString(36).slice(2, 10)}`]);
+  const leagueId = league.rows[0]!.id;
+
+  // Jeder Verein braucht dieselbe Positionsmischung, sonst kann die
+  // Auto-Aufstellung keine sinnvolle Elf bilden
+  const NEEDS = ["GK", "GK", "CB", "CB", "CB", "LB", "RB", "DM",
+                 "CM", "CM", "AM", "LW", "RW", "ST", "ST", "ST"].slice(0, squadSize);
+
+  const clubIds: string[] = [];
+  for (let i = 0; i < clubCount; i++) {
+    const user = await pool.query<{ id: string }>(
+      `INSERT INTO app_user (email, display_name) VALUES ($1, $2) RETURNING id`,
+      [`e2e${i}-${Math.random().toString(36).slice(2, 8)}@test.local`, `Manager ${i}`]);
+    const club = await pool.query<{ id: string }>(
+      `INSERT INTO club (league_id, user_id, name, short_name, cash, fan_mood)
+       VALUES ($1, $2, $3, $4, 400000000, 60) RETURNING id`,
+      [leagueId, user.rows[0]!.id, `Verein ${i}`, `V${i}`]);
+    const clubId = club.rows[0]!.id;
+    clubIds.push(clubId);
+
+    for (const position of NEEDS) {
+      const candidates = byPosition.get(position);
+      const player = candidates?.shift();
+      if (!player) throw new Error(`Pool erschöpft auf Position ${position}`);
+
+      const template = await pool.query<{ id: string }>(
+        `INSERT INTO player_template
+           (external_key, full_name, birth_year, primary_position, tier,
+            attributes, potential_min, potential_max, base_value, base_wage)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+         ON CONFLICT (external_key) DO UPDATE SET full_name = EXCLUDED.full_name
+         RETURNING id`,
+        [player.externalKey, player.fullName, player.birthYear, player.primaryPosition,
+         player.tier, player.attributes, player.potentialMin, player.potentialMax,
+         player.baseValue, player.baseWage]);
+
+      await pool.query(
+        `INSERT INTO player_instance
+           (league_id, template_id, club_id, primary_position, attributes, traits,
+            age, overall, true_potential, market_value, wage_per_matchday)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+        [leagueId, template.rows[0]!.id, clubId, player.primaryPosition,
+         player.attributes, player.traits, player.age, player.overall,
+         player.potentialMax, player.baseValue, player.baseWage]);
+    }
+  }
+
+  return { leagueId, clubIds };
+}

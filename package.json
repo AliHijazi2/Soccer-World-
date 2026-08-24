@@ -13,7 +13,8 @@
     "players": "node --experimental-strip-types --no-warnings tools/player-data/src/build.ts",
     "balance:pool": "node --experimental-strip-types --no-warnings tools/balance-sim/src/pool-report.ts",
     "test:db": "node --experimental-strip-types --no-warnings --test packages/server/test/*.test.ts",
-    "test:all": "npm run test && npm run test:db"
+    "test:all": "npm run test && npm run test:db",
+    "season:demo": "node --experimental-strip-types --no-warnings tools/season-demo/src/index.ts"
   },
   "devDependencies": {
     "@types/node": "^22.20.1",

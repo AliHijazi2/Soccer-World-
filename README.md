@@ -34,6 +34,7 @@ npm test        # 13 Tests: Determinismus, Ratings, Ticker-Konsistenz
 npm run balance      # Zielkurve aus GDD §8.2, mit gleichmäßigen Testkadern
 npm run balance:pool # dieselbe Prüfung mit echten Kadern, plus Draft-Test
 npm run players      # erzeugt data/players.json aus data/roster.json
+npm run season:demo  # spielt eine komplette Saison durch und druckt die Tabelle
 npm run typecheck
 ```
 
@@ -61,6 +62,13 @@ Jede Testdatei legt sich ihre eigene Datenbank an.
 | Datenbankschema (Marktausschnitt) | ✅ |
 | Auktion, Escrow, Proxy-Gebote | ✅ Nebenläufigkeit geprüft |
 | Auktionsabschluss und Buchhaltung | ✅ |
+| Spielplan und Zeitplanung | ✅ inkl. Zeitumstellung |
+| Scheduler mit Jobkette | ✅ idempotent |
+| Vollständiger Saisondurchlauf | ✅ ohne Oberfläche |
+| Fans, Sponsoren, TV-Gelder, Ereignisse | ⬜ |
 | Scheduler | ⬜ |
 | Wirtschaft, Fans, Ereignisse | ⬜ |
 | Client | ⬜ |
+
+Eine komplette Saison mit 4 Vereinen läuft in unter einer Sekunde durch:
+42 Partien, 21 Jobs, rund 730 Ticker-Ereignisse.
