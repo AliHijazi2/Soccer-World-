@@ -54,6 +54,12 @@ export const FEED_TEMPLATES: TemplateSet = {
     "{fee:money} für {player} — kassiert hat ein Verein, den hier niemand kennt.",
     "Ihr habt {player} kampflos ziehen lassen. {fee:money} gingen ins Ausland.",
   ],
+  "lobby.free_agents_assigned": [
+    "{club} hat die Aufbauphase verschlafen: {count:count} Spieler zwangszugeteilt, zu 120 % Gehalt.",
+    "Notprogramm bei {club} — {count:count} Freie Agenten aufgefüllt. Billig war das nicht.",
+    "{club} geht mit {count:count} zugeteilten Spielern in die Saison. Ausgesucht hat die niemand.",
+    "Wer nicht bietet, bekommt zugeteilt: {count:count} Spieler für {club}, Aufschlag inklusive.",
+  ],
   "transfer.bidding_war": [
     "Bieterkrieg um {player}: {bidders} Vereine, Endstand {fee:money}.",
     "{bidders} Interessenten, ein Gewinner: {club} bekommt {player} für {fee:money}.",
@@ -202,6 +208,7 @@ export const FEED_PLACEHOLDERS: Record<string, readonly string[]> = {
   "transfer.bargain": ["club", "player", "fee", "pct"],
   "transfer.completed": ["club", "player", "fee"],
   "transfer.bidding_war": ["club", "player", "fee", "pct", "bidders"],
+  "lobby.free_agents_assigned": ["club", "count"],
   "transfer.to_abroad": ["player", "fee", "club", "value", "pct"],
   "club.broke": ["club", "cash"],
   "club.wage_pressure": ["club", "wages", "pct"],

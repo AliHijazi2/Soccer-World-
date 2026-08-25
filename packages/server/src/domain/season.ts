@@ -19,11 +19,13 @@ import {
 import { inTransaction, type Pool, type PoolClient } from "../db/pool.ts";
 import { enqueue, type Job, type JobHandler } from "../scheduler/runner.ts";
 import { deliverEvents, resolveExpired, resolveOpen } from "./events.ts";
+import { assignFreeAgents } from "./lobby.ts";
 import { drawActivePool, ensureBotClub, refreshMarket } from "./market.ts";
 import { runMatchday } from "./matchday.ts";
 import { settleAuction } from "./auction.ts";
 
 export const JOB = {
+  START_SEASON: "start_season",
   RUN_MATCHDAY: "run_matchday",
   CLOSE_AUCTION: "close_auction",
   DELIVER_EVENTS: "deliver_events",
@@ -386,7 +388,42 @@ const closeAuctionHandler: JobHandler = async (job: Job, pool: Pool) => {
   }
 };
 
+/**
+ * Ende der Aufbauphase (GDD §2.4).
+ *
+ * Die Liga startet nach Fristablauf, ob die Kader fertig sind oder nicht. Wer
+ * zu wenige Spieler hat, bekommt Freie Agenten zugeteilt — sonst scheitert
+ * sein erster Spieltag, und weil die Spieltage eine Kette bilden, stünde die
+ * Liga für alle still. Ein einzelner Trödler darf den Abend nicht kippen.
+ */
+async function startSeasonHandler(job: Job, pool: Pool): Promise<void> {
+  const leagueId = job.leagueId;
+  if (!leagueId) throw new Error("start_season ohne Liga");
+  const league = await pool.query<{ status: string }>(
+    "SELECT status FROM league WHERE id = $1", [leagueId]);
+  if (league.rows[0]?.status !== "building") return;  // schon gestartet
+
+  const filled = await inTransaction(pool, (client) =>
+    assignFreeAgents(client, leagueId));
+  for (const { clubId, assigned } of filled) {
+    const club = await pool.query<{ name: string }>(
+      "SELECT name FROM club WHERE id = $1", [clubId]);
+    await pool.query(
+      `INSERT INTO feed_item
+         (league_id, subject_club_id, season, matchday, template_key, payload, importance)
+       VALUES ($1, $2, 1, 0, 'lobby.free_agents_assigned', $3, 2)`,
+      [leagueId, clubId,
+       JSON.stringify({ club: club.rows[0]?.name ?? "Ein Verein", count: assigned })]);
+  }
+
+  const start = job.runAt;
+  await startSeason(pool, leagueId, {
+    year: start.getFullYear(), month: start.getMonth() + 1, day: start.getDate(),
+  });
+}
+
 export const handlers: Record<string, JobHandler> = {
+  [JOB.START_SEASON]: startSeasonHandler,
   [JOB.RUN_MATCHDAY]: runMatchdayHandler,
   [JOB.CLOSE_AUCTION]: closeAuctionHandler,
   [JOB.DELIVER_EVENTS]: deliverEventsHandler,

@@ -10,8 +10,10 @@
 import { readFileSync } from "node:fs";
 
 import { createPool, migrate } from "../../../packages/server/src/db/pool.ts";
-import { startSeason } from "../../../packages/server/src/domain/season.ts";
+import { JOB } from "../../../packages/server/src/domain/season.ts";
+import { openInitialMarket } from "../../../packages/server/src/domain/lobby.ts";
 import { drawActivePool } from "../../../packages/server/src/domain/market.ts";
+import { enqueue } from "../../../packages/server/src/scheduler/runner.ts";
 
 interface PoolPlayer {
   externalKey: string; fullName: string; birthYear: number; age: number;
@@ -90,10 +92,26 @@ try {
   await drawActivePool(client, leagueId, clubs.length);
 } finally { client.release(); }
 
-const today = new Date();
-await startSeason(pool, leagueId, {
-  year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate(),
+// Die Aufbauphase (GDD §2.4): Der ganze Pool liegt sofort auf dem Tisch, die
+// Liga startet nach Ablauf der Frist von selbst. Die Saison hier direkt zu
+// starten wäre falsch — der erste Spieltag käme, bevor irgendjemand elf
+// Spieler hat.
+const now = new Date();
+const buildHours = Number(process.env.BUILD_HOURS ?? 24);
+const marketCloses = new Date(now.getTime() + buildHours * 3600 * 1000);
+
+const opened = await openInitialMarket(pool, leagueId, marketCloses, now);
+
+await enqueue(pool, {
+  leagueId, type: JOB.START_SEASON,
+  payload: {},
+  // Nach dem letzten Auktionsschluss, damit die gekauften Spieler im Kader
+  // stehen, bevor gezählt wird
+  runAt: new Date(marketCloses.getTime() + (opened + 5) * 60 * 1000),
+  idempotencyKey: `season_start:${leagueId}:s1`,
 });
+
+const zeit = (d: Date) => d.toLocaleString("de-DE", { dateStyle: "short", timeStyle: "short" });
 
 console.log(`\n  Liga "${leagueName}" angelegt.\n`);
 console.log(`  Liga-Kennung   ${leagueId}\n`);
@@ -101,7 +119,12 @@ console.log("  Diese Kennungen an die Freunde geben:\n");
 for (const club of clubs) {
   console.log(`    ${club.name.padEnd(16)} ${club.id}`);
 }
-console.log(`\n  Spieltage: täglich 17:00, 20:00 und 22:00 Uhr.`);
-console.log(`  Marktabschluss: täglich zwischen 16:00 und 17:00 Uhr.\n`);
+console.log(`\n  Aufbauphase läuft. ${opened} Spieler sind ausgeschrieben.`);
+console.log(`  Markt schließt:  ${zeit(marketCloses)}`);
+console.log(`  Liga startet:    danach automatisch, erster Anstoß am Folgetag.`);
+console.log(`\n  Pflichtkader: 14 Spieler, mindestens 1 Torwart und 3 Verteidiger.`);
+console.log(`  Wer bis dahin zu wenige hat, bekommt die schlechtesten freien`);
+console.log(`  Spieler zugeteilt — zu 120 % Gehalt.`);
+console.log(`\n  Spieltage danach: täglich 17:00, 20:00 und 22:00 Uhr.\n`);
 
 await pool.end();
