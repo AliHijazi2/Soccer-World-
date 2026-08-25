@@ -69,10 +69,11 @@ Jede Testdatei legt sich ihre eigene Datenbank an.
 | Einnahmen, Sponsoren, Prämien, Betriebskosten | ✅ kalibriert |
 | Boulevard-Feed mit 140 Text-Templates | ✅ |
 | Ereignissystem mit 20 Ereignissen | ✅ 83 % mit Entscheidung |
-| Transfermarkt-Anbindung im Spielbetrieb | ⬜ |
+| Transfermarkt im laufenden Spielbetrieb | ✅ |
+| Bot-Verein bei ungerader Spielerzahl | ✅ |
+| Client | ⬜ |
 | Scheduler | ⬜ |
 | Wirtschaft, Fans, Ereignisse | ⬜ |
-| Client | ⬜ |
 
 Eine komplette Saison mit 4 Vereinen läuft in unter einer Sekunde durch:
 42 Partien, 21 Jobs, rund 730 Ticker-Ereignisse. `npm run season:demo` druckt

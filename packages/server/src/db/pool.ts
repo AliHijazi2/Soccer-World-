@@ -10,8 +10,20 @@ pg.types.setTypeParser(pg.types.builtins.NUMERIC, (value) => Number(value));
 export type Pool = pg.Pool;
 export type PoolClient = pg.PoolClient;
 
-export function createPool(connectionString: string): Pool {
-  return new pg.Pool({ connectionString, max: 20 });
+/**
+ * Verbindungspool.
+ *
+ * Acht gleichzeitige Nutzer brauchen keine zwanzig Verbindungen. Die
+ * Voreinstellung ist trotzdem großzügig genug für den Marktabschluss, den
+ * einzigen Moment mit echter Gleichzeitigkeit.
+ *
+ * `max` ist parametrisierbar, weil `node --test` jede Testdatei in einem
+ * eigenen Prozess startet: Sieben Dateien mit je zwanzig Verbindungen sprengen
+ * das Standardlimit von PostgreSQL, und die Tests werden dann an beliebigen
+ * Stellen sporadisch rot — ohne dass an der geprüften Logik etwas falsch wäre.
+ */
+export function createPool(connectionString: string, max = 10): Pool {
+  return new pg.Pool({ connectionString, max });
 }
 
 const MIGRATION_DIR = "packages/server/src/db/migrations";

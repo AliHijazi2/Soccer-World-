@@ -130,7 +130,11 @@ test("Torschützen und Vorlagengeber erscheinen mit Namen", async () => {
     const expected = match.rows[0]!;
 
     const lines = await readTicker(client, expected.id);
-    const goal = lines.find((line) => line.text.includes(expected.player));
+    // Nach der Torzeile suchen, nicht nach der ersten Zeile mit dem Namen:
+    // Ein Spieler taucht oft schon vorher bei einem Fehlschuss auf, und dort
+    // steht naturgemäß kein Vorlagengeber.
+    const goal = lines.find(
+      (line) => line.type === "goal" && line.text.includes(expected.player));
     // Gegen die echten Namen prüfen statt gegen ein Muster: Der Pool enthält
     // Namen wie "İlkay Gündoğan" und "Dušan Vlahović", an denen jede
     // handgeschriebene Regex früher oder später scheitert.

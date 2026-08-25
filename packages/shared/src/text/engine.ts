@@ -57,6 +57,9 @@ const FORMATTERS: Record<string, (value: number) => string> = {
   minute: (value) => `${Math.round(value)}.`,
   one: (value) => value.toFixed(1).replace(".", ","),
   ordinal: formatOrdinal,
+  // Für Sätze, in denen eine Menge gemeint ist und nicht eine Richtung:
+  // "1.800 Anhänger haben den Rücken gekehrt", nicht "-1.800 Anhänger"
+  count: (value) => formatNumber(Math.abs(value)),
 };
 
 export interface RenderOptions {

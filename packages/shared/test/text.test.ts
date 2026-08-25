@@ -136,7 +136,8 @@ test("Eine Überraschung braucht einen echten Erwartungsunterschied", () => {
 const club: ClubSnapshot = {
   clubId: "c1", name: "Test FC", isBot: false, rank: 2, points: 20, played: 14,
   expectedPpg: 1.4, fanMood: 65, fanCount: 350_000, cash: 100_000_000,
-  winStreak: 0, lossStreak: 0, tiredPlayers: 2, injuredPlayers: 1, squadSize: 16,
+  winStreak: 0, lossStreak: 0, tiredPlayers: 2, injuredPlayers: 1,
+  squadSize: 16, squadValue: 400_000_000,
 };
 
 test("Erschöpfung wird am Kaderanteil gemessen, nicht an einer festen Zahl", () => {

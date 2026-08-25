@@ -118,7 +118,8 @@ test("Die Buchhaltung stimmt nach der kompletten Saison", async () => {
   const clubs = await pool.query<{ id: string; cash: number; booked: number }>(
     `SELECT c.id, c.cash, COALESCE(SUM(l.amount), 0) AS booked
        FROM club c LEFT JOIN ledger_entry l ON l.club_id = c.id
-      WHERE c.league_id = $1 GROUP BY c.id, c.cash`, [fx.leagueId]);
+      WHERE c.league_id = $1 AND NOT c.is_outside_world
+      GROUP BY c.id, c.cash`, [fx.leagueId]);
 
   for (const club of clubs.rows) {
     assert.equal(club.cash, 400_000_000 + club.booked,

@@ -23,7 +23,7 @@ interface ClubRow {
   expected_ppg: number; fan_mood: number; fan_count: number; cash: number;
   points: number; played: number;
   win_streak: number; loss_streak: number;
-  tired: number; injured: number; squad_size: number;
+  tired: number; injured: number; squad_size: number; squad_value: number;
 }
 
 async function loadSnapshots(
@@ -38,10 +38,12 @@ async function loadSnapshots(
               WHERE p.club_id = c.id AND p.fitness < 70) AS tired,
             (SELECT COUNT(*)::int FROM player_instance p
               WHERE p.club_id = c.id AND p.injured_until_matchday IS NOT NULL) AS injured,
-            (SELECT COUNT(*)::int FROM player_instance p WHERE p.club_id = c.id) AS squad_size
+            (SELECT COUNT(*)::int FROM player_instance p WHERE p.club_id = c.id) AS squad_size,
+            (SELECT COALESCE(SUM(p.market_value), 0)::bigint FROM player_instance p
+              WHERE p.club_id = c.id) AS squad_value
        FROM club c
        LEFT JOIN standing s ON s.club_id = c.id AND s.season = $2
-      WHERE c.league_id = $1`,
+      WHERE c.league_id = $1 AND NOT c.is_outside_world`,
     [leagueId, season],
   );
 
@@ -55,7 +57,8 @@ async function loadSnapshots(
     expectedPpg: row.expected_ppg, fanMood: row.fan_mood,
     fanCount: row.fan_count, cash: row.cash,
     winStreak: row.win_streak, lossStreak: row.loss_streak,
-    tiredPlayers: row.tired, injuredPlayers: row.injured, squadSize: row.squad_size,
+    tiredPlayers: row.tired, injuredPlayers: row.injured,
+    squadSize: row.squad_size, squadValue: row.squad_value,
   }));
 }
 

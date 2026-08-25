@@ -19,6 +19,7 @@ import {
 import { inTransaction, type Pool, type PoolClient } from "../db/pool.ts";
 import { enqueue, type Job, type JobHandler } from "../scheduler/runner.ts";
 import { deliverEvents, resolveExpired, resolveOpen } from "./events.ts";
+import { drawActivePool, ensureBotClub, refreshMarket } from "./market.ts";
 import { runMatchday } from "./matchday.ts";
 import { settleAuction } from "./auction.ts";
 
@@ -26,6 +27,7 @@ export const JOB = {
   RUN_MATCHDAY: "run_matchday",
   CLOSE_AUCTION: "close_auction",
   DELIVER_EVENTS: "deliver_events",
+  REFRESH_MARKET: "refresh_market",
 } as const;
 
 export function matchdayKey(leagueId: string, season: number, matchday: number): string {
@@ -58,8 +60,14 @@ export async function startSeason(
     if (!league) throw new Error(`Liga ${leagueId} nicht gefunden`);
     const season = league.current_season;
 
+    // Bei ungerader Spielerzahl füllt ein Bot-Verein auf (GDD §9.5) — sonst
+    // scheitert die Spielplanerzeugung, und zwar zu Recht
+    await ensureBotClub(client, leagueId);
+
+    // Die Außenwelt ist ein Marktakteur und spielt nicht mit (GDD §5.4)
     const clubsResult = await client.query<{ id: string }>(
-      "SELECT id FROM club WHERE league_id = $1 ORDER BY created_at, id", [leagueId]);
+      `SELECT id FROM club WHERE league_id = $1 AND NOT is_outside_world
+        ORDER BY created_at, id`, [leagueId]);
     const clubs = clubsResult.rows.map((row) => row.id);
 
     const existing = await client.query<{ n: number }>(
@@ -75,6 +83,15 @@ export async function startSeason(
     const kickoffByMatchday = new Map(kickoffs.map((k) => [k.matchday, k.kickoffAt]));
 
     await setExpectations(client, leagueId, season, clubs);
+
+    // Aktiven Marktpool ziehen, falls noch freie Spieler im Bestand sind.
+    // Der Rest bleibt Reserve und rückt zwischen den Saisons nach (GDD §5.2).
+    const free = await client.query<{ n: number }>(
+      "SELECT COUNT(*)::int AS n FROM player_instance WHERE league_id = $1 AND club_id IS NULL",
+      [leagueId]);
+    if ((free.rows[0]?.n ?? 0) > 0) {
+      await drawActivePool(client, leagueId, clubs.length);
+    }
 
     for (const fixture of fixtures) {
       const home = clubs[fixture.homeIndex]!;
@@ -125,6 +142,15 @@ async function scheduleMarketClose(
     payload: { season, matchday },
     runAt: new Date(closeAt.getTime() - 8 * 3600 * 1000),
     idempotencyKey: `events:${leagueId}:s${season}:md${matchday}`,
+  });
+
+  // Neue Auktionen ebenfalls morgens, damit sie bis zum Abschluss Zeit haben,
+  // sich zu füllen. Sie enden im selben Fenster wie alle anderen.
+  await enqueue(client, {
+    leagueId, type: JOB.REFRESH_MARKET,
+    payload: { season, matchday, closesAt: closeAt.toISOString() },
+    runAt: new Date(closeAt.getTime() - 9 * 3600 * 1000),
+    idempotencyKey: `market:${leagueId}:s${season}:md${matchday}`,
   });
   const auctions = await client.query<{ id: string }>(
     `SELECT id FROM auction WHERE league_id = $1 AND status = 'open'`, [leagueId]);
@@ -317,9 +343,31 @@ const deliverEventsHandler: JobHandler = async (job: Job, pool: Pool) => {
     Number(job.payload.season), Number(job.payload.matchday));
 };
 
+/** Legt neue Auktionen an und lässt die Außenwelt mitbieten (GDD §5.4). */
+const refreshMarketHandler: JobHandler = async (job: Job, pool: Pool) => {
+  if (!job.leagueId) throw new Error("refresh_market ohne Liga");
+  const closesAt = new Date(String(job.payload.closesAt));
+  await refreshMarket(pool, job.leagueId, Number(job.payload.matchday), closesAt, job.runAt);
+
+  // Die neuen Auktionen brauchen ihre eigenen Abschluss-Jobs, gestaffelt
+  const auctions = await pool.query<{ id: string }>(
+    `SELECT id FROM auction WHERE league_id = $1 AND status = 'open'
+      ORDER BY opens_at`, [job.leagueId]);
+  for (const [index, auction] of auctions.rows.entries()) {
+    await enqueue(pool, {
+      leagueId: job.leagueId, type: JOB.CLOSE_AUCTION,
+      payload: { auctionId: auction.id },
+      runAt: new Date(closesAt.getTime() + index * 2 * 60 * 1000),
+      idempotencyKey: `market_close:${auction.id}:md${job.payload.matchday}`,
+    });
+  }
+};
+
 const closeAuctionHandler: JobHandler = async (job: Job, pool: Pool) => {
   const auctionId = String(job.payload.auctionId);
-  const result = await settleAuction(pool, auctionId);
+  // Auch hier die Spielzeit, nicht die Systemuhr: Sonst schließt ein
+  // nachgeholter Job Auktionen, die zu ihrer Zeit noch liefen.
+  const result = await settleAuction(pool, auctionId, job.runAt);
 
   // Ein Soft-Close kann das Ende verschoben haben: dann später erneut versuchen,
   // statt die Auktion vorzeitig zu schließen (Architektur §6).
@@ -342,4 +390,5 @@ export const handlers: Record<string, JobHandler> = {
   [JOB.RUN_MATCHDAY]: runMatchdayHandler,
   [JOB.CLOSE_AUCTION]: closeAuctionHandler,
   [JOB.DELIVER_EVENTS]: deliverEventsHandler,
+  [JOB.REFRESH_MARKET]: refreshMarketHandler,
 };

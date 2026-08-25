@@ -118,7 +118,8 @@ export async function deliverEvents(
 
   return inTransaction(pool, async (client) => {
     const clubs = await client.query<{ id: string; name: string; is_bot: boolean }>(
-      "SELECT id, name, is_bot FROM club WHERE league_id = $1 ORDER BY id", [leagueId]);
+      `SELECT id, name, is_bot FROM club WHERE league_id = $1 AND NOT is_outside_world
+        ORDER BY id`, [leagueId]);
     const report: DeliveryReport = { delivered: 0, linked: 0 };
     const humanClubs = clubs.rows.filter((club) => !club.is_bot);
 

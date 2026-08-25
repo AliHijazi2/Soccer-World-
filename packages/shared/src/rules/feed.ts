@@ -22,6 +22,7 @@ export interface ClubSnapshot {
   tiredPlayers: number;
   injuredPlayers: number;
   squadSize: number;
+  squadValue: number;
 }
 
 export interface MatchSnapshot {
@@ -172,7 +173,7 @@ export function clubFeed(club: ClubSnapshot, matchday: number): FeedCandidate[] 
     const delta = actual - club.expectedPpg;
     if (delta <= -THRESHOLDS.EXPECTATION_GAP) {
       candidates.push({ ...base, templateKey: "expectation.missed",
-        payload: { club: club.name, rank: club.rank, delta, fee: 0 },
+        payload: { club: club.name, rank: club.rank, delta, fee: club.squadValue },
         importance: 3, cooldownMatchdays: 5 });
     } else if (delta >= THRESHOLDS.EXPECTATION_GAP) {
       candidates.push({ ...base, templateKey: "expectation.exceeded",

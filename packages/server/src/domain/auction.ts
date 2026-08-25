@@ -226,23 +226,100 @@ async function completeTransfer(
     await client.query("UPDATE club SET cash = cash + $2 WHERE id = $1", [clubId, amount]);
   };
 
-  await book(buyerClubId, "transfer_in", -fee, "Ablöse");
+  // Die Außenwelt ist ein Marktakteur, kein Verein: Gewinnt sie, verlässt der
+  // Spieler die Liga, statt in einem Bot-Kader zu landen (GDD §5.4).
+  // Wer nicht mitbietet, verliert ihn ans Ausland — das ist der Druck, den
+  // die Außenwelt erzeugen soll.
+  const outside = await client.query<{ is_outside_world: boolean }>(
+    "SELECT is_outside_world FROM club WHERE id = $1", [buyerClubId]);
+  const toOutsideWorld = outside.rows[0]?.is_outside_world ?? false;
+
+  if (!toOutsideWorld) {
+    await book(buyerClubId, "transfer_in", -fee, "Ablöse");
+  }
   if (auction.seller_club_id) {
     await book(auction.seller_club_id, "transfer_out", fee - tax, "Ablöse abzüglich Steuer");
   }
 
   await client.query(
-    "UPDATE player_instance SET club_id = $2 WHERE id = $1",
-    [auction.player_instance_id, buyerClubId]);
+    toOutsideWorld
+      ? `UPDATE player_instance SET club_id = NULL, pool_state = 'reserve' WHERE id = $1`
+      : `UPDATE player_instance SET club_id = $2 WHERE id = $1`,
+    toOutsideWorld
+      ? [auction.player_instance_id]
+      : [auction.player_instance_id, buyerClubId]);
 
   await client.query(
     `INSERT INTO transfer
        (league_id, player_instance_id, from_club_id, to_club_id, fee, tax, channel, season, matchday)
      VALUES ($1, $2, $3, $4, $5, $6, 'auction', 1, 0)`,
     [auction.league_id, auction.player_instance_id, auction.seller_club_id,
-     buyerClubId, fee, tax]);
+     toOutsideWorld ? null : buyerClubId, fee, tax]);
 
   await client.query(
     `UPDATE auction SET status = 'completed', settled_at = $2 WHERE id = $1`,
     [auction.id, now]);
+
+  await reportTransfer(client, auction, buyerClubId, fee, toOutsideWorld);
+}
+
+/**
+ * Meldet den Transfer im Boulevard-Feed.
+ *
+ * Ein Transfer ohne öffentliche Reaktion ist eine Buchung. Erst die Meldung
+ * macht daraus einen Vorgang, über den geredet wird — und der Panikkauf eines
+ * Freundes ist der Kern der Schadenfreude, auf die das Design zielt (§16.1).
+ */
+async function reportTransfer(
+  client: PoolClient,
+  auction: AuctionRow & { player_instance_id: string },
+  buyerClubId: string,
+  fee: number,
+  toOutsideWorld: boolean,
+): Promise<void> {
+  const info = await client.query<{
+    player: string; value: number; buyer: string; season: number; matchday: number;
+  }>(
+    `SELECT t.full_name AS player, p.market_value AS value, c.name AS buyer,
+            l.current_season AS season, l.current_matchday AS matchday
+       FROM player_instance p
+       JOIN player_template t ON t.id = p.template_id
+       JOIN club c ON c.id = $2
+       JOIN league l ON l.id = $3
+      WHERE p.id = $1`,
+    [auction.player_instance_id, buyerClubId, auction.league_id]);
+  const row = info.rows[0];
+  if (!row) return;
+
+  const bidders = await client.query<{ n: number }>(
+    "SELECT COUNT(DISTINCT club_id)::int AS n FROM bid WHERE auction_id = $1", [auction.id]);
+  const bidderCount = bidders.rows[0]?.n ?? 1;
+
+  const ratio = row.value > 0 ? fee / row.value : 1;
+  const percent = Math.round(Math.abs(ratio - 1) * 100);
+
+  let templateKey = "transfer.completed";
+  let importance = 1;
+  if (toOutsideWorld) {
+    templateKey = "transfer.to_abroad";
+    importance = 2;
+  } else if (bidderCount >= 3) {
+    templateKey = "transfer.bidding_war";
+    importance = 2;
+  } else if (ratio >= 1.4) {
+    templateKey = "transfer.overpaid";
+    importance = 3;
+  } else if (ratio <= 0.7) {
+    templateKey = "transfer.bargain";
+    importance = 2;
+  }
+
+  await client.query(
+    `INSERT INTO feed_item
+       (league_id, season, matchday, template_key, payload, subject_club_id, importance)
+     VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+    [auction.league_id, row.season, Math.max(row.matchday, 1), templateKey,
+     { club: row.buyer, player: row.player, fee, value: row.value,
+       pct: percent, bidders: bidderCount },
+     toOutsideWorld ? null : buyerClubId, importance]);
 }

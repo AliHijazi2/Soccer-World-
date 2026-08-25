@@ -329,7 +329,7 @@ async function payRecurring(
     stadium_capacity: number; stadium_condition: number;
   }>(
     `SELECT id, fan_count, fan_mood, stadium_capacity, stadium_condition
-       FROM club WHERE league_id = $1`, [leagueId]);
+       FROM club WHERE league_id = $1 AND NOT is_outside_world`, [leagueId]);
 
   const tvBase = tvBasePerMatchday();
   for (const club of rows) {
@@ -358,7 +358,7 @@ async function payRecurring(
   // Das Stadion verfällt, ob man hinsieht oder nicht (GDD §12.4)
   await client.query(
     `UPDATE club SET stadium_condition = GREATEST(0, stadium_condition - 0.6)
-      WHERE league_id = $1`, [leagueId]);
+      WHERE league_id = $1 AND NOT is_outside_world`, [leagueId]);
 }
 
 async function updateStanding(
@@ -384,9 +384,10 @@ async function payWages(
   client: PoolClient, leagueId: string, season: number, matchday: number,
 ): Promise<number> {
   const { rows } = await client.query<{ club_id: string; total: number }>(
-    `SELECT club_id, SUM(wage_per_matchday)::bigint AS total
-       FROM player_instance WHERE league_id = $1 AND club_id IS NOT NULL
-      GROUP BY club_id`, [leagueId]);
+    `SELECT p.club_id, SUM(p.wage_per_matchday)::bigint AS total
+       FROM player_instance p JOIN club c ON c.id = p.club_id
+      WHERE p.league_id = $1 AND NOT c.is_outside_world
+      GROUP BY p.club_id`, [leagueId]);
   let paid = 0;
   for (const row of rows) {
     await book(client, leagueId, row.club_id, season, matchday,

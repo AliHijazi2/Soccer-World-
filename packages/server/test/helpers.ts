@@ -19,7 +19,7 @@ function urlFor(database: string): string {
  * am Code etwas falsch wäre.
  */
 export async function freshPool(database: string): Promise<Pool> {
-  const admin = createPool(BASE_URL);
+  const admin = createPool(BASE_URL, 2);
   try {
     await admin.query(`CREATE DATABASE ${database}`);
   } catch (error) {
@@ -29,7 +29,7 @@ export async function freshPool(database: string): Promise<Pool> {
     await admin.end();
   }
 
-  const pool = createPool(urlFor(database));
+  const pool = createPool(urlFor(database), 6);
   await migrate(pool);
   await pool.query(`
     TRUNCATE transfer, ledger_entry, escrow_hold, bid, auction,
@@ -253,4 +253,48 @@ export async function seedLeague(
   }
 
   return { leagueId, clubIds };
+}
+
+/**
+ * Legt eine Liga an, deren Spieler NICHT alle vergeben sind.
+ *
+ * Jeder Verein bekommt nur einen Mindestkader, der Rest des Bestands bleibt
+ * frei und landet im Auktionsmarkt. Damit lässt sich prüfen, ob der Markt im
+ * laufenden Spielbetrieb wirklich lebt.
+ */
+export async function seedLeagueWithMarket(
+  pool: Pool, clubCount: number, squadSize = 15,
+): Promise<SeasonFixture> {
+  const fx = await seedLeague(pool, clubCount, squadSize);
+
+  const raw = JSON.parse(readFileSync("data/players.json", "utf8")) as { players: PoolPlayer[] };
+  const taken = new Set(
+    (await pool.query<{ external_key: string }>(
+      `SELECT t.external_key FROM player_instance p
+         JOIN player_template t ON t.id = p.template_id
+        WHERE p.league_id = $1`, [fx.leagueId])).rows.map((row) => row.external_key));
+
+  for (const player of raw.players) {
+    if (taken.has(player.externalKey)) continue;
+    const template = await pool.query<{ id: string }>(
+      `INSERT INTO player_template
+         (external_key, full_name, birth_year, primary_position, tier,
+          attributes, potential_min, potential_max, base_value, base_wage)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+       ON CONFLICT (external_key) DO UPDATE SET full_name = EXCLUDED.full_name
+       RETURNING id`,
+      [player.externalKey, player.fullName, player.birthYear, player.primaryPosition,
+       player.tier, player.attributes, player.potentialMin, player.potentialMax,
+       player.baseValue, player.baseWage]);
+    await pool.query(
+      `INSERT INTO player_instance
+         (league_id, template_id, club_id, primary_position, attributes, traits,
+          age, overall, true_potential, market_value, wage_per_matchday, pool_state)
+       VALUES ($1, $2, NULL, $3, $4, $5, $6, $7, $8, $9, $10, 'active')
+       ON CONFLICT (league_id, template_id) DO NOTHING`,
+      [fx.leagueId, template.rows[0]!.id, player.primaryPosition,
+       player.attributes, player.traits, player.age, player.overall,
+       player.potentialMax, player.baseValue, player.baseWage]);
+  }
+  return fx;
 }

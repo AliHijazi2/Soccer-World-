@@ -48,6 +48,12 @@ export const FEED_TEMPLATES: TemplateSet = {
     "Vollzug: {club} verpflichtet {player}. Ablöse {fee:money}.",
     "{club} und {player} — der Deal steht bei {fee:money}.",
   ],
+  "transfer.to_abroad": [
+    "{player} verlässt die Liga — {fee:money} aus dem Ausland, und niemand von euch hat mitgeboten.",
+    "Weg ist er: {player} wechselt für {fee:money} ins Ausland. Keiner hat geboten.",
+    "{fee:money} für {player} — kassiert hat ein Verein, den hier niemand kennt.",
+    "Ihr habt {player} kampflos ziehen lassen. {fee:money} gingen ins Ausland.",
+  ],
   "transfer.bidding_war": [
     "Bieterkrieg um {player}: {bidders} Vereine, Endstand {fee:money}.",
     "{bidders} Interessenten, ein Gewinner: {club} bekommt {player} für {fee:money}.",
@@ -105,20 +111,20 @@ export const FEED_TEMPLATES: TemplateSet = {
   ],
   "fans.euphoric": [
     "{club} lebt: Stimmung {mood} von 100, das Stadion ist ausverkauft.",
-    "Euphorie bei {club}. {fans} Anhänger und kein freier Platz.",
+    "Euphorie bei {club}. {fans:number} Anhänger und kein freier Platz.",
     "{club} reitet auf einer Welle. Stimmungswert {mood}.",
   ],
   "fans.growth": [
-    "{club} gewinnt {delta} neue Anhänger. Jetzt {fans}.",
-    "Die Fanbasis von {club} wächst auf {fans}.",
-    "Erfolg zieht an: {club} zählt jetzt {fans} Anhänger.",
-    "{delta} Menschen haben sich für {club} entschieden. Bestand: {fans}.",
+    "{club} gewinnt {delta:number} neue Anhänger. Jetzt {fans:number}.",
+    "Die Fanbasis von {club} wächst auf {fans:number}.",
+    "Erfolg zieht an: {club} zählt jetzt {fans:number} Anhänger.",
+    "{delta:number} Menschen haben sich für {club} entschieden. Bestand: {fans:number}.",
   ],
   "fans.exodus": [
-    "{club} verliert Anhänger: noch {fans}. {delta} sind gegangen.",
-    "Bei {club} wandern die Fans ab. Bestand: {fans}.",
-    "{delta} Anhänger haben {club} den Rücken gekehrt.",
-    "Die Fanbasis von {club} schrumpft auf {fans}.",
+    "{club} verliert Anhänger: noch {fans:number}. {delta:count} sind gegangen.",
+    "Bei {club} wandern die Fans ab. Bestand: {fans:number}.",
+    "{delta:count} Anhänger haben {club} den Rücken gekehrt.",
+    "Die Fanbasis von {club} schrumpft auf {fans:number}.",
   ],
 
   // ── Erwartung ───────────────────────────────────────────────────────────
@@ -183,6 +189,7 @@ export const FEED_PLACEHOLDERS: Record<string, readonly string[]> = {
   "transfer.bargain": ["club", "player", "fee", "pct"],
   "transfer.completed": ["club", "player", "fee"],
   "transfer.bidding_war": ["club", "player", "fee", "pct", "bidders"],
+  "transfer.to_abroad": ["player", "fee", "club", "value", "pct"],
   "club.broke": ["club", "cash"],
   "club.wage_pressure": ["club", "wages", "pct"],
   "match.thrashing": ["winner", "loser", "home", "away"],

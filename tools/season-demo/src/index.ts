@@ -12,7 +12,7 @@ import { handlers, startSeason } from "../../../packages/server/src/domain/seaso
 import { drain } from "../../../packages/server/src/scheduler/runner.ts";
 import { readEvents } from "../../../packages/server/src/domain/events.ts";
 import { readFeed, readTicker } from "../../../packages/server/src/domain/feed.ts";
-import { seedLeague } from "../../../packages/server/test/helpers.ts";
+import { seedLeagueWithMarket } from "../../../packages/server/test/helpers.ts";
 
 const CLUBS = Number(process.env.CLUBS ?? 4);
 const url = process.env.DATABASE_URL ??
@@ -36,7 +36,7 @@ const mio = (v: number) => `${(v / 1_000_000).toFixed(1)} Mio`;
 
 console.log(`\nSoccer World — Saisondurchlauf mit ${CLUBS} Vereinen\n`);
 
-const fx = await seedLeague(pool, CLUBS);
+const fx = await seedLeagueWithMarket(pool, CLUBS);
 const started = await startSeason(pool, fx.leagueId, { year: 2026, month: 5, day: 4 });
 console.log(`Spielplan: ${started.matchesCreated} Partien, erster Anstoß ` +
   started.firstKickoff.toLocaleString("de-DE", { timeZone: "Europe/Berlin" }));

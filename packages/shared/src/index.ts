@@ -12,3 +12,8 @@ export * from "./rules/feed.ts";
 export * from "./text/engine.ts";
 export * from "./text/ticker.de.ts";
 export * from "./text/feed.de.ts";
+export * from "./rules/market.ts";
+export * from "./rules/events/types.ts";
+export * from "./rules/events/definitions.ts";
+export * from "./rules/events/selection.ts";
+export * from "./text/events.de.ts";
