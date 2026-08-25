@@ -14,6 +14,7 @@ Zielkurve des Designs kalibriert; alles Weitere steht noch aus.
 | [Game Design Document](docs/GAME_DESIGN.md) | Das vollständige Spielkonzept in 23 Abschnitten: Core Loop, Transfermarkt und Bieterkriege, Simulation, Ereignisse, Wirtschaft, Fans, Anti-Snowball-Balancing, MVP-Zuschnitt und Entscheidungsprotokoll. |
 | [Systemarchitektur](docs/ARCHITECTURE.md) | Technologiewahl, Scheduler, Auktions- und Escrow-Nebenläufigkeit, deterministische Simulation, Sichtbarkeitsregeln, Baureihenfolge. |
 | [Datenmodell](docs/DATA_MODEL.md) | PostgreSQL-Schema mit allen Tabellen, Invarianten und Datenmengen. |
+| [Aufs Handy bekommen](docs/DEPLOYMENT.md) | Wie die App installiert wird, was HTTPS damit zu tun hat und wie ihr eine Liga anlegt. |
 
 ## Die Kurzfassung
 
@@ -33,6 +34,16 @@ Zielkurve des Designs kalibriert; alles Weitere steht noch aus.
 | Kader | Feed |
 |---|---|
 | ![Kader](docs/screens/squad.png) | ![Feed](docs/screens/feed.png) |
+
+## Loslegen
+
+```bash
+docker compose up -d --build
+docker compose exec app npm run new-league -- "Freitagsliga" Ali Marco Lisa Tom
+```
+
+Dann `http://localhost:3000` öffnen. Für die Installation auf dem Handy braucht
+es HTTPS — die Wege dorthin stehen in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## Entwicklung
 

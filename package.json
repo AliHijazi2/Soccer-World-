@@ -18,7 +18,10 @@
     "dev": "vite --config packages/client/vite.config.ts",
     "build:client": "vite build --config packages/client/vite.config.ts",
     "server": "node --experimental-strip-types --no-warnings packages/server/src/api/server.ts",
-    "screenshots": "node --experimental-strip-types --no-warnings tools/screenshots/src/index.ts"
+    "screenshots": "node --experimental-strip-types --no-warnings tools/screenshots/src/index.ts",
+    "icons": "node --experimental-strip-types --no-warnings tools/icons/src/index.ts",
+    "new-league": "node --experimental-strip-types --no-warnings tools/new-league/src/index.ts",
+    "pwa:check": "node --experimental-strip-types --no-warnings tools/screenshots/src/pwa-check.ts"
   },
   "devDependencies": {
     "@types/node": "^22.20.1",

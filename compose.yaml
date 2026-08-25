@@ -1,0 +1,32 @@
+# Zum Ausprobieren und für einen kleinen Server:
+#   docker compose up -d
+#   docker compose exec app npm run new-league -- "Freitagsliga" Ali Marco Lisa
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: soccer
+      POSTGRES_DB: soccerworld
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      DATABASE_URL: postgresql://postgres:soccer@db:5432/soccerworld
+      # Bestimmt, wann Spieltage und Marktabschluss stattfinden
+      TZ: Europe/Berlin
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  pgdata:
