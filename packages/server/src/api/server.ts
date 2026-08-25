@@ -3,6 +3,10 @@
  * (Architektur §1).
  */
 
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+
+import fastifyStatic from "@fastify/static";
 import Fastify, { type FastifyInstance } from "fastify";
 
 import { createPool, migrate, type Pool } from "../db/pool.ts";
@@ -23,6 +27,20 @@ export async function buildServer(
 
   const app = Fastify({ logger: options.logger ?? false });
   registerRoutes(app, pool);
+
+  // Der gebaute Client kommt vom selben Server (Architektur §12): ein Prozess,
+  // ein Port, keine getrennte Auslieferung.
+  const clientDir = resolve("dist/client");
+  if (existsSync(clientDir)) {
+    await app.register(fastifyStatic, { root: clientDir });
+    // Alles, was keine Schnittstelle ist, liefert die App aus
+    app.setNotFoundHandler((request, reply) => {
+      if (request.url.startsWith("/api")) {
+        return reply.code(404).send({ error: "not_found" });
+      }
+      return reply.sendFile("index.html");
+    });
+  }
 
   app.addHook("onClose", async () => { await pool.end(); });
   return { app, pool };

@@ -137,7 +137,7 @@ const club: ClubSnapshot = {
   clubId: "c1", name: "Test FC", isBot: false, rank: 2, points: 20, played: 14,
   expectedPpg: 1.4, fanMood: 65, fanCount: 350_000, cash: 100_000_000,
   winStreak: 0, lossStreak: 0, tiredPlayers: 2, injuredPlayers: 1,
-  squadSize: 16, squadValue: 400_000_000,
+  squadSize: 16, squadValue: 400_000_000, seasonGoal: "mid_table",
 };
 
 test("Erschöpfung wird am Kaderanteil gemessen, nicht an einer festen Zahl", () => {
@@ -186,4 +186,26 @@ test("Wichtige Meldungen verdrängen unwichtige", () => {
   assert.equal(selected.length, 4);
   assert.ok(selected.every((item) => item.importance === 3),
     "Bei Platzmangel müssen die Schlagzeilen gewinnen");
+});
+
+test("Kantersieg-Meldungen nennen die Tore aus Sicht des Siegers", () => {
+  // Die Payload liefert home = Siegertore, away = Verlierertore. Jede Variante
+  // muss dieselbe Lesart verwenden — sonst steht dort "kassiert 0 Gegentore".
+  const payload = { winner: "Sieger", loser: "Verlierer", home: 5, away: 0 };
+  for (const variant of FEED_TEMPLATES["match.thrashing"]!) {
+    const text = render("match.thrashing", payload,
+      { templates: { k: [variant] }, words: FEED_WORDS })
+      .replace("[k]", "");
+    void text;
+  }
+  // Jede Variante einzeln rendern und auf Widerspruch prüfen
+  for (const [index, variant] of FEED_TEMPLATES["match.thrashing"]!.entries()) {
+    const text = render("k", payload, { templates: { k: [variant] }, words: FEED_WORDS });
+    if (text.includes("kassiert")) {
+      assert.ok(text.includes("5 Gegentore"),
+        `Variante ${index} nennt die falschen Gegentore: "${text}"`);
+    }
+    assert.ok(!text.includes("Sieger 0") && !/Verlierer.*\b5:0\b.*schlägt/.test(text),
+      `Variante ${index} verdreht Sieger und Verlierer: "${text}"`);
+  }
 });

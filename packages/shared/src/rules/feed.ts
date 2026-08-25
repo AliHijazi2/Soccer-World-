@@ -23,6 +23,8 @@ export interface ClubSnapshot {
   injuredPlayers: number;
   squadSize: number;
   squadValue: number;
+  /** Bestimmt, welche Formulierung zutrifft (GDD §3) */
+  seasonGoal: "title" | "top_half" | "mid_table" | "avoid_last";
 }
 
 export interface MatchSnapshot {
@@ -172,11 +174,17 @@ export function clubFeed(club: ClubSnapshot, matchday: number): FeedCandidate[] 
     const actual = club.points / club.played;
     const delta = actual - club.expectedPpg;
     if (delta <= -THRESHOLDS.EXPECTATION_GAP) {
-      candidates.push({ ...base, templateKey: "expectation.missed",
+      // Nur ein Titelanwärter darf als solcher angesprochen werden
+      candidates.push({ ...base,
+        templateKey: club.seasonGoal === "title"
+          ? "expectation.missed_title" : "expectation.missed",
         payload: { club: club.name, rank: club.rank, delta, fee: club.squadValue },
         importance: 3, cooldownMatchdays: 5 });
     } else if (delta >= THRESHOLDS.EXPECTATION_GAP) {
-      candidates.push({ ...base, templateKey: "expectation.exceeded",
+      // Und nur der schwächste Kader ist ein Außenseiter
+      candidates.push({ ...base,
+        templateKey: club.seasonGoal === "avoid_last"
+          ? "expectation.exceeded_underdog" : "expectation.exceeded",
         payload: { club: club.name, rank: club.rank, delta },
         importance: 2, cooldownMatchdays: 5 });
     }

@@ -24,6 +24,16 @@ Zielkurve des Designs kalibriert; alles Weitere steht noch aus.
 - **Simulierte Partien** als 90-Sekunden-Ticker, deterministisch und reproduzierbar
 - **Acht Trophäen und zwei Anti-Trophäen** pro Saison, Prestige kumuliert über alle Saisons
 
+## So sieht es aus
+
+| Markt | Posteingang | Tabelle |
+|---|---|---|
+| ![Markt](docs/screens/market.png) | ![Posteingang](docs/screens/inbox.png) | ![Tabelle](docs/screens/table.png) |
+
+| Kader | Feed |
+|---|---|
+| ![Kader](docs/screens/squad.png) | ![Feed](docs/screens/feed.png) |
+
 ## Entwicklung
 
 Voraussetzung: Node 22 oder neuer. Die TypeScript-Dateien laufen direkt, ohne Build-Schritt.
@@ -36,6 +46,20 @@ npm run balance:pool # dieselbe Prüfung mit echten Kadern, plus Draft-Test
 npm run players      # erzeugt data/players.json aus data/roster.json
 npm run season:demo  # spielt eine komplette Saison durch und druckt die Tabelle
 npm run typecheck
+```
+
+Spiel starten — Server und Client laufen auf demselben Port:
+
+```bash
+npm run build:client
+DATABASE_URL="postgresql://…" npm run server   # http://localhost:3000
+```
+
+Für die Entwicklung am Client mit Neuladen:
+
+```bash
+npm run server &   # API auf 3000
+npm run dev        # Vite auf 5173, proxyt /api
 ```
 
 Für die Nebenläufigkeitstests wird eine PostgreSQL-Instanz gebraucht:
@@ -72,7 +96,7 @@ Jede Testdatei legt sich ihre eigene Datenbank an.
 | Transfermarkt im laufenden Spielbetrieb | ✅ |
 | Bot-Verein bei ungerader Spielerzahl | ✅ |
 | HTTP-Schnittstelle mit Sichtbarkeitsregeln | ✅ |
-| Client | ⬜ |
+| Client mit fünf Bereichen | ✅ |
 | Scheduler | ⬜ |
 | Wirtschaft, Fans, Ereignisse | ⬜ |
 

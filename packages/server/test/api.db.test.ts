@@ -144,13 +144,23 @@ test("Nur das eigene Proxy-Maximum ist sichtbar", async () => {
   await startSeason(pool, fx.leagueId, { year: 2026, month: 5, day: 4 });
   await refreshMarket(pool, fx.leagueId, 1, new Date(Date.now() + 3600_000));
 
-  const auctions = await pool.query<{ id: string }>(
-    "SELECT id FROM auction WHERE league_id = $1 AND status = 'open' LIMIT 1", [fx.leagueId]);
+  // Eine Auktion ohne bestehendes Gebot wählen und sicher darüber bieten.
+  // Zwei Fallstricke stecken hier: Ohne feste Sortierung erwischt LIMIT 1 mal
+  // einen Weltklassespieler, dessen Mindestpreis über dem Gebot liegt. Und auf
+  // Auktionen mit laufendem Gebot hat oft schon die Außenwelt geboten, die bis
+  // 90 Prozent des Marktwerts geht — dann wird das Gebot zwar angenommen,
+  // führt aber nicht.
+  const auctions = await pool.query<{ id: string; min_price: number }>(
+    `SELECT id, min_price FROM auction
+      WHERE league_id = $1 AND status = 'open' AND current_bid IS NULL
+      ORDER BY min_price, id LIMIT 1`,
+    [fx.leagueId]);
   if (auctions.rows.length === 0) return;
   const auctionId = auctions.rows[0]!.id;
+  const amount = auctions.rows[0]!.min_price + 1_000_000;
 
   const bidder = fx.clubIds[0]!, rival = fx.clubIds[1]!;
-  const bid = await post(`/api/auctions/${auctionId}/bid`, { maxAmount: 30_000_000 }, bidder);
+  const bid = await post(`/api/auctions/${auctionId}/bid`, { maxAmount: amount }, bidder);
   assert.equal(bid.status, 200);
 
   const asBidder = await get(`/api/leagues/${fx.leagueId}/market`, bidder);
@@ -161,7 +171,7 @@ test("Nur das eigene Proxy-Maximum ist sichtbar", async () => {
   const foreign = (asRival.body.auctions as Record<string, unknown>[])
     .find((row) => row.id === auctionId)!;
 
-  assert.equal(own.yourMaximum, 30_000_000);
+  assert.equal(own.yourMaximum, amount);
   assert.ok(!("yourMaximum" in foreign),
     "Das Maximum eines Gegners zu kennen, entscheidet jeden Bieterkrieg");
 

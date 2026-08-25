@@ -78,7 +78,7 @@ export const FEED_TEMPLATES: TemplateSet = {
     "{winner} zerlegt {loser} mit {home}:{away}.",
     "{home}:{away} — {loser} wird von {winner} vorgeführt.",
     "Deutlicher geht es kaum: {winner} schlägt {loser} {home}:{away}.",
-    "{loser} kassiert {away} Gegentore. {winner} hatte einen guten Abend.",
+    "{loser} kassiert {home} Gegentore. {winner} hatte einen guten Abend.",
   ],
   "match.upset": [
     "{winner} schlägt {loser}. Damit hat niemand gerechnet.",
@@ -128,16 +128,29 @@ export const FEED_TEMPLATES: TemplateSet = {
   ],
 
   // ── Erwartung ───────────────────────────────────────────────────────────
+  // Nach Saisonziel getrennt: Eine Meldung darf nichts behaupten, was auf den
+  // Verein nicht zutrifft. "Der teuerste Kader der Liga" über den Verein mit
+  // der niedrigsten Erwartung macht den ganzen Feed unglaubwürdig.
   "expectation.missed": [
-    "{club} sollte um den Titel spielen und steht auf Platz {rank}. {~doubt_pl}.",
-    "Der teuerste Kader der Liga, Tabellenplatz {rank}: {club} enttäuscht.",
     "{club} bleibt {delta:one} Punkte pro Spiel hinter der Erwartung zurück.",
     "Für {fee:money} Kaderwert erwartet man mehr als Platz {rank}, {club}.",
+    "{club} liegt auf Platz {rank} — weniger, als der Kader hergibt. {~doubt_pl}.",
+    "Platz {rank} für {club}. Das war so nicht geplant.",
+  ],
+  "expectation.missed_title": [
+    "{club} sollte um den Titel spielen und steht auf Platz {rank}. {~doubt_pl}.",
+    "Der teuerste Kader der Liga, Tabellenplatz {rank}: {club} enttäuscht.",
+    "Titelanwärter {club} auf Platz {rank}. {~doubt_pl} werden laut.",
   ],
   "expectation.exceeded": [
-    "{club} sollte Letzter werden und steht auf Platz {rank}.",
-    "Niemand hatte {club} auf Platz {rank} erwartet. Auch {club} selbst nicht.",
     "{club} übertrifft die Erwartung um {delta:one} Punkte pro Spiel.",
+    "Niemand hatte {club} auf Platz {rank} erwartet. Auch {club} selbst nicht.",
+    "{club} auf Platz {rank} — mit diesem Kader eine Ansage.",
+  ],
+  "expectation.exceeded_underdog": [
+    "{club} sollte Letzter werden und steht auf Platz {rank}.",
+    "Der billigste Kader der Liga auf Platz {rank}: {club} macht es allen vor.",
+    "{club} hat den schwächsten Kader und steht auf Platz {rank}. Erklärt das mal.",
   ],
 
   // ── Kader ───────────────────────────────────────────────────────────────
@@ -202,7 +215,9 @@ export const FEED_PLACEHOLDERS: Record<string, readonly string[]> = {
   "fans.growth": ["club", "fans", "delta"],
   "fans.exodus": ["club", "fans", "delta"],
   "expectation.missed": ["club", "rank", "delta", "fee"],
+  "expectation.missed_title": ["club", "rank", "delta", "fee"],
   "expectation.exceeded": ["club", "rank", "delta"],
+  "expectation.exceeded_underdog": ["club", "rank", "delta"],
   "squad.tired": ["club", "count"],
   "squad.injury_crisis": ["club", "count"],
   "squad.star_injured": ["club", "player", "matchdays"],

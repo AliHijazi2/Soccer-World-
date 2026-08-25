@@ -24,6 +24,7 @@ interface ClubRow {
   points: number; played: number;
   win_streak: number; loss_streak: number;
   tired: number; injured: number; squad_size: number; squad_value: number;
+  season_goal: ClubSnapshot["seasonGoal"];
 }
 
 async function loadSnapshots(
@@ -31,6 +32,7 @@ async function loadSnapshots(
 ): Promise<ClubSnapshot[]> {
   const { rows } = await client.query<ClubRow>(
     `SELECT c.id, c.name, c.is_bot, c.expected_ppg, c.fan_mood, c.fan_count, c.cash,
+            c.season_goal,
             COALESCE(s.points, 0) AS points, COALESCE(s.played, 0) AS played,
             COALESCE(s.win_streak, 0) AS win_streak,
             COALESCE(s.loss_streak, 0) AS loss_streak,
@@ -59,6 +61,7 @@ async function loadSnapshots(
     winStreak: row.win_streak, lossStreak: row.loss_streak,
     tiredPlayers: row.tired, injuredPlayers: row.injured,
     squadSize: row.squad_size, squadValue: row.squad_value,
+    seasonGoal: row.season_goal,
   }));
 }
 

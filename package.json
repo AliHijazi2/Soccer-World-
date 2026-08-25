@@ -14,15 +14,27 @@
     "balance:pool": "node --experimental-strip-types --no-warnings tools/balance-sim/src/pool-report.ts",
     "test:db": "node --experimental-strip-types --no-warnings --test packages/server/test/*.test.ts",
     "test:all": "npm run test && npm run test:db",
-    "season:demo": "node --experimental-strip-types --no-warnings tools/season-demo/src/index.ts"
+    "season:demo": "node --experimental-strip-types --no-warnings tools/season-demo/src/index.ts",
+    "dev": "vite --config packages/client/vite.config.ts",
+    "build:client": "vite build --config packages/client/vite.config.ts",
+    "server": "node --experimental-strip-types --no-warnings packages/server/src/api/server.ts",
+    "screenshots": "node --experimental-strip-types --no-warnings tools/screenshots/src/index.ts"
   },
   "devDependencies": {
     "@types/node": "^22.20.1",
-    "typescript": "^7.0.2"
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "@vitejs/plugin-react": "^6.1.0",
+    "playwright": "^1.62.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2"
   },
   "dependencies": {
+    "@fastify/static": "^10.1.3",
     "@types/pg": "^8.23.1",
     "fastify": "^5.12.1",
-    "pg": "^8.23.0"
+    "pg": "^8.23.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
   }
 }

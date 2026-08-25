@@ -69,8 +69,8 @@ export const EVENT_TEMPLATES: TemplateSet = {
 
   "economy.tax_bill.title": ["Steuernachzahlung"],
   "economy.tax_bill.body": [
-    "Das Finanzamt hat die letzten Transferabwicklungen geprüft. Fällig sind {amount}.",
-    "Eine Nachforderung über {amount} liegt im Briefkasten. Zahlbar sofort.",
+    "Das Finanzamt hat die letzten Transferabwicklungen geprüft. Fällig sind {amount:money}.",
+    "Eine Nachforderung über {amount:money} liegt im Briefkasten. Zahlbar sofort.",
   ],
 
   "economy.merch_boom.title": ["Die Trikots verkaufen sich"],
