@@ -4,6 +4,11 @@ const BASE_URL =
   process.env.DATABASE_URL ??
   "postgresql://postgres@localhost/postgres?host=/tmp&port=5433";
 
+/** Verbindungszeichenkette einer Testdatenbank — auch für den API-Test. */
+export function TEST_DATABASE_URL_FOR(database: string): string {
+  return urlFor(database);
+}
+
 function urlFor(database: string): string {
   const url = new URL(BASE_URL);
   url.pathname = `/${database}`;

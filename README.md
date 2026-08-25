@@ -71,6 +71,7 @@ Jede Testdatei legt sich ihre eigene Datenbank an.
 | Ereignissystem mit 20 Ereignissen | ✅ 83 % mit Entscheidung |
 | Transfermarkt im laufenden Spielbetrieb | ✅ |
 | Bot-Verein bei ungerader Spielerzahl | ✅ |
+| HTTP-Schnittstelle mit Sichtbarkeitsregeln | ✅ |
 | Client | ⬜ |
 | Scheduler | ⬜ |
 | Wirtschaft, Fans, Ereignisse | ⬜ |
