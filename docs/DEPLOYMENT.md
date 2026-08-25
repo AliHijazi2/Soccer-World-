@@ -58,11 +58,10 @@ eine kleine Instanz mit Datenbank kostet wenige Euro im Monat.
 curl -L https://fly.io/install.sh | sh
 fly auth signup
 
-# Im Projektverzeichnis
-fly launch --no-deploy          # erkennt das Dockerfile
-fly postgres create             # Datenbank anlegen
-fly postgres attach <db-name>   # setzt DATABASE_URL automatisch
-fly secrets set TZ=Europe/Berlin
+# Im Projektverzeichnis — fly.toml liegt fertig im Repo
+fly launch --no-deploy --copy-config
+fly postgres create --name soccer-world-db
+fly postgres attach soccer-world-db   # setzt DATABASE_URL automatisch
 fly deploy
 
 # Liga anlegen
@@ -75,11 +74,19 @@ Andere Anbieter funktionieren genauso, solange sie ein Dockerfile und eine
 PostgreSQL-Datenbank unterstützen — etwa Railway, Render oder ein eigener
 kleiner Server mit Caddy als Reverse-Proxy.
 
+### Die Maschine darf nicht schlafen
+
+In `fly.toml` steht `auto_stop_machines = false` und `min_machines_running = 1`.
+Das ist Absicht: Spieltage stoßen um 17, 20 und 22 Uhr an, Auktionen schließen
+nachts von selbst. Ein Server, der beim letzten Seitenaufruf einschläft,
+verpasst all das — die Liga steht am nächsten Morgen genau da, wo sie abends
+stand. Wer hier spart, spart die Spieltage weg.
+
 ### Die Zeitzone ist keine Kleinigkeit
 
 `TZ` bestimmt, wann Spieltage und Marktabschluss stattfinden. Steht der Server
-auf UTC, stößt euer 20-Uhr-Spiel um 22 Uhr an. Setz die Variable auf die
-Zeitzone der Gruppe.
+auf UTC, stößt euer 20-Uhr-Spiel um 22 Uhr an. In `fly.toml` und `compose.yaml`
+ist `Europe/Berlin` gesetzt — wohnt die Gruppe woanders, ändert das dort.
 
 ---
 

@@ -1,0 +1,36 @@
+# Konfiguration für Fly.io. Anlegen und starten:
+#
+#   fly launch --no-deploy --copy-config
+#   fly postgres create --name soccer-world-db
+#   fly postgres attach soccer-world-db     # setzt DATABASE_URL automatisch
+#   fly deploy
+#
+# Danach einmalig die Liga anlegen:
+#
+#   fly ssh console -C 'npm run new-league -- "Freitagsliga" Ali Marco Lisa'
+
+app = "soccer-world"
+primary_region = "fra"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "3000"
+  # Bestimmt, wann Spieltage anstoßen und der Markt schließt. Ohne diese
+  # Zeile läuft der Server auf UTC und euer 20-Uhr-Spiel beginnt um 22 Uhr.
+  TZ = "Europe/Berlin"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  # Die Maschine muss laufen, auch wenn niemand die App offen hat: Spieltage
+  # stoßen um 17, 20 und 22 Uhr an, Auktionen schließen nachts von selbst.
+  # Ein schlafender Server verpasst all das.
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
